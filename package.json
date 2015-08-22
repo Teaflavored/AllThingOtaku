@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
   	"browserify" : "browserify clientApp.js | uglifyjs -mc > public/javascripts/bundle.js",
-  	"watchify" : "watchify clientApp.js -do public/javascriopts/bundle.js",
+  	"watch" : "watchify clientApp.js -do public/javascripts/bundle.js",
     "start": "npm run build && node ./bin/www",
     "build" : "npm run browserify"
   },
