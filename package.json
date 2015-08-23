@@ -21,7 +21,8 @@
     "node-jsx" : "*",
     "babel" : "*",
     "bootstrap" : "*",
-    "react-router" : "*"
+    "react-router" : "*",
+    "jquery" : "*"
   },
   "devDependencies" : {
   	"browserify" : "*",
