@@ -19,7 +19,8 @@
     "serve-favicon": "~2.3.0",
     "react" : "*",
     "node-jsx" : "*",
-    "babel" : "*"
+    "babel" : "*",
+    "bootstrap" : "*"
   },
   "devDependencies" : {
   	"browserify" : "*",
