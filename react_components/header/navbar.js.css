@@ -1,6 +1,6 @@
 module.exports = {
 	headerContainer : {
-		minHeight: 60
+		height: 60
 	},
 	brandHeader : {
 		marginTop: 0 

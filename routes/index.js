@@ -7,7 +7,7 @@ var ReactRouter = require("react-router");
 var clientRoutes = require("../clientRoutes.jsx");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('*', function(req, res, next) {
 	ReactRouter.run(clientRoutes, req.path, function (Root) {
 		var root = React.createElement(Root);
 
