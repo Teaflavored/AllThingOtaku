@@ -20,7 +20,8 @@
     "react" : "*",
     "node-jsx" : "*",
     "babel" : "*",
-    "bootstrap" : "*"
+    "bootstrap" : "*",
+    "react-router" : "*"
   },
   "devDependencies" : {
   	"browserify" : "*",
