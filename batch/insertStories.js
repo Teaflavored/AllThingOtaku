@@ -1,3 +1,4 @@
+
 //connect to mongo db, drop all data, repopulate with new data
 var mongoose = require("mongoose");
 var DB_NAME = "allThingsOtaku";
@@ -26,6 +27,7 @@ var insertStories = function () {
 		insertStories();
 	});
 };
+
 try {
 	
 	console.log(db_config.getDBUrl(DB_NAME));

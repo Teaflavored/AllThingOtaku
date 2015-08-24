@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-  	"browserify" : "browserify clientApp.js | uglifyjs -mc > public/javascripts/bundle.js",
-  	"watch" : "watchify clientApp.js -do public/javascripts/bundle.js",
+  	"browserify" : "browserify client.js | uglifyjs -mc > public/javascripts/bundle.js",
+  	"watch" : "watchify client.js -do public/javascripts/bundle.js",
     "start": "npm run build && node ./bin/www",
     "build" : "npm run browserify"
   },
@@ -21,8 +21,11 @@
     "node-jsx" : "*",
     "babel" : "*",
     "bootstrap" : "*",
-    "react-router" : "*",
-    "jquery" : "*"
+    "react-router" : "0.13.3",
+    "jquery" : "*",
+    "fluxible" : "*",
+    "async" : "*",
+    "express-state" : "*"
   },
   "devDependencies" : {
   	"browserify" : "*",
