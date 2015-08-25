@@ -25,7 +25,9 @@
     "jquery" : "*",
     "fluxible" : "*",
     "async" : "*",
-    "express-state" : "*"
+    "express-state" : "*",
+    "immutable" : "*",
+    "fluxible-plugin-fetchr" : "*"
   },
   "devDependencies" : {
   	"browserify" : "*",

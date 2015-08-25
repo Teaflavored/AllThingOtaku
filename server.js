@@ -7,8 +7,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressState = require("express-state");
+
 var routes = require('./routes/index.jsx');
 var lightNovels = require("./routes/light_novels");
+
 var app = express();
 
 expressState.extend(app);
@@ -18,13 +20,13 @@ app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/api/lightNovels", lightNovels);
 app.use('/', routes);
 
 // catch 404 and forward to error handler

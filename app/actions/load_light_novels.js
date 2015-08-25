@@ -1,22 +1,12 @@
-try {
-	var LightNovel = require("../../models/light_novel");
-} catch (err) {
-
-}
-
 var loadLightNovels = function (context, payload, done) {
-	if (LightNovel) {
-		LightNovel.find({}, function (err, lightNovels) {
-			if (err) {
-
-			} else {
-				context.dispatch("LOAD_LIGHT_NOVELS", lightNovels)
-				done();
-			}
-		});
-	} else {
+	context.service.read("lightNovels", {}, {}, function(err, lightNovels) {
+		if (err || !lightNovels) {
+			context.dispatch("LOAD_LIGHT_NOVELS_ERR", err);
+		} else {
+			context.dispatch("LOAD_LIGHT_NOVELS", lightNovels);
+		}
 		done();
-	}
+	});
 };
 
 module.exports = loadLightNovels;
