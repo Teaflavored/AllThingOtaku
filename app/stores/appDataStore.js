@@ -20,7 +20,6 @@ module.exports = createStore({
 						return this.lightNovels;
 					},
 	dehydrate: function () {
-
 				   return {
 					   data: this.lightNovels
 				   }

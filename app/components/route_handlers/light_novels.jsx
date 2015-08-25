@@ -3,30 +3,23 @@ var getLightNovels = require("../../actions/load_light_novels");
 var LightNovelList = require("../light_novels/light_novel_list.jsx");
 
 var LightNovels = React.createClass({
-	mixins: [require("fluxible").FluxibleMixin],
+	contextTypes: {
+					executeAction: React.PropTypes.func.isRequired,
+					getStore: React.PropTypes.func.isRequired
+				  },
 	statics: {
-				 loadAction : getLightNovels,
-				 storeListeners : ["appStore"]
+				 loadAction : getLightNovels
 			 },
-	getDefaultProps: function () {
-					 },
-	onChange: function () {
-				
-			  },
 	componentWillMount: function () {
-							this.props.context.executeAction(getLightNovels);
+							this.context.executeAction(getLightNovels);
 						},
 	render: function () {
-				var store = this.props.context.getStore("appStore");
-				var lightNovels = store.getLightNovels();
-
 				return (
 					<div id="lightNovels">
-						<LightNovelList lightNovels={lightNovels} />
+						<LightNovelList />
 					</div>
 					);
 			}
 });
-
 
 module.exports = LightNovels;

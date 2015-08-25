@@ -9,6 +9,8 @@ var ReactRouter = require("react-router");
 var expressState = require("express-state");
 var pluginInstance = app.getPlugin("FetchrPlugin");
 
+var fluxibleAddons = require('fluxible-addons-react');
+
 pluginInstance.registerService(lightNovelService);
 router.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
 
@@ -29,8 +31,14 @@ router.get("*", function (req, res, next) {
 			},
 			function () {
 				console.log("Rendering Server React Components");
-				var markup = React.renderToString(<Root {...state} context={context.getComponentContext()} /> )	
 				res.expose(app.dehydrate(context), app.uid);
+				var RootComponent = fluxibleAddons.provideContext(Root, {
+					getStore : React.PropTypes.func.isRequired,
+					executeAction : React.PropTypes.func.isRequired
+				});
+
+				var markup = React.renderToString(<RootComponent {...state} context={context.getComponentContext()} /> )	
+
 				res.render("index", {
 						main: markup,
 						uid: app.uid
