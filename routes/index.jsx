@@ -15,7 +15,12 @@ pluginInstance.registerService(lightNovelService);
 router.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
 
 router.get("*", function (req, res, next) {
-	var context = app.createContext();
+	var context = app.createContext({
+		req: req,
+		xhrContext: {
+			lang: "en-US"
+		}
+	});
 	
 	ReactRouter.run(app.getComponent(), req.path, function (Root, state) {
 		//if no matching routes found, then go to 404

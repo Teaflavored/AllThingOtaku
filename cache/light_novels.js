@@ -1,6 +1,7 @@
 var lightNovels =  [
 {
 		author: "Auster",
+		title: "Auster's first book",
 		volumes: [
 			{
 				title: "volume1",
@@ -19,6 +20,7 @@ var lightNovels =  [
 			}
 		]
 	}
+
 ];
 
 module.exports = lightNovels;
