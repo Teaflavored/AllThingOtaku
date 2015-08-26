@@ -27,34 +27,25 @@ router.get("*", function (req, res, next) {
 		if (state.routes.length === 0) {
 			res.status(404);
 		}
-		async.filterSeries(
-			state.routes.filter(function (route){
-				return route.handler.loadAction ? true : false		
-			}),
-			function (route, done) {
-				context.getActionContext().executeAction(route.handler.loadAction, { params: state.params, query: state.query }, done);
-			},
-			function () {
-				console.log("Rendering Server React Components");
-				res.expose(app.dehydrate(context), app.uid);
-				var RootComponent = fluxibleAddons.provideContext(Root, {
-					getStore : React.PropTypes.func.isRequired,
-					executeAction : React.PropTypes.func.isRequired
-				});
+		
+		var RootComponent = fluxibleAddons.provideContext(Root, {
+			getStore : React.PropTypes.func.isRequired,
+			executeAction : React.PropTypes.func.isRequired
+		});
 
-				var markup = React.renderToString(<RootComponent {...state} context={context.getComponentContext()} /> )	
+		var markup = React.renderToString(<RootComponent {...state} context={context.getComponentContext()} /> )	
+		res.expose(app.dehydrate(context), app.uid);
 
-				res.render("index", {
-						main: markup,
-						uid: app.uid
-				}, function (err, markup){
-					if (err) {
-						next(err);
-					}
-					res.send(markup);
-				} );
+		console.log("Rendering Server React Components");
+		res.render("index", {
+				main: markup,
+				uid: app.uid
+		}, function (err, markup){
+			if (err) {
+				next(err);
 			}
-		);
+			res.send(markup);
+		});
 	});
 });
 

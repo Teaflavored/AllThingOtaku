@@ -1,4 +1,6 @@
 var React = require("react");
+var Router = require("react-router");
+var Link = Router.Link;
 
 var LightNovel = React.createClass({
 	render: function () {
@@ -8,6 +10,9 @@ var LightNovel = React.createClass({
 
 				return (
 					<div className="lightNovel">
+						<Link to="lightNovel" params={{id: id}} >
+							{ author }
+						</Link>
 						<div className="author">
 							{ author }
 						</div>

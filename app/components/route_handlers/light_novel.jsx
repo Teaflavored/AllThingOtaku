@@ -9,9 +9,12 @@ var LightNovel = React.createClass({
 						getStore: React.PropTypes.func.isRequired,
 						executeAction: React.PropTypes.func.isRequired
 				  },
-	statics : {
-				  loadAction: getLightNovel
-			  },
+	componentWillMount: function () {
+							this.context.executeAction(getLightNovel, {
+								params: this.props.params,
+								query: this.props.query 
+							});
+						},
 	render: function () {
 				var lightNovel = this.context.getStore(lightNovelStore).getLightNovel();
 
@@ -23,7 +26,7 @@ var LightNovel = React.createClass({
 			}
 });
 
-LightNovel = fluxibleAddons.connectToStore(LightNovel, [lightNovelStore], function(context, props) {
+LightNovel = fluxibleAddons.connectToStores(LightNovel, [lightNovelStore], function(context, props) {
 	return {
 		lightNovel: context.getStore(lightNovelStore).getLightNovel()
 	}
