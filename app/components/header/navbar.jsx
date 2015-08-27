@@ -10,10 +10,14 @@ var Navbar = React.createClass({
 						<div id="navbar" className="navbar navbar-fixed-top" style={navbarCSS.headerContainer}>
 							<div className="container">
 								<div className="navbar-header">
-									<h1 style={navbarCSS.brandHeader}><a className="navbar-brand" href="/">AllThingsOtaku</a></h1>
+									<h1 style={navbarCSS.brandHeader}>
+                                        <Link to="home" className="navbar-brand">
+                                            AllThingsOtaku
+                                        </Link>
+                                    </h1>
 								</div>
 								<ul className="nav navbar-nav navbar-right">
-									<li><Link to="lightNovels">Light Novels</Link></li>
+									<li><Link to="lightNovelsIndex">Light Novels</Link></li>
 								</ul>
 							</div>
 						</div>

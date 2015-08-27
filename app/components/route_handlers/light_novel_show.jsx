@@ -4,17 +4,23 @@ var LightNovelItem = require("../light_novels/light_novel.jsx");
 var lightNovelStore = require("../../stores/light_novel_store");
 var fluxibleAddons = require("fluxible-addons-react");
 
-var LightNovel = React.createClass({
+var LightNovelShow = React.createClass({
 	contextTypes: {
 						getStore: React.PropTypes.func.isRequired,
 						executeAction: React.PropTypes.func.isRequired
 				  },
-	componentWillMount: function () {
+	statics: {
+        loadAction: getLightNovel
+    },
+	componentDidMount: function () {
 							this.context.executeAction(getLightNovel, {
 								params: this.props.params,
 								query: this.props.query 
 							});
 						},
+    componentWillReceiveProps: function (nextProps) {
+
+    },
 	render: function () {
 				var lightNovel = this.context.getStore(lightNovelStore).getLightNovel();
 
@@ -31,10 +37,10 @@ var LightNovel = React.createClass({
 			}
 });
 
-LightNovel = fluxibleAddons.connectToStores(LightNovel, [lightNovelStore], function(context, props) {
+LightNovelShow = fluxibleAddons.connectToStores(LightNovelShow, [lightNovelStore], function(context, props) {
 	return {
 		lightNovel: context.getStore(lightNovelStore).getLightNovel()
 	}
 });
 
-module.exports = LightNovel;
+module.exports = LightNovelShow;

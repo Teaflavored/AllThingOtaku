@@ -11,14 +11,12 @@ var App = React.createClass({
 		getStore : React.PropTypes.func.isRequired,
 		executeAction : React.PropTypes.func.isRequired
 	},
-	statics: {
-			 },
 	render: function () {
 				return (
 						<div> 
 							<Navbar />
 							<div id="mainContent" className="container" style={appCSS.mainContent}>
-								<RouteHandler />	
+								<RouteHandler {...this.props}/>
 							</div>
 						</div>
 					);
