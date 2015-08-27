@@ -10,10 +10,10 @@ var LightNovel = require("./components/route_handlers/light_novel.jsx");
 
 var routes = (
 		<Route handler={App}>
-			<DefaultRoute handler={Home} />
-			<Route name="lightNovel" path="/lightNovels/:id" handler={LightNovel} />
-			<Route name="lightNovels" path="/lightNovels" handler={LightNovels} />
-		</Route>		
+			<DefaultRoute name="home" handler={Home} />
+			<Route name="lightNovels" path="lightNovels" handler={LightNovels} />
+            <Route name="lightNovel" path="lightNovel/:id" handler={LightNovel} />
+		</Route>
 		);
 
 module.exports = routes;

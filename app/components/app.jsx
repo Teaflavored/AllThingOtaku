@@ -1,7 +1,7 @@
 var React = require("react");
 var Router = require("react-router");
 var Navbar = require("./header/navbar.jsx");
-var appCSS = require("./app.js.css");
+var appCSS = require("./app.css.js");
 var RouteHandler = Router.RouteHandler;
 var RouterPropTypes = require("react-router/lib/PropTypes");
 

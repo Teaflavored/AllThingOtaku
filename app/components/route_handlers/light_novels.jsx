@@ -9,8 +9,11 @@ var LightNovels = React.createClass({
 					executeAction: React.PropTypes.func.isRequired,
 					getStore: React.PropTypes.func.isRequired
 				  },
+	statics: {
+		loadAction: getLightNovels
+	},
 	componentWillMount: function () {
-							this.context.executeAction(getLightNovels);
+							this.context.executeAction(getLightNovels );
 						},
 	render: function () {
 				var lightNovels = this.context.getStore(lightNovelStore).getLightNovels();

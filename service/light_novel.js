@@ -7,16 +7,22 @@ var lightNovelService = {
 		var queryParams = {};
 
 		if (params.id) {
-			queryParams._id = mongoose.Types.ObjectId(params.id);
+			LightNovel.findOne().lean().exec(params, function (err, lightNovel) {
+				if (err) {
+					callback(err);
+				} else {
+					callback(null, lightNovel)
+				}
+			});
+		} else {
+			LightNovel.find().lean().exec(queryParams, function (err, lightNovels) {
+				if (err) {
+					callback(err);
+				} else {
+					callback(null, lightNovels);
+				}
+			});
 		}
-
-		LightNovel.find().lean().exec(queryParams, function (err, lightNovels) {
-			if (err) {
-				callback(err);
-			} else {
-				callback(null, lightNovels);
-			}
-		});
 	},
 	create: function (req, resource, params, config, callback) {
 				

@@ -9,7 +9,6 @@ var bodyParser = require('body-parser');
 var expressState = require("express-state");
 
 var routes = require('./routes/index.jsx');
-var lightNovels = require("./routes/light_novels");
 
 var app = express();
 

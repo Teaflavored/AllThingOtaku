@@ -1,6 +1,6 @@
 var React = require("react");
 var Router = require('react-router');
-var navbarCSS = require("./navbar.js.css");
+var navbarCSS = require("./navbar.css.js");
 var Link = Router.Link;
 // need to move the input into its own component, needs to handle auto complete and searching, can do later
 

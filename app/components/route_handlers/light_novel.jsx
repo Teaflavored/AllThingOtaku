@@ -20,7 +20,12 @@ var LightNovel = React.createClass({
 
 				return (
 						<div id="lightNovel">
-							<LightNovelItem lightNovel={lightNovel} />
+							<div className="lightNovel-title">
+								{lightNovel.title}
+                            </div>
+							<div className="lightNovel-author">
+								{lightNovel.author}
+                            </div>
 						</div>
 					);
 			}

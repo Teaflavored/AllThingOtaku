@@ -33,19 +33,29 @@ router.get("*", function (req, res, next) {
 			executeAction : React.PropTypes.func.isRequired
 		});
 
-		var markup = React.renderToString(<RootComponent {...state} context={context.getComponentContext()} /> )	
-		res.expose(app.dehydrate(context), app.uid);
+		var loadAction = state.routes[1].handler.loadAction;
+		var renderReactOnServer = function () {
+			var markup = React.renderToString(<RootComponent {...state} context={context.getComponentContext()} /> );
+			res.expose(app.dehydrate(context), app.uid);
 
-		console.log("Rendering Server React Components");
-		res.render("index", {
+			console.log("Rendering Server React Components");
+			res.render("index", {
 				main: markup,
 				uid: app.uid
-		}, function (err, markup){
-			if (err) {
-				next(err);
-			}
-			res.send(markup);
-		});
+			}, function (err, markup){
+				if (err) {
+					next(err);
+				}
+				res.send(markup);
+			});
+		};
+
+		if (loadAction){
+			context.getActionContext().executeAction(loadAction, { params: state.params, query: state.query }, renderReactOnServer);
+		} else {
+			renderReactOnServer();
+		}
+
 	});
 });
 
