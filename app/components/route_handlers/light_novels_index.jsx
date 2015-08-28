@@ -5,10 +5,10 @@ var lightNovelStore = require("../../stores/light_novel_store");
 var LightNovel = require("../light_novels/light_novel_list_item.jsx");
 
 var LightNovelsIndex = React.createClass({
-	contextTypes: {
-					executeAction: React.PropTypes.func.isRequired,
-					getStore: React.PropTypes.func.isRequired
-				  },
+    contextTypes: {
+        getStore: React.PropTypes.func.isRequired,
+        executeAction: React.PropTypes.func.isRequired
+    },
 	statics: {
 		loadAction: getLightNovels
 	},

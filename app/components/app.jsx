@@ -4,13 +4,9 @@ var Navbar = require("./header/navbar.jsx");
 var appCSS = require("./app.css.js");
 var RouteHandler = Router.RouteHandler;
 var RouterPropTypes = require("react-router/lib/PropTypes");
+var fluxibleAddons = require("fluxible-addons-react");
 
 var App = React.createClass({
-	contextTypes: {
-		router : RouterPropTypes.router.isRequired,
-		getStore : React.PropTypes.func.isRequired,
-		executeAction : React.PropTypes.func.isRequired
-	},
 	render: function () {
 				return (
 						<div> 
@@ -23,4 +19,9 @@ var App = React.createClass({
 			}
 });
 
+App = fluxibleAddons.provideContext(App, {
+        executeAction : React.PropTypes.func.isRequired,
+        getStore : React.PropTypes.func.isRequired
+    }
+);
 module.exports = App;

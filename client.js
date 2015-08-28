@@ -11,11 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		
 		Router.run(app.getComponent(), Router.HistoryLocation, function (Root, state) {
-			var RootComponent = fluxibleAddons.provideContext(Root,{
-				getStore : React.PropTypes.func.isRequired,
-				executeAction: React.PropTypes.func.isRequired
-			});
-			React.render(React.createElement(RootComponent, React.__spread({}, state, { context : context.getComponentContext()  })), document.getElementById(app.uid));
+			React.render(React.createElement(Root, React.__spread({}, state, { context : context.getComponentContext()  })), document.getElementById(app.uid));
 		});
 	});
 });

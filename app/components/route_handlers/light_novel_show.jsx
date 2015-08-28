@@ -5,10 +5,10 @@ var lightNovelStore = require("../../stores/light_novel_store");
 var fluxibleAddons = require("fluxible-addons-react");
 
 var LightNovelShow = React.createClass({
-	contextTypes: {
-						getStore: React.PropTypes.func.isRequired,
-						executeAction: React.PropTypes.func.isRequired
-				  },
+    contextTypes: {
+        executeAction: React.PropTypes.func.isRequired,
+        getStore: React.PropTypes.func.isRequired
+    },
 	statics: {
         loadAction: getLightNovel
     },
@@ -22,7 +22,7 @@ var LightNovelShow = React.createClass({
 
     },
 	render: function () {
-				var lightNovel = this.context.getStore(lightNovelStore).getLightNovel();
+				var lightNovel = this.props.context.getStore(lightNovelStore).getLightNovel();
 
 				return (
 						<div id="lightNovel">

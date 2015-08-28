@@ -6,9 +6,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan'); 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var expressState = require("express-state");
 
-var routes = require('./routes/index.jsx');
+var expressState = require("express-state");
+var React = require("react");
+var mainApp = require("./app/");
+
+//services
+var lightNovelService = require("./service/light_novel");
+var ReactRouter = require("react-router");
+var pluginInstance = mainApp.getPlugin("FetchrPlugin");
+var fluxibleAddons = require('fluxible-addons-react');
 
 var app = express();
 
@@ -26,7 +33,54 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+pluginInstance.registerService(lightNovelService);
+app.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
+
+app.get("*", function (req, res, next) {
+  var context = mainApp.createContext({
+    req: req,
+    xhrContext: {
+      lang: "en-US"
+    }
+  });
+
+  ReactRouter.run(mainApp.getComponent(), req.path, function (Root, state) {
+    //if no matching routes found, then go to 404
+    if (state.routes.length === 0) {
+      res.status(404);
+    }
+
+    var RootComponent = fluxibleAddons.provideContext(Root, {
+      getStore : React.PropTypes.func.isRequired,
+      executeAction : React.PropTypes.func.isRequired
+    });
+
+    var loadAction = state.routes[1].handler.loadAction;
+    var renderReactOnServer = function () {
+        var markup = React.renderToString(React.createElement(RootComponent, React.__spread({}, state, { context : context.getComponentContext()  }) ));
+        res.expose(mainApp.dehydrate(context), mainApp.uid);
+
+        console.log("Rendering Server React Components");
+      res.render("index", {
+        main: markup,
+        uid: mainApp.uid
+      }, function (err, markup){
+        if (err) {
+          next(err);
+        }
+        res.send(markup);
+      });
+    };
+
+    if (loadAction){
+      context.getActionContext().executeAction(loadAction, { params: state.params, query: state.query }, renderReactOnServer);
+    } else {
+      renderReactOnServer();
+    }
+
+  });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
