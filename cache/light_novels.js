@@ -20,7 +20,6 @@ var lightNovels =  [
 			}
 		]
 	}
-
 ];
 
 module.exports = lightNovels;

@@ -10,8 +10,7 @@ module.exports = createStore({
 				  LOAD_LIGHT_NOVELS : "_receiveLightNovels",
 				  LOAD_LIGHT_NOVELS_ERR : "_receiveLightNovelsErr",
 				  FIND_LIGHT_NOVEL : "_receiveLightNovel",
-				  FIND_LIGHT_NOVEL_ERR : "_receiveLightNovelErr"
-
+				  FIND_LIGHT_NOVEL_ERR : "_receiveLightNovelErr",
 			  },
 	_receiveLightNovelErr : function (err) {
 								//todo implement this

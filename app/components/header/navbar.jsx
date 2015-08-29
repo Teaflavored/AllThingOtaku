@@ -1,6 +1,6 @@
 var React = require("react");
 var Router = require('react-router');
-var navbarCSS = require("./navbar.css.js");
+var navbarCSS = require("./navbar.css");
 var Link = Router.Link;
 // need to move the input into its own component, needs to handle auto complete and searching, can do later
 
@@ -17,7 +17,7 @@ var Navbar = React.createClass({
                                     </h1>
 								</div>
 								<ul className="nav navbar-nav navbar-right">
-									<li><Link to="lightNovelsIndex">Light Novels</Link></li>
+									<li><Link className="nav-btn" to="lightNovelsIndex">Light Novels</Link></li>
 								</ul>
 							</div>
 						</div>

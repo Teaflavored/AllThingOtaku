@@ -1,7 +1,25 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body {  
+    font: 14px "Noto Sans", sans-serif !important;
+    background: #f8f8f8 !important;
 }
 
 a {
   color: #00B7FF;
+}
+
+/* Navbar */
+#navbar .nav-btn:hover,
+#navbar .nav-btn.active:hover {
+    background: #66B0E4;
+}
+
+#navbar .nav-btn.active {
+    background: #3498db;
+    color: #fff;
+}
+
+#navbar .navbar-brand,
+#navbar .navbar-nav .nav-btn {
+    line-height: 30px;
+    height: 60px;
 }

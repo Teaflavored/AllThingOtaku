@@ -1,8 +1,14 @@
 var React = require("react");
-var getLightNovels = require("../../actions/load_light_novels");
+var Link = require("react-router").Link;
 var fluxibleAddons = require("fluxible-addons-react");
 var lightNovelStore = require("../../stores/light_novel_store");
+
+//actions
+var getLightNovels = require("../../actions/load_light_novels");
+
+//components & css
 var LightNovel = require("../light_novels/light_novel_list_item.jsx");
+var lightNovelIndexCSS = require("./light_novels_index.css.js");
 
 var LightNovelsIndex = React.createClass({
     contextTypes: {
@@ -24,8 +30,13 @@ var LightNovelsIndex = React.createClass({
 				});
 
 				return (
-					<div id="lightNovels">
-						{lightNovelNodes}
+					<div id="lightNovels" className="container">
+                        <Link to="lightNovelCreate">
+                            Create New
+                        </Link>
+                        <div style={lightNovelIndexCSS.listContainer}>
+                            {lightNovelNodes}
+                        </div>
 					</div>
 					);
 			}

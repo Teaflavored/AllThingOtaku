@@ -10,13 +10,17 @@ var lightNovelSchema = new Schema({
 				required: true,
 				index: { unique: true }
 			},
+	title: {
+		type: String,
+		required: true,
+		index: { unique: true }
+	},
 	publication_date : {
 						   type: Date
 					   },
 	completed : {
 					type: Boolean,
 					default: false,
-					required: true
 				},
 	volumes: [Volume.schema]
 });

@@ -12,7 +12,7 @@ var React = require("react");
 var mainApp = require("./app/");
 
 //services
-var lightNovelService = require("./service/light_novel");
+var lightNovelService = require("./service/light_novel_service");
 var ReactRouter = require("react-router");
 var pluginInstance = mainApp.getPlugin("FetchrPlugin");
 var fluxibleAddons = require('fluxible-addons-react');

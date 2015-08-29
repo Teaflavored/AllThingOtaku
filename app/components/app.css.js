@@ -1,6 +1,6 @@
 var appCSS = {
 	mainContent: {
-		paddingTop: 60
+		paddingTop: 85
 	}
 };
 

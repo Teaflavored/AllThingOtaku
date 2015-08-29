@@ -18,9 +18,6 @@ var LightNovelShow = React.createClass({
 								query: this.props.query 
 							});
 						},
-    componentWillReceiveProps: function (nextProps) {
-
-    },
 	render: function () {
 				var lightNovel = this.props.context.getStore(lightNovelStore).getLightNovel();
 
