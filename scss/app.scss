@@ -1,0 +1,24 @@
+@import "_bootstrap.scss";
+@import "includes/_core-variables.scss";
+@import "includes/core";
+
+a {
+  color: $primary-color;
+}
+
+/* Navbar */
+#navbar .nav-btn:hover,
+#navbar .nav-btn.active:hover {
+  background: $primary-color-light;
+}
+
+#navbar .nav-btn.active {
+  background: $primary-color;
+  color: $white;
+}
+
+#navbar .navbar-brand,
+#navbar .navbar-nav .nav-btn {
+  line-height: 30px;
+  height: 60px;
+}
