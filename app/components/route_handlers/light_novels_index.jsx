@@ -8,7 +8,6 @@ var getLightNovels = require("../../actions/load_light_novels");
 
 //components & css
 var LightNovel = require("../light_novels/light_novel_list_item.jsx");
-var lightNovelIndexCSS = require("./light_novels_index.css.js");
 
 var LightNovelsIndex = React.createClass({
     getDefaultProps: function () {

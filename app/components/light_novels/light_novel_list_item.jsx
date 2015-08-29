@@ -1,6 +1,5 @@
 var React = require("react");
 var Router = require("react-router");
-var lightNovelListItemCSS = require("./light_novel_list_item.css");
 var Link = Router.Link;
 
 var LightNovel = React.createClass({
