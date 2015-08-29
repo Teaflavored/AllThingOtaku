@@ -1,5 +1,5 @@
 module.exports = {
-    lightNovelContainer : {
+    lightNovelContainer: {
         background: "#fff",
         boxShadow: "1px 1px 3px 0px #e6e6e6",
         float: "left",

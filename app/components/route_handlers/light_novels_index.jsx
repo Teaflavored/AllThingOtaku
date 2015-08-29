@@ -11,40 +11,45 @@ var LightNovel = require("../light_novels/light_novel_list_item.jsx");
 var lightNovelIndexCSS = require("./light_novels_index.css.js");
 
 var LightNovelsIndex = React.createClass({
+    getDefaultProps: function () {
+        return {
+            lightNovels: []
+        };
+    },
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
         executeAction: React.PropTypes.func.isRequired
     },
-	statics: {
-		loadAction: getLightNovels
-	},
-	componentDidMount: function () {
-							this.context.executeAction(getLightNovels);
-						},
-	render: function () {
-				var lightNovels = this.context.getStore(lightNovelStore).getLightNovels();
-				lightNovelNodes = lightNovels.map(function(lightNovel){
-					return (
-						<LightNovel lightNovel={ lightNovel  } key={lightNovel._id}/>
-						);
-				});
+    statics: {
+        loadAction: getLightNovels
+    },
+    componentDidMount: function () {
+        this.context.executeAction(getLightNovels);
+    },
+    render: function () {
+        var lightNovels = this.props.lightNovels; lightNovelNodes = lightNovels.map(function (lightNovel) {
+            return (
+                <LightNovel lightNovel={ lightNovel  } key={lightNovel._id}/>
+            );
+        });
 
-				return (
-					<div id="lightNovels" className="container">
-                        <Link to="lightNovelCreate">
-                            Create New
-                        </Link>
-                        <div style={lightNovelIndexCSS.listContainer}>
-                            {lightNovelNodes}
-                        </div>
-					</div>
-					);
-			}
+        return (
+            <div id="lightNovels" className="container">
+                <Link to="lightNovelCreate">
+                    Create New
+                </Link>
+
+                <div style={lightNovelIndexCSS.listContainer}>
+                    {lightNovelNodes}
+                </div>
+            </div>
+        );
+    }
 });
 
 LightNovelsIndex = fluxibleAddons.connectToStores(LightNovelsIndex, [lightNovelStore], function (context, props) {
-	return {
-		lightNovels: context.getStore(lightNovelStore).getLightNovels()
-	};
+    return {
+        lightNovels: context.getStore(lightNovelStore).getLightNovels()
+    };
 });
 module.exports = LightNovelsIndex;

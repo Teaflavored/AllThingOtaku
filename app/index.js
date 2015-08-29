@@ -4,11 +4,11 @@ var lightNovelStore = require("./stores/light_novel_store");
 var routes = require("./routes.jsx");
 
 var fetchr = fetchrPlugin({
-	xhrPath: "/api"
+    xhrPath: "/api"
 });
 
 var app = new FluxibleApp({
-	component: routes
+    component: routes
 });
 
 app.uid = "allThingsOtaku";

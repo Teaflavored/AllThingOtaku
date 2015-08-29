@@ -41,7 +41,13 @@ module.exports = createStore({
         return this.lightNovel;
     },
     getNewLightNovelErr: function () {
-        return this.newLightNovelErr;
+        //error object should be cleared once it's sent
+        var error = this.newLightNovelErr;
+        this.newLightNovelErr = null;
+        return error;
+    },
+    clearNewLightNovelErr: function () {
+        this.newLightNovelErr = null;
     },
     dehydrate: function () {
         return {
@@ -55,5 +61,4 @@ module.exports = createStore({
         this.lightNovel = state.lightNovel;
         this.newLightNovelErr = state.newLightNovelErr;
     }
-
 });

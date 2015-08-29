@@ -15,10 +15,16 @@ var LightNovelNew = React.createClass({
         getStore: React.PropTypes.func.isRequired,
         executeAction: React.PropTypes.func.isRequired
     },
+    getDefaultProps: function () {
+        return {
+            error: null
+        }
+    },
     getInitialState: function () {
         return {
             title: "",
-            author: ""
+            author: "",
+            summary: ""
         }
     },
     handleTitleFieldChange: function (event) {
@@ -35,6 +41,13 @@ var LightNovelNew = React.createClass({
             }
         )
     },
+    handleSummaryFieldChange: function () {
+        this.setState(
+            {
+                summary: event.target.value
+            }
+        );
+    },
     handleSubmit: function () {
         this.context.executeAction(createLightNovel, {
             params: {},
@@ -44,7 +57,7 @@ var LightNovelNew = React.createClass({
     },
     render: function () {
         var errorNode;
-        var error = this.context.getStore(lightNovelStore).getNewLightNovelErr();
+        var error = this.props.error;
         if (error) {
             errorNode = <div className="alert-danger alert">{error.message}</div>;
         } else {
@@ -67,7 +80,7 @@ var LightNovelNew = React.createClass({
     }
 });
 
-LightNovelNew = fluxibleAddons.connectToStores(LightNovelNew, [lightNovelStore], function (context, props){
+LightNovelNew = fluxibleAddons.connectToStores(LightNovelNew, [lightNovelStore], function (context, props) {
     return {
         error: context.getStore(lightNovelStore).getNewLightNovelErr()
     };

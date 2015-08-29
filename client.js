@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	app.rehydrate(dehydratedState, function (err, context) {
 		if (err) {
 		}
-		
-		Router.run(app.getComponent(), Router.HistoryLocation, function (Root, state) {
+	
+        Router.run(app.getComponent(), Router.HistoryLocation, function (Root, state) {
 			React.render(React.createElement(Root, React.__spread({}, state, { context : context.getComponentContext()  })), document.getElementById(app.uid));
 		});
 	});
