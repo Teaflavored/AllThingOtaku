@@ -27,9 +27,7 @@ var lightNovelService = {
                 var lightNovel = new LightNovel(body);
                 lightNovel.save(function(err) {
                     if (err) {
-                        err.output = {
-                            message: "Light Novel could not be created"
-                        };
+                        err.statusCode = 422;
                         callback(err);
                     } else {
                         callback(null, lightNovel);
