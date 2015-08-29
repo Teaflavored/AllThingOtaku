@@ -1,0 +1,14 @@
+@import "_core-variables";
+
+@mixin main-body() {
+  font: 14px "Noto Sans", sans-serif !important;
+  background: #f8f8f8 !important;
+}
+
+@mixin card() {
+  background: $white;
+  -webkit-box-shadow: 1px 1px 3px 0 #e6e6e6;
+  -moz-box-shadow: 1px 1px 3px 0 #e6e6e6;
+  box-shadow: 1px 1px 3px 0 #e6e6e6;
+}
+

@@ -1,6 +1,15 @@
 @import "_bootstrap.scss";
-@import "includes/_core-variables.scss";
-@import "includes/core";
+@import "includes/core-variables";
+@import "includes/core-mixins";
+@import "includes/list";
+
+body {
+  @include main-body;
+}
+
+.card {
+  @include card;
+}
 
 a {
   color: $primary-color;
@@ -22,3 +31,6 @@ a {
   line-height: 30px;
   height: 60px;
 }
+
+
+

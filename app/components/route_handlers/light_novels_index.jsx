@@ -34,12 +34,12 @@ var LightNovelsIndex = React.createClass({
         });
 
         return (
-            <div id="lightNovels" className="container">
+            <div id="lightNovels">
                 <Link to="lightNovelCreate">
                     Create New
                 </Link>
 
-                <div style={lightNovelIndexCSS.listContainer}>
+                <div id="lightNovelList" className="list">
                     {lightNovelNodes}
                 </div>
             </div>

@@ -10,7 +10,7 @@ var LightNovel = React.createClass({
         var id = this.props.lightNovel._id;
 
         return (
-            <div className="lightNovel" style={lightNovelListItemCSS.lightNovelContainer}>
+            <div className="light-novel card list-item">
                 <Link to="lightNovelShow" params={ { id : id } }>
                     { title }
                 </Link>
