@@ -6,19 +6,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var expressState = require("express-state");
 var React = require("react");
 var mainApp = require("./app/");
 
 //services
 var lightNovelService = require("./service/light_novel_service");
+var authenticateService = require("./service/authenticate_service");
+//router
 var ReactRouter = require("react-router");
+
 var pluginInstance = mainApp.getPlugin("FetchrPlugin");
 var fluxibleAddons = require('fluxible-addons-react');
 
 var app = express();
-
+//allow exposing of extra data to client
 expressState.extend(app);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +36,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 pluginInstance.registerService(lightNovelService);
+pluginInstance.registerService(authenticateService);
+
 app.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
 
 app.get("*", function (req, res, next) {

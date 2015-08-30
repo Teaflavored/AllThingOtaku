@@ -1,6 +1,20 @@
 var React = require("react");
+var Router = require("react-router");
+var Navigation = Router.Navigation;
+var fluxibleAddons = require("fluxible-addons-react");
+
+//stores
+var authenticationStore = require("../../stores/authentication_store");
+
+//actions
+var authenticate = require("../../actions/authenticate");
 
 var Login = React.createClass({
+    mixins: [Navigation],
+    contextTypes: {
+        getStore: React.PropTypes.func.isRequired,
+        executeAction: React.PropTypes.func.isRequired
+    },
     getInitialState: function () {
         return {
             email: "",
@@ -18,18 +32,29 @@ var Login = React.createClass({
         });
     },
     handleLogin: function () {
-        console.log(this.state);
+        this.context.executeAction(authenticate, {
+            body : this.state,
+            component: this
+        })
     },
     render: function () {
+        var error = this.props.error;
+        var errorNode;
+        if (error) {
+            errorNode = <div className="alert-danger alert">{error.message}</div>;
+        } else {
+            errorNode = "";
+        }
         return (
             <div className="col-md-4 col-md-offset-4">
                 <form action="javascript:void(0);" className="card">
+                    {errorNode}
                     <div className="form-group">
-                        <label for="username">E-mail</label>
+                        <label htmlFor="username">E-mail</label>
                         <input type="text" className="form-control" onChange={this.handleEmailchange} />
                     </div>
                     <div className="form-group">
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" onChange={this.handlePasswordChange} />
                     </div>
                     <div className="form-group">
@@ -41,4 +66,9 @@ var Login = React.createClass({
     }
 });
 
+Login = fluxibleAddons.connectToStores(Login, [authenticationStore], function (context, props){
+    return {
+        error : context.getStore(authenticationStore).getError()
+    };
+});
 module.exports = Login;

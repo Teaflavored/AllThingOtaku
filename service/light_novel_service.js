@@ -25,6 +25,7 @@ var lightNovelService = {
     },
     create: function (req, resource, params, body, config, callback) {
         var lightNovel = new LightNovel(body);
+        //may be better to move validation logic in here
         lightNovel.save(function (err) {
             if (err) {
                 err.statusCode = 422;
