@@ -7,6 +7,8 @@
 
 @mixin card() {
   background: $white;
+  padding: 15px;
+  margin-bottom: 15px;
   -webkit-box-shadow: 1px 1px 3px 0 #e6e6e6;
   -moz-box-shadow: 1px 1px 3px 0 #e6e6e6;
   box-shadow: 1px 1px 3px 0 #e6e6e6;

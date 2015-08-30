@@ -1,8 +1,15 @@
 var React = require("react");
-var getLightNovel = require("../../actions/find_light_novel");
-var LightNovelItem = require("../light_novels/light_novel.jsx");
-var lightNovelStore = require("../../stores/light_novel_store");
 var fluxibleAddons = require("fluxible-addons-react");
+
+//actions
+var getLightNovel = require("../../actions/find_light_novel");
+
+//stores
+var lightNovelStore = require("../../stores/light_novel_store");
+
+//components
+var LightNovelItem = require("../light_novels/light_novel.jsx");
+
 
 var LightNovelShow = React.createClass({
     getDefaultProps: function () {
@@ -33,6 +40,9 @@ var LightNovelShow = React.createClass({
                 </div>
                 <div className="lightNovel-author">
                     {lightNovel.author}
+                </div>
+                <div className="lightNovel-summary">
+                    {lightNovel.summary}
                 </div>
             </div>
         );

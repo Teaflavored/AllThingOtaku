@@ -64,18 +64,26 @@ var LightNovelNew = React.createClass({
             errorNode = "";
         }
         return (
-            <form id="lightNovelNew" action="javascript:void(0);">
-                {errorNode}
-                <div className="form-group">
-                    <label htmlFor="title">Title</label>
-                    <input type="text" className="form-control" id="title" onChange={this.handleTitleFieldChange}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="author">Author</label>
-                    <input type="text" className="form-control" id="author" onChange={this.handleAuthorFieldChange}/>
-                </div>
-                <input type="button" className="btn btn-primary" onClick={this.handleSubmit}/>
-            </form>
+            <div className="row">
+                <form id="lightNovelNew" action="javascript:void(0);" className="col-sm-4">
+                    {errorNode}
+                    <div className="form-group">
+                        <label htmlFor="title">Title</label>
+                        <input type="text" className="form-control" id="title" onChange={this.handleTitleFieldChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="author">Author</label>
+                        <input type="text" className="form-control" id="author"
+                               onChange={this.handleAuthorFieldChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="summary">Summary</label>
+                        <textarea className="form-control" onChange={this.handleSummaryFieldChange} id="summary"
+                                  rows="10"></textarea>
+                    </div>
+                    <input type="button" className="btn btn-primary" onClick={this.handleSubmit} value="Create"/>
+                </form>
+            </div>
         );
     }
 });

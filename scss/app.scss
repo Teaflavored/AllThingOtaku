@@ -1,7 +1,6 @@
 @import "_bootstrap.scss";
 @import "includes/core-variables";
 @import "includes/core-mixins";
-@import "includes/list";
 
 body {
   @include main-body;
@@ -19,11 +18,13 @@ a {
 #navbar .nav-btn:hover,
 #navbar .nav-btn.active:hover {
   background: $primary-color-light;
+  color: $white;
 }
 
 #navbar .nav-btn.active {
   background: $primary-color;
   color: $white;
+
 }
 
 #navbar .navbar-brand,

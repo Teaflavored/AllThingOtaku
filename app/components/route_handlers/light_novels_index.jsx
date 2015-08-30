@@ -38,7 +38,7 @@ var LightNovelsIndex = React.createClass({
                     Create New
                 </Link>
 
-                <div id="lightNovelList" className="list">
+                <div id="lightNovelList" className="row">
                     {lightNovelNodes}
                 </div>
             </div>
