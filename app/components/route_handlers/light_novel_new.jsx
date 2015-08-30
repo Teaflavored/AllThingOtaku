@@ -34,14 +34,14 @@ var LightNovelNew = React.createClass({
             }
         )
     },
-    handleAuthorFieldChange: function () {
+    handleAuthorFieldChange: function (event) {
         this.setState(
             {
                 author: event.target.value
             }
         )
     },
-    handleSummaryFieldChange: function () {
+    handleSummaryFieldChange: function (event) {
         this.setState(
             {
                 summary: event.target.value
