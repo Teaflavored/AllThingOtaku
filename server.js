@@ -9,15 +9,21 @@ var bodyParser = require('body-parser');
 var expressState = require("express-state");
 var React = require("react");
 var mainApp = require("./app/");
+var User = require("./models/user");
 
 //services
 var lightNovelService = require("./service/light_novel_service");
 var authenticateService = require("./service/authenticate_service");
+var userService = require("./service/user_service");
+
 //router
 var ReactRouter = require("react-router");
 
 var pluginInstance = mainApp.getPlugin("FetchrPlugin");
 var fluxibleAddons = require('fluxible-addons-react');
+
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
 
 var app = express();
 //allow exposing of extra data to client
@@ -34,9 +40,50 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
 
+passport.use(new LocalStrategy({
+        usernameField: "email",
+        passwordField: "password"
+    },
+    function (email, password, done) {
+        User.findOne({email: email}, function (err, user) {
+            if (err) {
+                return done(err);
+            }
+
+            if (!user) {
+                return done(null, false, {message: "Incorrect username or password "});
+            }
+
+            user.validatePassword(password, function (err, isMatch) {
+                if (err) {
+                    done(err);
+                } else if (isMatch) {
+                    return done(null, user);
+                } else {
+                    return done(null, false, {message: "Incorrect username or password"});
+                }
+            });
+
+        });
+    }
+));
+
+passport.serializeUser(function (user, done) {
+    done(null, user._id);
+});
+
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (err, user) {
+        done(err, user);
+    });
+});
+//authentication
 pluginInstance.registerService(lightNovelService);
 pluginInstance.registerService(authenticateService);
+pluginInstance.registerService(userService);
 
 app.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
 

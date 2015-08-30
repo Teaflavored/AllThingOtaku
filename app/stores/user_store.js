@@ -1,16 +1,16 @@
 var createStore = require("fluxible/addons/createStore");
 
 module.exports = createStore({
-    storeName: "authenticationStore",
+    storeName: "userStore",
     handlers: {
-        "AUTHENTICATE_ERR" : "_receiveAuthenticationError",
-        "AUTHENTICATE_SUCCESS" : "_receiveAuthentication"
+        "USER_ERR" : "_receiveUserError",
+        "USER_SUCCESS" : "_receiveUser"
     },
-    _receiveAuthenticationError: function (err) {
+    _receiveUserError: function (err) {
         this.error = err;
         this.emitChange();
     },
-    _receiveAuthentication : function (data) {
+    _receiveUser : function (data) {
         this.user = data;
         this.emitChange();
     },
@@ -25,8 +25,5 @@ module.exports = createStore({
     },
     getUser: function () {
         return this.user;
-    },
-    isLoggedIn: function () {
-        return !!this.user;
     }
 });

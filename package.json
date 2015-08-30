@@ -16,6 +16,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-state": "*",
+    "extend": "^3.0.0",
     "fluxible": "*",
     "fluxible-addons-react": "*",
     "fluxible-plugin-fetchr": "*",
@@ -25,6 +26,8 @@
     "mongoose": "*",
     "morgan": "~1.6.1",
     "node-jsx": "*",
+    "passport": "^0.3.0",
+    "passport-local": "^1.0.0",
     "react": "*",
     "react-router": "0.13.3",
     "serve-favicon": "~2.3.0"

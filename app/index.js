@@ -4,6 +4,7 @@ var routes = require("./routes.jsx");
 
 //stores
 var lightNovelStore = require("./stores/light_novel_store");
+var userStore = require("./stores/user_store");
 var authenticationStore = require("./stores/authentication_store");
 
 var fetchr = fetchrPlugin({
@@ -17,6 +18,7 @@ var app = new FluxibleApp({
 app.uid = "allThingsOtaku";
 app.registerStore(lightNovelStore);
 app.registerStore(authenticationStore);
+app.registerStore(userStore);
 
 app.plug(fetchr);
 

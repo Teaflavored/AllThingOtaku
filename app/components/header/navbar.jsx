@@ -18,8 +18,8 @@ var Navbar = React.createClass({
                     </div>
                     <ul className="nav navbar-nav navbar-right">
                         <li><Link className="nav-btn" to="home">Anime</Link></li>
-                        <li><Link className="nav-btn" to="home">Manga</Link></li>
                         <li><Link className="nav-btn" to="lightNovelsIndex">Light Novels</Link></li>
+                        <li><Link className="nav-btn" to="signup">Sign Up</Link></li>
                         <li><Link className="nav-btn" to="login">Log In</Link></li>
                     </ul>
                 </div>
