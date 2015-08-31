@@ -32,17 +32,36 @@ var LightNovelShow = React.createClass({
     },
     render: function () {
         var lightNovel = this.props.lightNovel;
+        var numVolumes = lightNovel.volumes.length;
+        var numVolumesMeta;
 
+        if (numVolumes > 0) {
+            numVolumesMeta = (<span className="meta-text">{numVolumes} Volumes</span>);
+        } else {
+            numVolumesMeta = (<div className="no-volumes">There are currently no volumes of '{lightNovel.title}' available right now. Please check back later</div>)
+        }
         return (
-            <div id="lightNovel">
-                <div className="lightNovel-title">
-                    {lightNovel.title}
+            <div id="lightNovel" className="row">
+                <div className="col-sm-8">
+                    <div className="card">
+                        <h1>{lightNovel.title}</h1>
+                        {numVolumesMeta}
+                    </div>
                 </div>
-                <div className="lightNovel-author">
-                    {lightNovel.author}
-                </div>
-                <div className="lightNovel-summary">
-                    {lightNovel.summary}
+                <div className="col-sm-4">
+                    <div className="card">
+                        <div className="lightNovel-title">
+                            {lightNovel.title}
+                        </div>
+
+                        <div className="lightNovel-author">
+                            {lightNovel.author}
+                        </div>
+
+                        <div className="lightNovel-summary">
+                            {lightNovel.summary}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

@@ -46,7 +46,6 @@ var Navbar = React.createClass({
                         </h1>
                     </div>
                     <ul className="nav navbar-nav navbar-right">
-                        <li><Link className="nav-btn" to="home">Anime</Link></li>
                         <li><Link className="nav-btn" to="lightNovelsIndex">Light Novels</Link></li>
                         {
                             (function() {
