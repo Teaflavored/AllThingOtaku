@@ -3,6 +3,9 @@ var User = require("../models/user");
 var userService = {
     name: "users",
     create: function (req, resource, params, body, config, callback) {
+        if (req.user) {
+            return callback(new Error("You are already signed in"));
+        }
         var user = new User(body);
         user.save(function (err) {
             if (err) {
@@ -17,7 +20,14 @@ var userService = {
                     callback(err);
                 }
             } else {
-                callback(null, user);
+                req.logIn(user, function (err2) {
+                    if (err2) {
+                        err.statusCode = 403;
+                        callback(err2);
+                    } else {
+                        callback(null, user);
+                    }
+                });
             }
         });
     }

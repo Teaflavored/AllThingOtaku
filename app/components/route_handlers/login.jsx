@@ -21,6 +21,16 @@ var Login = React.createClass({
             password: ""
         };
     },
+    getDefaultProps: function () {
+        return {
+            isLoggedIn: false
+        }
+    },
+    componentDidMount: function () {
+        if (this.props.isLoggedIn) {
+            this.transitionTo("home");
+        }
+    },
     handleEmailchange: function (event) {
         this.setState({
             email: event.target.value
@@ -68,7 +78,8 @@ var Login = React.createClass({
 
 Login = fluxibleAddons.connectToStores(Login, [authenticationStore], function (context, props){
     return {
-        error : context.getStore(authenticationStore).getError()
+        error : context.getStore(authenticationStore).getError(),
+        isLoggedIn : context.getStore(authenticationStore).isLoggedIn()
     };
 });
 module.exports = Login;

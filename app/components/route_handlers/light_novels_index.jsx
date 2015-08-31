@@ -1,7 +1,10 @@
 var React = require("react");
 var Link = require("react-router").Link;
 var fluxibleAddons = require("fluxible-addons-react");
+
+//stores
 var lightNovelStore = require("../../stores/light_novel_store");
+var authenticationStore = require("../../stores/authentication_store");
 
 //actions
 var getLightNovels = require("../../actions/load_light_novels");
@@ -12,7 +15,8 @@ var LightNovel = require("../light_novels/light_novel_list_item.jsx");
 var LightNovelsIndex = React.createClass({
     getDefaultProps: function () {
         return {
-            lightNovels: []
+            lightNovels: [],
+            isLoggedIn: false
         };
     },
     contextTypes: {
@@ -26,6 +30,8 @@ var LightNovelsIndex = React.createClass({
         this.context.executeAction(getLightNovels);
     },
     render: function () {
+        var isLoggedIn = this.props.isLoggedIn;
+
         var lightNovels = this.props.lightNovels; lightNovelNodes = lightNovels.map(function (lightNovel) {
             return (
                 <LightNovel lightNovel={ lightNovel  } key={lightNovel._id}/>
@@ -34,9 +40,17 @@ var LightNovelsIndex = React.createClass({
 
         return (
             <div id="lightNovels">
-                <Link to="lightNovelCreate">
-                    Create New
-                </Link>
+                {
+                    (function() {
+                        if (isLoggedIn) {
+                            return (
+                                <Link to="lightNovelCreate">
+                                    Create New
+                                </Link>
+                            );
+                        }
+                    })()
+                }
 
                 <div id="lightNovelList" className="row">
                     {lightNovelNodes}
@@ -46,9 +60,10 @@ var LightNovelsIndex = React.createClass({
     }
 });
 
-LightNovelsIndex = fluxibleAddons.connectToStores(LightNovelsIndex, [lightNovelStore], function (context, props) {
+LightNovelsIndex = fluxibleAddons.connectToStores(LightNovelsIndex, [lightNovelStore, authenticationStore], function (context, props) {
     return {
-        lightNovels: context.getStore(lightNovelStore).getLightNovels()
+        lightNovels: context.getStore(lightNovelStore).getLightNovels(),
+        isLoggedIn: context.getStore(authenticationStore).isLoggedIn()
     };
 });
 module.exports = LightNovelsIndex;

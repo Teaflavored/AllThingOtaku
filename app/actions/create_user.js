@@ -4,8 +4,10 @@ var createUser = function (context, payload, done){
             context.dispatch("USER_ERR", err);
         } else {
             context.dispatch("USER_SUCCESS", user);
+            context.dispatch("AUTHENTICATE_SUCCESS", user);
             payload.component.transitionTo("home");
         }
+        done();
     });
 };
 

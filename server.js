@@ -8,8 +8,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressState = require("express-state");
 var React = require("react");
-var mainApp = require("./app/");
-var User = require("./models/user");
 
 //services
 var lightNovelService = require("./service/light_novel_service");
@@ -19,15 +17,23 @@ var userService = require("./service/user_service");
 //router
 var ReactRouter = require("react-router");
 
+//fluxible app
+var mainApp = require("./app/");
 var pluginInstance = mainApp.getPlugin("FetchrPlugin");
 var fluxibleAddons = require('fluxible-addons-react');
 
+//session and authentication management
+var mongoose = require("mongoose");
+var User = require("./models/user");
+var session = require("express-session");
+var MongoStore = require("connect-mongo")(session);
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
 var app = express();
 //allow exposing of extra data to client
 expressState.extend(app);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -40,6 +46,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+    secret: "Test",
+    saveUninitialized: false,
+    resave: false,
+    store: new MongoStore({
+        mongooseConnection: mongoose.connnection,
+        db: "allThingsOtaku"
+    })
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -54,7 +71,7 @@ passport.use(new LocalStrategy({
             }
 
             if (!user) {
-                return done(null, false, {message: "Incorrect username or password "});
+                return done(null, false, {message: "Incorrect email or password "});
             }
 
             user.validatePassword(password, function (err, isMatch) {
@@ -63,7 +80,7 @@ passport.use(new LocalStrategy({
                 } else if (isMatch) {
                     return done(null, user);
                 } else {
-                    return done(null, false, {message: "Incorrect username or password"});
+                    return done(null, false, {message: "Incorrect email or password"});
                 }
             });
 
@@ -76,8 +93,8 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
-        done(err, user);
+    User.findById(id, "_id email created modified", function (err, user) {
+        done(err, user.toObject());
     });
 });
 //authentication
@@ -95,7 +112,12 @@ app.get("*", function (req, res, next) {
         }
     });
 
-    ReactRouter.run(mainApp.getComponent(), req.path, function (Root, state) {
+    var router = ReactRouter.create({
+        routes: mainApp.getComponent(),
+        location: req.path
+    });
+
+    router.run(function (Root, state) {
         //if no matching routes found, then go to 404
         if (state.routes.length === 0) {
             res.status(404);
@@ -107,6 +129,7 @@ app.get("*", function (req, res, next) {
         });
 
         var loadAction = state.routes[1].handler.loadAction;
+
         var renderReactOnServer = function () {
             var markup = React.renderToString(React.createElement(RootComponent, React.__spread({}, state, {context: context.getComponentContext()})));
             res.expose(mainApp.dehydrate(context), mainApp.uid);
@@ -124,6 +147,11 @@ app.get("*", function (req, res, next) {
             });
         };
 
+        //passing user object to authentication store on server side
+        if (req.user) {
+            context.getActionContext().dispatch("AUTHENTICATE_SUCCESS", req.user);
+        }
+
         if (loadAction) {
             context.getActionContext().executeAction(loadAction, {
                 params: state.params,
@@ -135,7 +163,6 @@ app.get("*", function (req, res, next) {
 
     });
 });
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

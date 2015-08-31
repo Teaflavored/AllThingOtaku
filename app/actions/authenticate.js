@@ -6,6 +6,7 @@ var authenticate = function (context, payload, done){
             context.dispatch("AUTHENTICATE_SUCCESS", user);
             payload.component.transitionTo("home");
         }
+        done();
     });
 };
 

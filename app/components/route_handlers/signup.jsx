@@ -5,11 +5,12 @@ var fluxibleAddons = require("fluxible-addons-react");
 
 //stores
 var userStore = require("../../stores/user_store");
+var authenticationStore = require("../../stores/authentication_store");
 
 //actions
 var createUser = require("../../actions/create_user");
 
-var NewUser = React.createClass({
+var Signup = React.createClass({
     mixins: [Navigation],
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
@@ -20,6 +21,16 @@ var NewUser = React.createClass({
             email: "",
             password: ""
         };
+    },
+    getDefaultProps: function () {
+        return {
+            isLoggedIn: false
+        };
+    },
+    componentDidMount: function () {
+        if (this.props.isLoggedIn) {
+            this.transitionTo("home");
+        }
     },
     handleEmailchange: function (event) {
         this.setState({
@@ -66,9 +77,10 @@ var NewUser = React.createClass({
     }
 });
 
-NewUser = fluxibleAddons.connectToStores(NewUser, [userStore], function (context, props){
+Signup = fluxibleAddons.connectToStores(Signup, [userStore, authenticationStore], function (context, props){
     return {
-        error : context.getStore(userStore).getError()
+        error : context.getStore(userStore).getError(),
+        isLoggedIn : context.getStore(authenticationStore).isLoggedIn()
     };
 });
-module.exports = NewUser;
+module.exports = Signup;

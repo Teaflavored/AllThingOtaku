@@ -10,8 +10,7 @@ var App = React.createClass({
     render: function () {
         return (
             <div>
-                <Navbar />
-
+                <Navbar {...this.props} />
                 <div id="mainContent" className="container" style={appCSS.mainContent}>
                     <RouteHandler {...this.props}/>
                 </div>

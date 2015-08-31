@@ -6,6 +6,7 @@ var Navigation = Router.Navigation;
 var fluxibleAddons = require("fluxible-addons-react");
 //stores
 var lightNovelStore = require("../../stores/light_novel_store");
+var authenticationStore = require("../../stores/authentication_store");
 //actions
 var createLightNovel = require("../../actions/create_light_novel");
 
@@ -17,7 +18,8 @@ var LightNovelNew = React.createClass({
     },
     getDefaultProps: function () {
         return {
-            error: null
+            error: null,
+            isLoggedIn: false
         }
     },
     getInitialState: function () {
@@ -88,9 +90,10 @@ var LightNovelNew = React.createClass({
     }
 });
 
-LightNovelNew = fluxibleAddons.connectToStores(LightNovelNew, [lightNovelStore], function (context, props) {
+LightNovelNew = fluxibleAddons.connectToStores(LightNovelNew, [lightNovelStore, authenticationStore], function (context, props) {
     return {
-        error: context.getStore(lightNovelStore).getNewLightNovelErr()
+        error: context.getStore(lightNovelStore).getNewLightNovelErr(),
+        isLoggedIn : context.getStore(authenticationStore).isLoggedIn()
     };
 });
 module.exports = LightNovelNew;

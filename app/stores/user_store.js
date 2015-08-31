@@ -25,5 +25,13 @@ module.exports = createStore({
     },
     getUser: function () {
         return this.user;
+    },
+    dehydrate : function () {
+        return {
+            user: this.user
+        }
+    },
+    rehydrate : function (state) {
+        this.user = state.user;
     }
 });
