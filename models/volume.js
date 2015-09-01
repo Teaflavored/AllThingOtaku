@@ -5,15 +5,17 @@ var lastMod = require("./last_mod");
 var created = require("./created");
 
 var volumeSchema = new Schema({
-	volume_num : {
-					 type: Number,
-					 index: true
-				 },
-	title: {
-			   type: String
-		   },
-	chapters: [Chapter.schema],
-	pub_date: Date
+    volume_num: {
+        type: Number,
+        required: true,
+        index: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    chapters: [Chapter.schema],
+    pub_date: Date
 });
 
 volumeSchema.plugin(lastMod);

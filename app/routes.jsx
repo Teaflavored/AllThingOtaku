@@ -16,7 +16,7 @@ var Login = require("./components/route_handlers/login.jsx");
 var routes = (
     <Route handler={App} path="/">
         <Route name="lightNovelCreate" path="/lightNovel/new" handler={LightNovelNew}/>
-        <Route name="lightNovelShow" path="/lightNovel/:id" handler={LightNovelShow}/>
+        <Route name="lightNovelShow" path="/lightNovel/:id" handler={LightNovelShow} />
         <Route name="lightNovelsIndex" path="/lightNovels" handler={LightNovelIndex}/>
         <Route name="signup" path="/signup" handler={Signup} />
         <Route name="login" path="/login" handler={Login} />

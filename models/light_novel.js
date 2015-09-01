@@ -39,12 +39,13 @@ lightNovelSchema.pre("save", function (next) {
         this.invalidate("author", "Light Novel author must be present");
         next(new Error("Author must be present"));
     }
+
     mongoose.models["LightNovel"].findOne({
         title: this.title
     }, function (err, lightNovel) {
         if (err) {
             next(err);
-        } else if (lightNovel) {
+        } else if (lightNovel && lightNovel._id == self._id) {
             self.invalidate("title", "Light Novel title must be unique");
             next(new Error("Title must be unique"));
         } else {

@@ -46,9 +46,6 @@ module.exports = createStore({
         this.newLightNovelErr = null;
         return error;
     },
-    clearNewLightNovelErr: function () {
-        this.newLightNovelErr = null;
-    },
     dehydrate: function () {
         return {
             lightNovels: this.lightNovels,

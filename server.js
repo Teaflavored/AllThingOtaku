@@ -13,6 +13,7 @@ var React = require("react");
 var lightNovelService = require("./service/light_novel_service");
 var authenticateService = require("./service/authenticate_service");
 var userService = require("./service/user_service");
+var volumeService = require("./service/volume_service");
 
 //router
 var ReactRouter = require("react-router");
@@ -101,6 +102,7 @@ passport.deserializeUser(function (id, done) {
 pluginInstance.registerService(lightNovelService);
 pluginInstance.registerService(authenticateService);
 pluginInstance.registerService(userService);
+pluginInstance.registerService(volumeService);
 
 app.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
 
