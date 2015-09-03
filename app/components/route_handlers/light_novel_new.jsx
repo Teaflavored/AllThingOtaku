@@ -8,7 +8,7 @@ var fluxibleAddons = require("fluxible-addons-react");
 var lightNovelStore = require("../../stores/light_novel_store");
 var authenticationStore = require("../../stores/authentication_store");
 //actions
-var createLightNovel = require("../../actions/create_light_novel");
+var lightNovelActions = require("../../actions/light_novel_actions");
 
 var LightNovelNew = React.createClass({
     mixins: [Navigation],
@@ -27,7 +27,7 @@ var LightNovelNew = React.createClass({
             title: "",
             author: "",
             summary: ""
-        }
+        };
     },
     handleTitleFieldChange: function (event) {
         this.setState(
@@ -51,7 +51,7 @@ var LightNovelNew = React.createClass({
         );
     },
     handleSubmit: function () {
-        this.context.executeAction(createLightNovel, {
+        this.context.executeAction(lightNovelActions.create, {
             params: {},
             body: this.state,
             component: this
@@ -93,7 +93,7 @@ var LightNovelNew = React.createClass({
 LightNovelNew = fluxibleAddons.connectToStores(LightNovelNew, [lightNovelStore, authenticationStore], function (context, props) {
     return {
         error: context.getStore(lightNovelStore).getNewLightNovelErr(),
-        isLoggedIn : context.getStore(authenticationStore).isLoggedIn()
+        isLoggedIn: context.getStore(authenticationStore).isLoggedIn()
     };
 });
 module.exports = LightNovelNew;

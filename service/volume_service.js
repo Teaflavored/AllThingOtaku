@@ -23,20 +23,26 @@ module.exports = {
     },
     create: function (req, resource, params, body, config, actionCB) {
         var lightNovelId = params.id;
-        LightNovel.findById(lightNovelId, function (err, lightNovel) {
-            if (err) {
-                return actionCB(err);
-            } else {
-                lightNovel.volumes.push(_.clone(body));
+        LightNovel.findById(lightNovelId).exec().then(
+            function (lightNovel) {
 
-                lightNovel.save(function (err) {
-                    if (err) {
+                lightNovel.volumes.push(_.clone(body));
+                var promise = lightNovel.save();
+
+                promise.then(
+                    function (lightNovel) {
+                        return actionCB(null, lightNovel.toObject());
+                    },
+                    function (err) {
+                        err.statusCode = 422;
                         return actionCB(err);
-                    } else {
-                        actionCB(null, lightNovel);
                     }
-                });
+                );
+            },
+            function (err) {
+                err.statusCode = 422;
+                return actionCB(err);
             }
-        });
+        );
     }
 };

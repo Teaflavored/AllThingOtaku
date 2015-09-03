@@ -5,8 +5,8 @@ var Link = Router.Link;
 var fluxibleAddons = require("fluxible-addons-react");
 
 //actions
-var getLightNovel = require("../../actions/find_light_novel");
-var createVolume = require("../../actions/create_volume");
+var lightNovelActions = require("../../actions/light_novel_actions");
+var volumeActions = require("../../actions/volume_actions");
 
 //stores
 var lightNovelStore = require("../../stores/light_novel_store");
@@ -16,27 +16,21 @@ var LightNovelItem = require("../light_novels/light_novel.jsx");
 var VolumeListItem = require("../volumes/volume_list_item.jsx");
 
 var LightNovelShow = React.createClass({
+    contextTypes: {
+        executeAction: React.PropTypes.func.isRequired,
+        getStore: React.PropTypes.func.isRequired
+    },
+    statics: {
+        loadAction: lightNovelActions.find
+    },
     getInitialState: function () {
         return {
             volumeNumber: null,
             volumeTitle: ""
         }
     },
-    getDefaultProps: function () {
-        return {
-            lightNovel: {},
-            isLoggedIn: false
-        };
-    },
-    contextTypes: {
-        executeAction: React.PropTypes.func.isRequired,
-        getStore: React.PropTypes.func.isRequired
-    },
-    statics: {
-        loadAction: getLightNovel
-    },
     componentDidMount: function () {
-        this.context.executeAction(getLightNovel, {
+        this.context.executeAction(lightNovelActions.find, {
             params: this.props.params,
             query: this.props.query
         });
@@ -56,12 +50,12 @@ var LightNovelShow = React.createClass({
         }
     },
     handleSubmitVolumeCreate: function () {
-        this.context.executeAction(createVolume, {
+        this.context.executeAction(volumeActions.create, {
             params: {
                 id: this.props.lightNovel._id
             },
             body: {
-                volume_num: this.state.volumeNumber,
+                volumeNum: this.state.volumeNumber,
                 title: this.state.volumeTitle
             }
         });
@@ -70,9 +64,10 @@ var LightNovelShow = React.createClass({
     },
     render: function () {
         var lightNovel = this.props.lightNovel;
-        var volumeNodes = this.props.lightNovel.volumes.map(function (volume) {
+        var volumeNodes = this.props.lightNovel.volumes.map(function (volume, idx) {
+            var isOpen = idx == 0;
             return (
-                <VolumeListItem volume={volume} key={volume._id}/>
+                <VolumeListItem volume={volume} key={volume._id} isOpen={isOpen}/>
             );
         });
 
@@ -137,9 +132,9 @@ var LightNovelShow = React.createClass({
                             </button>
                         </h1>
                         {numVolumesMeta}
-                        <div className="volumesList row">
-                            {volumeNodes}
-                        </div>
+                    </div>
+                    <div className="volumesList row">
+                        {volumeNodes}
                     </div>
                 </div>
                 <div className="col-sm-4">
@@ -164,7 +159,7 @@ var LightNovelShow = React.createClass({
 
 LightNovelShow = fluxibleAddons.connectToStores(LightNovelShow, [lightNovelStore], function (context, props) {
     return {
-        lightNovel: context.getStore(lightNovelStore).getLightNovel(),
+        lightNovel: context.getStore(lightNovelStore).getLightNovel()
     };
 });
 

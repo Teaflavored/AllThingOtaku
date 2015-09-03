@@ -1,6 +1,7 @@
 @import "_bootstrap.scss";
 @import "includes/core-variables";
 @import "includes/core-mixins";
+@import "pages/volumes";
 
 body {
   @include main-body;

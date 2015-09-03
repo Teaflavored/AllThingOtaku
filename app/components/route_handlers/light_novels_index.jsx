@@ -7,27 +7,27 @@ var lightNovelStore = require("../../stores/light_novel_store");
 var authenticationStore = require("../../stores/authentication_store");
 
 //actions
-var getLightNovels = require("../../actions/load_light_novels");
+var lightNovelActions = require("../../actions/light_novel_actions");
 
 //components & css
 var LightNovel = require("../light_novels/light_novel_list_item.jsx");
 
 var LightNovelsIndex = React.createClass({
+    contextTypes: {
+        getStore: React.PropTypes.func.isRequired,
+        executeAction: React.PropTypes.func.isRequired
+    },
+    statics: {
+        loadAction: lightNovelActions.index
+    },
     getDefaultProps: function () {
         return {
             lightNovels: [],
             isLoggedIn: false
         };
     },
-    contextTypes: {
-        getStore: React.PropTypes.func.isRequired,
-        executeAction: React.PropTypes.func.isRequired
-    },
-    statics: {
-        loadAction: getLightNovels
-    },
     componentDidMount: function () {
-        this.context.executeAction(getLightNovels);
+        this.context.executeAction(lightNovelActions.index);
     },
     render: function () {
         var isLoggedIn = this.props.isLoggedIn;

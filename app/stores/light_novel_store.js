@@ -3,7 +3,9 @@ var createStore = require("fluxible/addons/createStore");
 module.exports = createStore({
     initialize: function () {
         this.lightNovels = [];
-        this.lightNovel = {};
+        this.lightNovel = {
+            volumes: []
+        };
         this.newLightNovelErr = null;
     },
     storeName: "lightNovelStore",

@@ -6,53 +6,55 @@ var Volume = require("./volume");
 
 var lightNovelSchema = new Schema({
     author: {
-        type: String,
-        required: "Author is required"
+        type: String
     },
     title: {
-        type: String,
-        required: "Title is required",
-        index: {unique: true}
+        type: String
     },
+    volumes: [Volume.schema],
     summary: String,
-    publication_date: Date,
+    image: String,
+    publicationDate: Date,
     completed: {
         type: Boolean,
         default: false,
-    },
-    volumes: [Volume.schema]
+    }
+});
+
+lightNovelSchema.pre("validate", function (next) {
+    if (!this.title) {
+        this.invalidate("title", "Title must be present");
+        next(new Error("Title is required"));
+    } else if (!this.author) {
+        this.invalidate("author", "Author must be present");
+        next(new Error("Author is required"));
+    } else {
+        next();
+    }
+});
+
+lightNovelSchema.pre("save", function (next) {
+    var self = this;
+
+    mongoose.models["LightNovel"]
+        .findOne({
+            title: this.title,
+            author: this.author
+        }).exec().then(function (lightNovel) {
+            if (lightNovel && !lightNovel._id.equals(self._id)) {
+                self.invalidate("title", "Title and Author must be unique");
+                self.invalidate("author", "Title and Author must be unique");
+                next(new Error("Title and Author must be unique"));
+            } else {
+                next();
+            }
+        }, function (err) {
+            next(err);
+        });
 });
 
 lightNovelSchema.plugin(modified);
 lightNovelSchema.plugin(created);
-
-//some custom validations
-lightNovelSchema.pre("save", function (next) {
-    var self = this;
-
-    if (!this.title) {
-        this.invalidate("title", "Light Novel title must be present");
-        next(new Error("Title must be present"));
-    }
-
-    if (!this.author) {
-        this.invalidate("author", "Light Novel author must be present");
-        next(new Error("Author must be present"));
-    }
-
-    mongoose.models["LightNovel"].findOne({
-        title: this.title
-    }, function (err, lightNovel) {
-        if (err) {
-            next(err);
-        } else if (lightNovel && lightNovel._id == self._id) {
-            self.invalidate("title", "Light Novel title must be unique");
-            next(new Error("Title must be unique"));
-        } else {
-            next();
-        }
-    });
-});
 
 var LightNovel = mongoose.model("LightNovel", lightNovelSchema);
 

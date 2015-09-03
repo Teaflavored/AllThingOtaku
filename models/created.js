@@ -1,16 +1,17 @@
 var createdPlugin = function (schema, options) {
-	schema.add({ created: Date });
+    schema.add({created: Date});
 
-	schema.pre("save", function (next) {
-		if (!this.created) {
-			this.created = new Date();
-		}	
-		next();
-	});
+    schema.pre("save", function (next) {
+        if (!this.created) {
+            this.created = new Date();
+        }
 
-	if (options && options.index) {
-		schema.path("created").index(options.index);
-	}
+        next();
+    });
+
+    if (options && options.index) {
+        schema.path("created").index(options.index);
+    }
 };
 
 

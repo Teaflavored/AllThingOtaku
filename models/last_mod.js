@@ -1,15 +1,15 @@
 var lastModifiedPlugin = function (schema, options) {
-	schema.add( { modified: Date } );
+    schema.add({modified: Date});
 
-	schema.pre("save", function (next) {
-		this.modified = new Date();
+    schema.pre("save", function (next) {
+        this.modified = new Date();
 
-		next();
-	});
+        next();
+    });
 
-	if (options && options.index) {
-		schema.path("modified").index(options.index);
-	}
+    if (options && options.index) {
+        schema.path("modified").index(options.index);
+    }
 };
 
 module.exports = lastModifiedPlugin;

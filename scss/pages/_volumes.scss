@@ -1,0 +1,10 @@
+@import "../includes/core-variables";
+
+.volume-item {
+  transition: height 0.5s ease;
+  height: 60px;
+
+  &.open {
+    height: 200px;
+  }
+}

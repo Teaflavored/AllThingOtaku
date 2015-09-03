@@ -5,7 +5,7 @@ var lastMod = require("./last_mod");
 var created = require("./created");
 
 var volumeSchema = new Schema({
-    volume_num: {
+    volumeNum: {
         type: Number,
         required: true,
         index: true

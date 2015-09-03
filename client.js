@@ -5,13 +5,13 @@ var fluxibleAddons = require("fluxible-addons-react");
 var routes = require("./app/routes.jsx");
 
 document.addEventListener("DOMContentLoaded", function () {
-	var dehydratedState = window[app.uid];
-	app.rehydrate(dehydratedState, function (err, context) {
-		if (err) {
-		}
+    var dehydratedState = window[app.uid];
+    app.rehydrate(dehydratedState, function (err, context) {
+        if (err) {
+        }
 
         Router.run(app.getComponent(), Router.HistoryLocation, function (Root, state) {
-			React.render(React.createElement(Root, React.__spread({}, state, { context : context.getComponentContext()  })), document.getElementById(app.uid));
-		});
-	});
+            React.render(React.createElement(Root, React.__spread({}, state, {context: context.getComponentContext()})), document.getElementById(app.uid));
+        });
+    });
 });
