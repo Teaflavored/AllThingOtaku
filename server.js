@@ -48,13 +48,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var uri = process.env.MONGOLAB_URI || process.env.DB_URL;
+var connection = mongoose.createConnection(uri);
+var sessionSecret = process.env.SESSION_SECRET || "testDummy";
 app.use(session({
-    secret: "Test",
+    secret: sessionSecret,
     saveUninitialized: false,
     resave: false,
     store: new MongoStore({
-        mongooseConnection: mongoose.connnection,
-        db: "allThingsOtaku"
+        mongooseConnection: connection
     })
 }));
 
