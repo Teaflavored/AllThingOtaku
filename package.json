@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "browserify": "browserify client.js | uglifyjs -mc > public/javascripts/bundle.js",
+    "watch": "watchify client.js -do public/javascripts/bundle.js",
+    "postinstall" : "grunt pbuild",
+    "start": "npm run build && node ./bin/www",
+    "build": "npm run browserify"
   },
   "dependencies": {
     "async": "*",
