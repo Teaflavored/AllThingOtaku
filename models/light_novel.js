@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 var modified = require("./last_mod");
 var created = require("./created");
 var Volume = require("./volume");
+var _ = require("lodash");
 
 var lightNovelSchema = new Schema({
     author: {
@@ -57,6 +58,22 @@ lightNovelSchema.pre("save", function (next) {
         });
 
 });
+
+lightNovelSchema.methods.toObjectNoVolumes = function () {
+    var tempLN = this.toObject();
+    tempLN = _.omit(tempLN, "volumes");
+
+    return tempLN;
+};
+
+lightNovelSchema.methods.toObjectNoChapters = function () {
+    var tempLN = this.toObject();
+    tempLN.volumes = tempLN.volumes.map(function(volume) {
+        return _.omit(volume, "chapters");
+    });
+
+    return tempLN;
+};
 
 lightNovelSchema.plugin(modified);
 lightNovelSchema.plugin(created);

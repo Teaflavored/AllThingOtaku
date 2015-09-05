@@ -152,6 +152,12 @@ output {
   // [converter] extracted textarea& to textarea.form-control
 }
 
+input[type="text"],
+input[type="password"] {
+  -webkit-appearance: none !important;
+  border-radius: 3px !important;
+}
+
 // Reset height for `textarea`s
 textarea.form-control {
   height: auto;

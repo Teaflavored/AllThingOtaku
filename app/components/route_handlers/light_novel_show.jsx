@@ -93,19 +93,20 @@ var LightNovelShow = React.createClass({
                                 <div className="row">
                                     <div className="col-sm-12">
                                         <div className="card">
-                                            <div className="row">
-                                                <div className="fa fa-plus">
-                                                </div>
-                                                <div className="col-xs-6">
+                                            <form className="row" onSubmit={self.handleSubmitVolumeCreate}
+                                                  action="javascript:void(0);">
+                                                <div className="col-xs-8">
                                                     <input className="form-control"
-                                                           onChange={self.handleVolumeTitleChange} value={self.state.volumeTitle} />
+                                                           onChange={self.handleVolumeTitleChange}
+                                                           value={self.state.volumeTitle} type="text"
+                                                           autoComplete="off"/>
                                                 </div>
-                                                <div className="col-xs-2">
-                                                    <button className="btn-block btn-primary"
-                                                            onClick={self.handleSubmitVolumeCreate}>Create
+                                                <div className="col-xs-4">
+                                                    <button className="btn-block btn-primary btn">
+                                                        Create New Volume
                                                     </button>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -1,6 +1,10 @@
 var LightNovel = require("../models/light_novel");
 var _ = require("lodash");
 
+var errorMessages = {
+    "NO_AUTHENTICATION": "You have no authentication for this action"
+};
+
 module.exports = {
     name: "volumes",
     read: function (req, resource, params, config, actionCB) {
@@ -22,6 +26,9 @@ module.exports = {
         });
     },
     create: function (req, resource, params, body, config, actionCB) {
+        if (!req.isAuthenticated()) {
+            return actionCB(new Error(errorMessages["NO_AUTHENTICATION"]));
+        }
         var lightNovelId = params.id;
         LightNovel.findById(lightNovelId).exec().then(
             function (lightNovel) {
@@ -35,7 +42,7 @@ module.exports = {
 
                 promise.then(
                     function (lightNovel) {
-                        return actionCB(null, lightNovel.toObject());
+                        return actionCB(null, lightNovel.toObjectNoChapters());
                     },
                     function (err) {
                         err.statusCode = 422;

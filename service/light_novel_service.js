@@ -12,17 +12,21 @@ var lightNovelService = {
             LightNovel.findById(params.id).exec()
                 .then(
                 function (lightNovel) {
-                    return actionCB(null, lightNovel.toObject());
+                    return actionCB(null, lightNovel.toObjectNoChapters());
                 },
                 function (err) {
                     err.statusCode = 404;
                     return actionCB(err);
                 });
         } else {
-            LightNovel.find({}).lean().exec()
+            LightNovel.find({}).exec()
                 .then(
                 function (lightNovels) {
-                    return actionCB(null, lightNovels);
+                    var lightNovelsArr = lightNovels.map(function (_lightNovel) {
+                        return _lightNovel.toObjectNoVolumes();
+                    });
+
+                    return actionCB(null, lightNovelsArr);
                 },
                 function (err) {
                     err.statusCode = 404;
@@ -37,7 +41,7 @@ var lightNovelService = {
         var lightNovel = new LightNovel(body);
         lightNovel.save().then(
             function (lightNovel) {
-                return actionCB(null, lightNovel.toObject());
+                return actionCB(null, lightNovel.toObjectNoChapters());
             },
             function (err) {
                 return actionCB(err);
@@ -56,10 +60,10 @@ var lightNovelService = {
             function(lightNovel) {
                 lightNovel.save(body).then(
                     function(lightNovel) {
-                        actionCB(null, lightNovel.toObject());
+                        actionCB(null, lightNovel.toObjectNoChapters());
                     },
                     function (err){
-                        err.statusCode = 42;;
+                        err.statusCode = 422;
                         actionCB(err);
                     }
                 )
@@ -79,7 +83,7 @@ var lightNovelService = {
                 err.statusCode = 422;
                 return actionCB(err);
             } else {
-
+                return actionCB(lightNovel.toObjectNoChapters());
             }
         });
     },
@@ -94,7 +98,7 @@ var lightNovelService = {
                 err.statusCode = 422;
                 return actionCB(err);
             } else {
-                return lightNovel.toObject();
+                return actionCB(null, lightNovel.toObjectNoVolumes());
             }
         });
     }
