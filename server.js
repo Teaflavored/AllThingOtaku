@@ -124,7 +124,12 @@ app.get("*", function (req, res, next) {
 
     var router = ReactRouter.create({
         routes: mainApp.getComponent(),
-        location: req.path
+        location: req.path,
+        onAbort: function (options){
+            var destination = options.to || "/";
+            res.redirect(302, destination);
+            console.log("Redirecting to: " + destination);
+        }
     });
 
     router.run(function (Root, state) {
