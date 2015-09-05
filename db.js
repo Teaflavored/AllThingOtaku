@@ -24,7 +24,7 @@ var connect = function (serverStartCB) {
     });
 
     try {
-        mongoose.connect(DB_URL);
+        mongoose.connect(process.env.MONGOLAB_URI);
     } catch (err) {
         console.log("Failed to initialize server", err.message);
     }
