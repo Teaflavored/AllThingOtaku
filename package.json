@@ -5,7 +5,6 @@
   "scripts": {
     "browserify": "browserify client.js | uglifyjs -mc > public/javascripts/bundle.js",
     "watch": "watchify client.js -do public/javascripts/bundle.js",
-    "postinstall": "grunt pbuild",
     "start": "npm run build && node ./bin/www",
     "build": "npm run browserify"
   },
