@@ -1,5 +1,7 @@
 var React = require("react");
 var Router = require("react-router");
+var Link = Router.Link;
+
 var Navigation = Router.Navigation;
 var fluxibleAddons = require("fluxible-addons-react");
 
@@ -20,16 +22,6 @@ var Login = React.createClass({
             email: "",
             password: ""
         };
-    },
-    getDefaultProps: function () {
-        return {
-            isLoggedIn: false
-        }
-    },
-    componentDidMount: function () {
-        if (this.props.isLoggedIn) {
-            this.transitionTo("home");
-        }
     },
     handleEmailchange: function (event) {
         this.setState({
@@ -58,6 +50,7 @@ var Login = React.createClass({
         return (
             <div className="col-md-4 col-md-offset-4">
                 <form action="javascript:void(0);" className="card">
+                    <h3 className="text-center">Log In</h3>
                     {errorNode}
                     <div className="form-group">
                         <label htmlFor="username">E-mail</label>
@@ -70,6 +63,7 @@ var Login = React.createClass({
                     <div className="form-group">
                         <input type="submit" value="Log In" className="btn btn-primary btn-block" onClick={this.handleLogin}/>
                     </div>
+                    <Link className="small" to="signup">Don't have an account?</Link>
                 </form>
             </div>
         );

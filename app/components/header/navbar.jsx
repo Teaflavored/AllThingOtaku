@@ -48,15 +48,6 @@ var Navbar = React.createClass({
                     <ul className="nav navbar-nav navbar-right">
                         <li><Link className="nav-btn" to="lightNovelsIndex">Light Novels</Link></li>
                         {
-                            (function() {
-                                if (!isLoggedIn) {
-                                    return (
-                                        <li><Link className="nav-btn" to="signup">Sign Up</Link></li>
-                                    );
-                                }
-                            })()
-                        }
-                        {
                             (function () {
                                 if (!isLoggedIn) {
                                     return (

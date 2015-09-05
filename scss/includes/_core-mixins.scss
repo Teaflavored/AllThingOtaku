@@ -14,3 +14,53 @@
   box-shadow: 1px 2px 4px 0 #e6e6e6;
 }
 
+@mixin margins() {
+  .mts {
+    margin-top: 5px;
+  }
+  .mtm {
+    margin-top: 10px;
+  }
+  .mtl {
+    margin-top: 15px;
+  }
+  .mtxl {
+    margin-top: 20px;
+  }
+  .mrs {
+    margin-right: 5px;
+  }
+  .mrm {
+    margin-right: 10px;
+  }
+  .mrl {
+    margin-right: 15px;
+  }
+  .mrxl {
+    margin-right: 20px;
+  }
+  .mbs {
+    margin-bottom: 5px;
+  }
+  .mbm {
+    margin-bottom: 10px;
+  }
+  .mbl {
+    margin-bottom: 15px;
+  }
+  .mbxl {
+    margin-bottom: 20px;
+  }
+  .mls {
+    margin-left: 5px;
+  }
+  .mlm {
+    margin-left: 10px;
+  }
+  .mll {
+    margin-left: 15px;
+  }
+  .mlxl {
+    margin-left: 20px;
+  }
+}
