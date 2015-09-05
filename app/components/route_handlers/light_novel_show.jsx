@@ -51,8 +51,13 @@ var LightNovelShow = React.createClass({
                 title: this.state.volumeTitle
             }
         });
+
+        this.setState({
+            volumeTitle: ""
+        });
     },
     render: function () {
+        var self = this;
         var lightNovel = this.props.lightNovel;
         var volumeNodes = this.props.lightNovel.volumes.map(function (volume, idx) {
             var isOpen = idx == 0;
@@ -91,13 +96,13 @@ var LightNovelShow = React.createClass({
                                             <div className="row">
                                                 <div className="fa fa-plus">
                                                 </div>
-                                                <div className="col-xs-11">
+                                                <div className="col-xs-6">
                                                     <input className="form-control"
-                                                           onChange={this.handleVolumeTitleChange}/>
+                                                           onChange={self.handleVolumeTitleChange} value={self.state.volumeTitle} />
                                                 </div>
-                                                <div className="col-xs-1">
+                                                <div className="col-xs-2">
                                                     <button className="btn-block btn-primary"
-                                                            onClick={this.handleSubmitVolumeCreate}>Create
+                                                            onClick={self.handleSubmitVolumeCreate}>Create
                                                     </button>
                                                 </div>
                                             </div>

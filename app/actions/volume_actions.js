@@ -4,7 +4,6 @@ var volumeActions = {
             if (err) {
                 context.dispatch("FIND_LIGHT_NOVEL_ERR", err);
             } else {
-                console.log(lightNovel);
                 context.dispatch("FIND_LIGHT_NOVEL", lightNovel);
             }
             done();
