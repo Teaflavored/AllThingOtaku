@@ -95,7 +95,13 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(function (id, done) {
     User.findById(id, "_id email created modified", function (err, user) {
-        done(err, user.toObject());
+        if (err) {
+            done(err);
+        } else if (user) {
+            done(err, user.toObject());
+        } else {
+            done(err, user);
+        }
     });
 });
 //authentication
