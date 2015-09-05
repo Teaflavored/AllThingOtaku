@@ -7,7 +7,7 @@ var created = require("./created");
 var volumeSchema = new Schema({
     volumeNum: {
         type: Number,
-        required: true,
+        default: -1,
         index: true
     },
     title: {
@@ -15,7 +15,7 @@ var volumeSchema = new Schema({
         required: true
     },
     chapters: [Chapter.schema],
-    pub_date: Date
+    pubDate: Date
 });
 
 volumeSchema.plugin(lastMod);

@@ -12,12 +12,16 @@ var lightNovelSchema = new Schema({
         type: String
     },
     volumes: [Volume.schema],
+    volumesCount: {
+        type: Number,
+        default: 0
+    },
     summary: String,
     image: String,
-    publicationDate: Date,
+    pubDate: Date,
     completed: {
         type: Boolean,
-        default: false,
+        default: false
     }
 });
 
@@ -51,6 +55,7 @@ lightNovelSchema.pre("save", function (next) {
         }, function (err) {
             next(err);
         });
+
 });
 
 lightNovelSchema.plugin(modified);
