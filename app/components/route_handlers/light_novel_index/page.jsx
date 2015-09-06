@@ -3,14 +3,14 @@ var Link = require("react-router").Link;
 var fluxibleAddons = require("fluxible-addons-react");
 
 //stores
-var lightNovelStore = require("../../stores/light_novel_store");
-var authenticationStore = require("../../stores/authentication_store");
+var lightNovelStore = require("../../../stores/light_novel_store");
+var authenticationStore = require("../../../stores/authentication_store");
 
 //actions
-var lightNovelActions = require("../../actions/light_novel_actions");
+var lightNovelActions = require("../../../actions/light_novel_actions");
 
 //components & css
-var LightNovel = require("../light_novels/light_novel_list_item.jsx");
+var LightNovel = require("./light_novel_list_item.jsx");
 
 var LightNovelsIndex = React.createClass({
     contextTypes: {
@@ -32,7 +32,8 @@ var LightNovelsIndex = React.createClass({
     render: function () {
         var isLoggedIn = this.props.isLoggedIn;
 
-        var lightNovels = this.props.lightNovels; lightNovelNodes = lightNovels.map(function (lightNovel) {
+        var lightNovels = this.props.lightNovels;
+        var lightNovelNodes = lightNovels.map(function (lightNovel) {
             return (
                 <LightNovel lightNovel={ lightNovel  } key={lightNovel._id}/>
             );
