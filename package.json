@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "browserify": "browserify client.js | uglifyjs -mc > public/javascripts/bundle.js",
-    "postinstall" : "grunt pbuild",
+    "postinstall": "grunt pbuild",
     "watch": "watchify client.js -do public/javascripts/bundle.js",
     "start": "npm run build && node ./bin/www",
     "build": "npm run browserify"
@@ -27,7 +27,7 @@
     "fluxible-addons-react": "*",
     "fluxible-plugin-fetchr": "*",
     "grunt": "^0.4.5",
-    "grunt-cli" : "*",
+    "grunt-cli": "*",
     "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-sass": "^1.0.0",
@@ -37,6 +37,7 @@
     "lodash": "^3.10.1",
     "mongoose": "*",
     "morgan": "~1.6.1",
+    "newrelic": "^1.22.0",
     "node-jsx": "*",
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
