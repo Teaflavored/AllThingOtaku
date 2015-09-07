@@ -31,3 +31,5 @@ var lightboxStore = createStore({
         return this.lightBoxOpen;
     }
 });
+
+module.exports = lightboxStore;
