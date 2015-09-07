@@ -41,7 +41,7 @@ var lightNovelService = {
         var lightNovel = new LightNovel(body);
         lightNovel.save().then(
             function (lightNovel) {
-                return actionCB(null, lightNovel.toObjectNoChapters());
+                return actionCB(null, lightNovel.toObjectNoChapterText());
             },
             function (err) {
                 return actionCB(err);
@@ -60,7 +60,7 @@ var lightNovelService = {
             function(lightNovel) {
                 lightNovel.save(body).then(
                     function(lightNovel) {
-                        actionCB(null, lightNovel.toObjectNoChapters());
+                        actionCB(null, lightNovel.toObjectNoChapterText());
                     },
                     function (err){
                         err.statusCode = 422;

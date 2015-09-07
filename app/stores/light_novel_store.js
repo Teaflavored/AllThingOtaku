@@ -1,6 +1,16 @@
 var createStore = require("fluxible/addons/createStore");
 
+var handlers = {
+    LOAD_LIGHT_NOVELS: "_receiveLightNovels",
+    LOAD_LIGHT_NOVELS_ERR: "_receiveLightNovelsErr",
+    FIND_LIGHT_NOVEL: "_receiveLightNovel",
+    FIND_LIGHT_NOVEL_ERR: "_receiveLightNovelErr",
+    CREATE_LIGHT_NOVEL_ERR: "_receiveCreateLightNovelErr",
+    FIND_VOLUME: "_receiveVolume"
+};
 module.exports = createStore({
+    storeName: "lightNovelStore",
+    handlers: handlers,
     initialize: function () {
         this.lightNovels = [];
         this.lightNovel = {
@@ -8,15 +18,6 @@ module.exports = createStore({
         };
         this.volumeIdToVolumes = {};
         this.newLightNovelErr = null;
-    },
-    storeName: "lightNovelStore",
-    handlers: {
-        LOAD_LIGHT_NOVELS: "_receiveLightNovels",
-        LOAD_LIGHT_NOVELS_ERR: "_receiveLightNovelsErr",
-        FIND_LIGHT_NOVEL: "_receiveLightNovel",
-        FIND_LIGHT_NOVEL_ERR: "_receiveLightNovelErr",
-        CREATE_LIGHT_NOVEL_ERR: "_receiveCreateLightNovelErr",
-        FIND_VOLUME : "_receiveVolume"
     },
     _receiveVolume: function (data) {
         this.volumeIdToVolumes[data._id] = data;

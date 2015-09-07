@@ -1,7 +1,10 @@
 var React = require("react");
-
+var fluxibleAddons = require("fluxible-addons-react");
 //components
 var VolumeListItem = require("./volume_list_item.jsx");
+
+//stores
+var volumeStore = require("../../../stores/volume_store");
 
 var VolumesList = React.createClass({
     contextTypes: {
@@ -18,7 +21,8 @@ var VolumesList = React.createClass({
         var listItemOpenStates = {};
 
         for (var i = 0; i < volumes.length; i++) {
-            listItemOpenStates[volumes[i]._id] = false;
+            var volumeId = volumes[i]._id;
+            listItemOpenStates[volumeId] = this.context.getStore(volumeStore).isLastUsedVolume(volumeId);
         }
 
         this.setState({

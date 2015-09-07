@@ -30,7 +30,10 @@ var chapterService = {
 
                 lightNovel.save().then(
                     function (lightNovel) {
-                        return actionCB(null, lightNovel.toObjectNoChapterText());
+                        return actionCB(null, {
+                            lightNovel: lightNovel.toObjectNoChapterText(),
+                            lastUsedVolumeId: volumeId
+                        });
                     },
                     function (err) {
                         err.statusCode = 422;

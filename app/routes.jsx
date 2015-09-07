@@ -9,7 +9,7 @@ var Home = require("./components/route_handlers/home.jsx");
 //light novel route handlers
 var LightNovelIndex = require("./components/route_handlers/light_novel_index/light_novel_index.jsx");
 var LightNovelShow = require("./components/route_handlers/light_novel_show/light_novel_show.jsx");
-var LightNovelNew = require('./components/route_handlers/light_novel_new.jsx');
+var LightNovelNew = require('./components/route_handlers/light_novel_new/page.jsx');
 var Signup = require("./components/route_handlers/signup.jsx");
 var Login = require("./components/route_handlers/login.jsx");
 

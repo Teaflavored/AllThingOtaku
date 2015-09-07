@@ -20,7 +20,7 @@ var VolumeListNewItem = React.createClass({
     handleSubmitVolumeCreate: function () {
         this.context.executeAction(volumeActions.create, {
             params: {
-                id: this.props.lightNovelId
+                lightNovelId: this.props.lightNovelId
             },
             body: {
                 title: this.state.volumeTitle

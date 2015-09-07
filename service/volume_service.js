@@ -26,7 +26,7 @@ module.exports = {
         if (!req.isAuthenticated()) {
             return actionCB(new Error(errorMessages["NO_AUTHENTICATION"]));
         }
-        var lightNovelId = params.id;
+        var lightNovelId = params.lightNovelId;
         LightNovel.findById(lightNovelId).exec().then(
             function (lightNovel) {
                 var volumeNum = lightNovel.volumesCount + 1;
@@ -35,11 +35,9 @@ module.exports = {
 
                 lightNovel.volumesCount = volumeNum;
 
-                var promise = lightNovel.save();
-
-                promise.then(
+                lightNovel.save().then(
                     function (lightNovel) {
-                        return actionCB(null, lightNovel.toObjectNoChapters());
+                        return actionCB(null, lightNovel.toObjectNoChapterText());
                     },
                     function (err) {
                         err.statusCode = 422;

@@ -5,10 +5,10 @@ var Navigation = Router.Navigation;
 //fluxible helpers
 var fluxibleAddons = require("fluxible-addons-react");
 //stores
-var lightNovelStore = require("../../stores/light_novel_store");
-var authenticationStore = require("../../stores/authentication_store");
+var lightNovelStore = require("../../../stores/light_novel_store");
+var authenticationStore = require("../../../stores/authentication_store");
 //actions
-var lightNovelActions = require("../../actions/light_novel_actions");
+var lightNovelActions = require("../../../actions/light_novel_actions");
 
 var LightNovelNew = React.createClass({
     mixins: [Navigation],
