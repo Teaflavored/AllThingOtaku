@@ -6,6 +6,7 @@ module.exports = createStore({
         this.lightNovel = {
             volumes: []
         };
+        this.volumeIdToVolumes = {};
         this.newLightNovelErr = null;
     },
     storeName: "lightNovelStore",
@@ -14,7 +15,12 @@ module.exports = createStore({
         LOAD_LIGHT_NOVELS_ERR: "_receiveLightNovelsErr",
         FIND_LIGHT_NOVEL: "_receiveLightNovel",
         FIND_LIGHT_NOVEL_ERR: "_receiveLightNovelErr",
-        CREATE_LIGHT_NOVEL_ERR: "_receiveCreateLightNovelErr"
+        CREATE_LIGHT_NOVEL_ERR: "_receiveCreateLightNovelErr",
+        FIND_VOLUME : "_receiveVolume"
+    },
+    _receiveVolume: function (data) {
+        this.volumeIdToVolumes[data._id] = data;
+        this.emitChange();
     },
     _receiveCreateLightNovelErr: function (err) {
         this.newLightNovelErr = err;
@@ -36,6 +42,24 @@ module.exports = createStore({
         this.lightNovels = data;
         this.emitChange();
     },
+    getChapters: function (volumeId) {
+        if (!volumeId) {
+            return [];
+        }
+
+        if (this.volumeIdToVolumes[volumeId]) {
+            return this.volumeIdToVolumes[volumeId].chapters;
+        } else {
+            return [];
+        }
+    },
+    hasChapters: function (volumeId) {
+        if (!volumeId) {
+            return false;
+        }
+
+        return !!this.volumeIdToVolumes[volumeId];
+    },
     getLightNovels: function () {
         return this.lightNovels;
     },
@@ -52,12 +76,14 @@ module.exports = createStore({
         return {
             lightNovels: this.lightNovels,
             lightNovel: this.lightNovel,
-            newLightNovelErr: this.newLightNovelErr
+            newLightNovelErr: this.newLightNovelErr,
+            volumeIdToVolumes: this.volumeIdToVolumes
         }
     },
     rehydrate: function (state) {
         this.lightNovels = state.lightNovels;
         this.lightNovel = state.lightNovel;
         this.newLightNovelErr = state.newLightNovelErr;
+        this.volumeIdToVolumes = state.volumeIdToVolumes;
     }
 });

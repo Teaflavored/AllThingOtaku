@@ -11,19 +11,16 @@ module.exports = {
         var lightNovelId = params.id;
         var volumeId = params.volumeId;
 
-        LightNovel.findById(lightNovelId, function (err, lightNovel) {
-            if (err) {
+        LightNovel.findById(lightNovelId).exec().then(
+            function (lightNovel) {
+                var volume = lightNovel.volumes.id(volumeId);
+                return actionCB(null, volume.toObject());
+            },
+            function (err) {
+                err.statusCode = 422;
                 return actionCB(err);
-            } else {
-                if (volumeId) {
-                    var volume = lightNovel.volumes.id(volumeId);
-                    actionCB(null, volume);
-                } else {
-                    var volumes = _.pick(lightNovel.toObject(), "volumes");
-                    actionCB(null, volumes);
-                }
             }
-        });
+        );
     },
     create: function (req, resource, params, body, config, actionCB) {
         if (!req.isAuthenticated()) {

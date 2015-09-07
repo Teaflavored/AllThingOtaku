@@ -14,7 +14,7 @@ var authenticationStore = require("../../../stores/authentication_store");
 
 //components
 var VolumeListItem = require("./volume_list_item.jsx");
-var NewVolumeRow = require("./new_volume_row.jsx");
+var VolumeListNewItem = require("./volume_list_new_item.jsx");
 
 var LightNovelShow = React.createClass({
     contextTypes: {
@@ -34,11 +34,7 @@ var LightNovelShow = React.createClass({
         var listItemOpenStates = {};
 
         for (var i = 0; i < volumes.length; i++) {
-            if (i == 0) {
-                listItemOpenStates[volumes[i]._id] = true;
-            } else {
-                listItemOpenStates[volumes[i]._id] = false;
-            }
+            listItemOpenStates[volumes[i]._id] = false;
         }
 
         this.setState({
@@ -53,20 +49,37 @@ var LightNovelShow = React.createClass({
     },
     handleOpenVolumeItem: function (event) {
         var volumeId = event.currentTarget.dataset.id,
-            currentState,
+            isOpen,
             newListItemOpenStates = {};
 
-        for (var id in this.state.listItemOpenStates) {
-            currentState = this.state.listItemOpenStates[id];
-            if (volumeId == id) {
-                newListItemOpenStates[id] = !currentState;
-            } else {
-                newListItemOpenStates[id] = false;
+        var handleAnimation = function () {
+            for (var id in this.state.listItemOpenStates) {
+                isOpen = this.state.listItemOpenStates[id];
+
+                if (volumeId == id) {
+                    newListItemOpenStates[id] = !isOpen;
+                } else {
+                    newListItemOpenStates[id] = false;
+                }
             }
+
+            this.setState({
+                listItemOpenStates: newListItemOpenStates
+            });
+
+        }.bind(this);
+
+        if (this.context.getStore(lightNovelStore).hasChapters(volumeId)) {
+            handleAnimation();
+        } else {
+            this.context.executeAction(volumeActions.read, {
+                params: {
+                    id: this.props.lightNovel._id,
+                    volumeId: volumeId
+                },
+                callback: handleAnimation
+            });
         }
-        this.setState({
-            listItemOpenStates: newListItemOpenStates
-        });
     },
     render: function () {
         var lightNovel = this.props.lightNovel;
@@ -107,10 +120,10 @@ var LightNovelShow = React.createClass({
                     </div>
                     {(function () {
                         if (isLoggedIn) {
-                            return <NewVolumeRow />
+                            return <VolumeListNewItem lightNovel={lightNovel} />
                         }
                     })()}
-                    <div className="volumesList row">
+                    <div className="volumes-list row">
                         {volumeNodes}
                     </div>
                 </div>

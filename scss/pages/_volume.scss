@@ -1,0 +1,20 @@
+.volume-item {
+
+  .volume-toggle {
+    margin: -15px;
+    padding: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .chapters-list {
+    height: 0;
+    transition: height 0.3s ease;
+  }
+
+  &.open .chapters-list{
+    height: 150px;
+  }
+}
