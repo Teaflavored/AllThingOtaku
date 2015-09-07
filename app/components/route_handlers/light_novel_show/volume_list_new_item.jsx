@@ -42,6 +42,7 @@ var VolumeListNewItem = React.createClass({
                                 <input className="form-control"
                                        onChange={this.handleVolumeTitleChange}
                                        value={this.state.volumeTitle} type="text"
+                                       placeholder="New Volume Name"
                                        autoComplete="off"/>
                             </div>
                             <div className="col-xs-4">

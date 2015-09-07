@@ -17,7 +17,6 @@ module.exports = createStore({
         this.lightNovel = {
             volumes: []
         };
-        this.volumeIdToVolumes = {};
         this.newLightNovelErr = null;
     },
     _receiveVolume: function (data) {
@@ -44,24 +43,6 @@ module.exports = createStore({
         this.lightNovels = data;
         this.emitChange();
     },
-    getChapters: function (volumeId) {
-        if (!volumeId) {
-            return [];
-        }
-
-        if (this.volumeIdToVolumes[volumeId]) {
-            return this.volumeIdToVolumes[volumeId].chapters;
-        } else {
-            return [];
-        }
-    },
-    hasChapters: function (volumeId) {
-        if (!volumeId) {
-            return false;
-        }
-
-        return !!this.volumeIdToVolumes[volumeId];
-    },
     getLightNovels: function () {
         return this.lightNovels;
     },
@@ -78,14 +59,10 @@ module.exports = createStore({
         return {
             lightNovels: this.lightNovels,
             lightNovel: this.lightNovel,
-            newLightNovelErr: this.newLightNovelErr,
-            volumeIdToVolumes: this.volumeIdToVolumes
         }
     },
     rehydrate: function (state) {
         this.lightNovels = state.lightNovels;
         this.lightNovel = state.lightNovel;
-        this.newLightNovelErr = state.newLightNovelErr;
-        this.volumeIdToVolumes = state.volumeIdToVolumes;
     }
 });

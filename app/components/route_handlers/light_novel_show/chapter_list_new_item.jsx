@@ -9,12 +9,18 @@ var ChapterListNewItem = React.createClass({
     },
     getInitialState: function () {
         return {
-            chapterName: ""
+            chapterName: "",
+            chapterText: ""
         };
+    },
+    handleChapterNameChange: function (event) {
+        this.setState({
+            chapterName: event.target.value
+        });
     },
     handleChapterTextChange: function (event) {
         this.setState({
-            chapterName: event.target.value
+            chapterText: event.target.value
         });
     },
     handleCreateChapter: function () {
@@ -24,15 +30,29 @@ var ChapterListNewItem = React.createClass({
                     lightNovelId: this.props.lightNovelId,
                     volumeId: this.props.volumeId
                 },
-                body: this.state
+                body: {
+                    chapterName: this.state.chapterName,
+                    chapterText: marked(this.state.chapterText)
+                }
             });
     },
     render: function () {
         return (
             <div>
                 <span className="fa fa-plus" onClick=""></span>
-                <input onChange={this.handleChapterTextChange} className="form-control" value={this.state.chapterName}/>
-                <button className="btn btn-primary" type="submit" onClick={this.handleCreateChapter}>Create</button>
+
+                <div className="form-group">
+                    <label htmlFor="chapterTitle">Chapter Title</label>
+                    <input onChange={this.handleChapterNameChange} type="text" className="form-control"
+                           id="chapterTitle" value={this.state.chapterName}/>
+                </div>
+                <div className="form-group">
+                    <textarea className="form-control" type="text" onChange={this.handleChapterTextChange}
+                              value={this.state.chapterText}></textarea>
+                </div>
+                <button className="btn btn-primary" type="submit" onClick={this.handleCreateChapter}>
+                    Create
+                </button>
             </div>
         );
     }

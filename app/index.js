@@ -8,6 +8,7 @@ var userStore = require("./stores/user_store");
 var authenticationStore = require("./stores/authentication_store");
 var chapterStore = require("./stores/chapter_store");
 var volumeStore = require("./stores/volume_store");
+var lightBoxStore = require("./stores/lightbox_store");
 
 var fetchr = fetchrPlugin({
     xhrPath: "/api"
@@ -23,6 +24,7 @@ app.registerStore(authenticationStore);
 app.registerStore(userStore);
 app.registerStore(chapterStore);
 app.registerStore(volumeStore);
+app.registerStore(lightBoxStore);
 
 app.plug(fetchr);
 

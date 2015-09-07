@@ -5,6 +5,7 @@ var ChapterListItem = React.createClass({
         return (
             <div>
                 {this.props.chapter.chapterName}
+                <p dangerouslySetInnerHTML={{__html: this.props.chapter.chapterText }}></p>
             </div>
         );
     }
