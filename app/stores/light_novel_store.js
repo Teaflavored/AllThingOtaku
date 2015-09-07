@@ -8,6 +8,7 @@ var handlers = {
     CREATE_LIGHT_NOVEL_ERR: "_receiveCreateLightNovelErr",
     FIND_VOLUME: "_receiveVolume"
 };
+
 module.exports = createStore({
     storeName: "lightNovelStore",
     handlers: handlers,
