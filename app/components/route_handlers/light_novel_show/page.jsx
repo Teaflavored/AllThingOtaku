@@ -83,17 +83,16 @@ var LightNovelShow = React.createClass({
     },
     render: function () {
         var lightNovel = this.props.lightNovel;
+        var isLoggedIn = this.props.isLoggedIn;
         var listItemOpenStates = this.state.listItemOpenStates;
         var handleVolumeItemOpen = this.handleOpenVolumeItem;
 
         var volumeNodes = this.props.lightNovel.volumes.map(function (volume, idx) {
             var isOpen = listItemOpenStates[volume._id];
             return (
-                <VolumeListItem volume={volume} key={volume._id} isOpen={isOpen} onClick={handleVolumeItemOpen}/>
+                <VolumeListItem volume={volume} isLoggedIn={isLoggedIn} key={volume._id} isOpen={isOpen} onClick={handleVolumeItemOpen}/>
             );
         });
-
-        var isLoggedIn = this.props.isLoggedIn;
 
         return (
             <div id="lightNovel" className="row">

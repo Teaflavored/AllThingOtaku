@@ -9,7 +9,8 @@ var lightNovelStore = require("../../../stores/light_novel_store");
 
 var VolumeListItem = React.createClass({
     contextTypes: {
-        getStore: React.PropTypes.func.isRequired
+        getStore: React.PropTypes.func.isRequired,
+        executeAction: React.PropTypes.func.isRequired
     },
     render: function () {
         var volumeClasses = classnames("volume-item", "card", {
@@ -30,7 +31,7 @@ var VolumeListItem = React.createClass({
                             { this.props.volume.title }, Volume { this.props.volume.volumeNum}
                         </h5>
                     </div>
-                    <ChaptersList chapters={this.props.chapters} />
+                    <ChaptersList chapters={this.props.chapters} volumeId={this.props.volume._id} isLoggedIn={this.props.isLoggedIn} />
                 </div>
             </div>
         );

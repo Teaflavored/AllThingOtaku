@@ -1,7 +1,7 @@
 var React = require("react");
 var volumeActions = require("../../../actions/volume_actions");
 
-var NewVolumeRow = React.createClass({
+var VolumeListNewItem = React.createClass({
     contextTypes: {
         executeAction: React.PropTypes.func.isRequired
     },
@@ -57,4 +57,4 @@ var NewVolumeRow = React.createClass({
     }
 });
 
-module.exports = NewVolumeRow;
+module.exports = VolumeListNewItem;

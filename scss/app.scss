@@ -1,6 +1,8 @@
 @import "_bootstrap.scss";
 @import "includes/core-mixins";
+
 @import "pages/volume";
+@import "pages/chapter";
 
 @include margins;
 body {
