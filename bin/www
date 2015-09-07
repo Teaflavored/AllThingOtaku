@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 require("dotenv").load();
+if (process.env.NPM_CONFIG_PRODUCTION) {
+    require("newrelic");
+}
 
 /**
  * Module dependencies.
