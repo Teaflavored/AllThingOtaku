@@ -6,6 +6,7 @@ var routes = require("./routes.jsx");
 var lightNovelStore = require("./stores/light_novel_store");
 var userStore = require("./stores/user_store");
 var authenticationStore = require("./stores/authentication_store");
+var chapterStore = require("./stores/chapter_store");
 
 var fetchr = fetchrPlugin({
     xhrPath: "/api"
@@ -19,6 +20,7 @@ app.uid = "allThingsOtaku";
 app.registerStore(lightNovelStore);
 app.registerStore(authenticationStore);
 app.registerStore(userStore);
+app.registerStore(chapterStore);
 
 app.plug(fetchr);
 

@@ -69,17 +69,7 @@ var LightNovelShow = React.createClass({
 
         }.bind(this);
 
-        if (this.context.getStore(lightNovelStore).hasChapters(volumeId)) {
-            handleAnimation();
-        } else {
-            this.context.executeAction(volumeActions.read, {
-                params: {
-                    id: this.props.lightNovel._id,
-                    volumeId: volumeId
-                },
-                callback: handleAnimation
-            });
-        }
+        handleAnimation();
     },
     render: function () {
         var lightNovel = this.props.lightNovel;
@@ -87,10 +77,12 @@ var LightNovelShow = React.createClass({
         var listItemOpenStates = this.state.listItemOpenStates;
         var handleVolumeItemOpen = this.handleOpenVolumeItem;
 
-        var volumeNodes = this.props.lightNovel.volumes.map(function (volume, idx) {
+        var volumeNodes = this.props.lightNovel.volumes.map(function (volume) {
             var isOpen = listItemOpenStates[volume._id];
             return (
-                <VolumeListItem volume={volume} isLoggedIn={isLoggedIn} key={volume._id} isOpen={isOpen} onClick={handleVolumeItemOpen}/>
+                <VolumeListItem lightNovelId={lightNovel._id} volumeId={volume._id} volume={volume}
+                                isLoggedIn={isLoggedIn} key={volume._id}
+                                isOpen={isOpen} onClick={handleVolumeItemOpen}/>
             );
         });
 
@@ -119,7 +111,7 @@ var LightNovelShow = React.createClass({
                     </div>
                     {(function () {
                         if (isLoggedIn) {
-                            return <VolumeListNewItem lightNovel={lightNovel} />
+                            return <VolumeListNewItem lightNovelId={lightNovel._id}/>
                         }
                     })()}
                     <div className="volumes-list row">

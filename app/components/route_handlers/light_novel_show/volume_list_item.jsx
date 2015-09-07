@@ -4,14 +4,8 @@ var fluxibleAddons = require("fluxible-addons-react");
 
 //components
 var ChaptersList = require("./chapters_list.jsx");
-//stores
-var lightNovelStore = require("../../../stores/light_novel_store");
 
 var VolumeListItem = React.createClass({
-    contextTypes: {
-        getStore: React.PropTypes.func.isRequired,
-        executeAction: React.PropTypes.func.isRequired
-    },
     render: function () {
         var volumeClasses = classnames("volume-item", "card", {
             open: this.props.isOpen
@@ -31,19 +25,11 @@ var VolumeListItem = React.createClass({
                             { this.props.volume.title }, Volume { this.props.volume.volumeNum}
                         </h5>
                     </div>
-                    <ChaptersList chapters={this.props.chapters} volumeId={this.props.volume._id} isLoggedIn={this.props.isLoggedIn} />
+                    <ChaptersList chapters={this.props.volume.chapters} lightNovelId={this.props.lightNovelId} volumeId={this.props.volume._id} isLoggedIn={this.props.isLoggedIn} />
                 </div>
             </div>
         );
     }
-});
-
-VolumeListItem = fluxibleAddons.connectToStores(VolumeListItem, [lightNovelStore], function (context, props) {
-    var chapters = context.getStore(lightNovelStore).getChapters(props.volume._id);
-    chapters = chapters || [];
-    return {
-        chapters: chapters
-    };
 });
 
 module.exports = VolumeListItem;

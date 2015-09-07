@@ -66,10 +66,14 @@ lightNovelSchema.methods.toObjectNoVolumes = function () {
     return tempLN;
 };
 
-lightNovelSchema.methods.toObjectNoChapters = function () {
+lightNovelSchema.methods.toObjectNoChapterText = function () {
     var tempLN = this.toObject();
     tempLN.volumes = tempLN.volumes.map(function(volume) {
-        return _.omit(volume, "chapters");
+        volume.chapters = volume.chapters.map (function (chapter) {
+            return _.omit(chapter, "chapterText");
+        });
+
+        return volume;
     });
 
     return tempLN;

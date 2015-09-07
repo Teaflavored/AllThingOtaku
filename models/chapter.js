@@ -4,9 +4,9 @@ var modified = require("./last_mod");
 var created = require("./created");
 
 var chapterSchema = new Schema({
-	chapter_num: Number,
-	chapter_name: String, 
-	chapter_text: String
+    chapterNum: Number,
+    chapterName: String,
+    chapterText: String
 });
 
 chapterSchema.plugin(modified);

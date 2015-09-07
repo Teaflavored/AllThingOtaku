@@ -4,6 +4,7 @@ var ChapterListItem = React.createClass({
     render: function () {
         return (
             <div>
+                {this.props.chapter.chapterName}
             </div>
         );
     }

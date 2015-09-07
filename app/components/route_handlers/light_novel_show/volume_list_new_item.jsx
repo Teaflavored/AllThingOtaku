@@ -20,7 +20,7 @@ var VolumeListNewItem = React.createClass({
     handleSubmitVolumeCreate: function () {
         this.context.executeAction(volumeActions.create, {
             params: {
-                id: this.props.lightNovel._id
+                id: this.props.lightNovelId
             },
             body: {
                 title: this.state.volumeTitle
@@ -46,7 +46,7 @@ var VolumeListNewItem = React.createClass({
                             </div>
                             <div className="col-xs-4">
                                 <button className="btn-block btn-primary btn">
-                                    Create New Volume
+                                    + Volume
                                 </button>
                             </div>
                         </form>

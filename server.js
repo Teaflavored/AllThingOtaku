@@ -14,6 +14,7 @@ var lightNovelService = require("./service/light_novel_service");
 var authenticateService = require("./service/authenticate_service");
 var userService = require("./service/user_service");
 var volumeService = require("./service/volume_service");
+var chapterService = require("./service/chapter_service");
 
 //router
 var ReactRouter = require("react-router");
@@ -111,6 +112,7 @@ pluginInstance.registerService(lightNovelService);
 pluginInstance.registerService(authenticateService);
 pluginInstance.registerService(userService);
 pluginInstance.registerService(volumeService);
+pluginInstance.registerService(chapterService);
 
 app.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
 

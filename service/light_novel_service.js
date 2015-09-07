@@ -12,7 +12,7 @@ var lightNovelService = {
             LightNovel.findById(params.id).exec()
                 .then(
                 function (lightNovel) {
-                    return actionCB(null, lightNovel.toObjectNoChapters());
+                    return actionCB(null, lightNovel.toObjectNoChapterText());
                 },
                 function (err) {
                     err.statusCode = 404;
