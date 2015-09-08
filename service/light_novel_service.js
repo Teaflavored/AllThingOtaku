@@ -1,4 +1,6 @@
 var LightNovel = require("../models/light_novel");
+var sanitizeHtml = require("sanitize-html");
+var sanitizeOptions = require("../utils/sanitize_options");
 var _ = require("lodash");
 
 var errorMessages = {
@@ -38,7 +40,11 @@ var lightNovelService = {
         if (req.isUnauthenticated()) {
             return actionCB(new Error(errorMessages["NO_AUTHENTICATION"]));
         }
-        var lightNovel = new LightNovel(body);
+        var lightNovel = new LightNovel({
+            author: sanitizeHtml(body.author, sanitizeOptions),
+            title: sanitizeHtml(body.title, sanitizeOptions),
+            summary: sanitizeHtml(body.summary, sanitizeOptions)
+        });
         lightNovel.save().then(
             function (lightNovel) {
                 return actionCB(null, lightNovel.toObjectNoChapterText());
