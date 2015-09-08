@@ -16,7 +16,7 @@ var volumeActions = {
             } else {
                 context.dispatch("FIND_VOLUME", volume);
             }
-            payload.callback();
+            payload.callback && payload.callback();
             done();
         });
     }

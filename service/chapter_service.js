@@ -1,4 +1,6 @@
 var LightNovel = require("../models/light_novel");
+var sanitizeHtml = require("sanitize-html");
+var sanitizeOptions = require("../utils/sanitize_options");
 var _ = require("lodash");
 
 var chapterService = {
@@ -28,7 +30,11 @@ var chapterService = {
                 var volume = lightNovel.volumes.id(volumeId);
                 volume.chaptersCount = volume.chaptersCount + 1;
 
-                volume.chapters.push(_.assign({}, body, { chapterNum: volume.chaptersCount }));
+                volume.chapters.push(_.assign({}, {
+                    chapterNum: volume.chaptersCount,
+                    chapterText: sanitizeHtml(body.chapterText, sanitizeOptions)
+                }));
+
                 lightNovel.save().then(
                     function (lightNovel) {
                         return actionCB(null, {

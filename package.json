@@ -45,6 +45,7 @@
     "react": "*",
     "react-router": "0.13.3",
     "reactify": "*",
+    "sanitize-html": "^1.10.0",
     "serve-favicon": "~2.3.0",
     "uglifyjs": "*",
     "watchify": "*"
