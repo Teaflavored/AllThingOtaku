@@ -4,7 +4,7 @@ var chapterActions = {
             if (err) {
                 context.dispatch("FIND_CHAPTER_ERR", err);
             } else if (chapter) {
-                context.dispatch("FIND_CHAPTER_SUCCESS", chapter);
+                console.log(chapter);
             }
         });
         done();

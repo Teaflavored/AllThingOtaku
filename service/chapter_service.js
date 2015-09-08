@@ -26,8 +26,9 @@ var chapterService = {
         LightNovel.findById(lightNovelId).exec().then(
             function (lightNovel) {
                 var volume = lightNovel.volumes.id(volumeId);
-                volume.chapters.push(_.assign({}, body));
+                volume.chaptersCount = volume.chaptersCount + 1;
 
+                volume.chapters.push(_.assign({}, body, { chapterNum: volume.chaptersCount }));
                 lightNovel.save().then(
                     function (lightNovel) {
                         return actionCB(null, {

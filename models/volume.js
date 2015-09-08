@@ -7,7 +7,6 @@ var created = require("./created");
 var volumeSchema = new Schema({
     volumeNum: {
         type: Number,
-        default: -1,
         index: true
     },
     title: {
@@ -15,6 +14,10 @@ var volumeSchema = new Schema({
         required: true
     },
     chapters: [Chapter.schema],
+    chaptersCount: {
+        type: Number,
+        default: 0
+    },
     pubDate: Date
 });
 
