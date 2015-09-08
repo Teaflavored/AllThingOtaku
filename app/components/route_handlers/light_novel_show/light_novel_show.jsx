@@ -27,8 +27,7 @@ var LightNovelShow = React.createClass({
     },
     componentDidMount: function () {
         this.context.executeAction(lightNovelActions.find, {
-            params: this.props.params,
-            query: this.props.query
+            params: this.props.params
         });
     },
     render: function () {

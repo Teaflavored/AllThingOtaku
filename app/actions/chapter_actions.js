@@ -6,8 +6,8 @@ var chapterActions = {
             } else if (chapter) {
                 context.dispatch("FIND_CHAPTER_SUCCESS", chapter);
             }
+            done();
         });
-        done();
     },
     create: function (context, payload, done) {
         context.service.create("chapters", payload.params, payload.body, {}, function (err, data) {
@@ -16,8 +16,8 @@ var chapterActions = {
             } else if (data.lightNovel) {
                 context.dispatch("FIND_LIGHT_NOVEL", data.lightNovel);
             }
+            done();
         });
-        done();
     }
 };
 

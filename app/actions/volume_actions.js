@@ -17,8 +17,8 @@ var volumeActions = {
                 context.dispatch("FIND_VOLUME", volume);
             }
             payload.callback();
+            done();
         });
-        done();
     }
 };
 
