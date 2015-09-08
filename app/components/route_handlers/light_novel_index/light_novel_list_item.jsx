@@ -9,11 +9,13 @@ var LightNovel = React.createClass({
         var id = this.props.lightNovel._id;
         return (
             <div className="col-sm-4 col-md-3">
-                <div className="light-novel card">
+                <div className="light-novel card text-center">
                     <Link to="lightNovelShow" params={ { id : id } }>
                         <div className="img-wrapper">
                         </div>
-                        { title }
+                        <div className="title">
+                            { title }
+                        </div>
                     </Link>
 
                     <div className="author">
