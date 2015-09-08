@@ -1,26 +1,26 @@
 var createStore = require("fluxible/addons/createStore");
 
+var handlers = {
+    FIND_CHAPTER_SUCCESS: "_findChapterSuccess",
+    FIND_CHAPTER_ERR: "_findChapterErr",
+    CREATE_CHAPTER_SUCCESS: "_createChapterSuccess",
+    CREATE_CHAPTER_ERR: "_createChapterErr"
+};
+
 var ChapterStore = createStore({
     storeName: "chapterStore",
     initialize: function () {
-        this.chapterIdToChapters = {
-
-        }
+        this.chapterIdToChapters = {}
     },
     dehydrate: function () {
         return {
-            chapterIdToChapters : {}
+            chapterIdToChapters: {}
         };
     },
     rehydrate: function (state) {
         this.chapterIdToChapters = state.chapterIdToChapters;
     },
-    handlers: {
-        FIND_CHAPTER_SUCCESS: "_findChapterSuccess",
-        FIND_CHAPTER_ERR: "_findChapterErr",
-        CREATE_CHAPTER_SUCCESS: "_createChapterSuccess",
-        CREATE_CHAPTER_ERR: "_createChapterErr"
-    },
+    handlers: handlers,
     _findChapterSuccess: function (chapter) {
         this.chapterIdToChapters[chapter._id] = chapter;
         this.emitChange();

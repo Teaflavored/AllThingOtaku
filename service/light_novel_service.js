@@ -8,8 +8,8 @@ var errorMessages = {
 var lightNovelService = {
     name: "lightNovels",
     read: function (req, resource, params, config, actionCB) {
-        if (params.id) {
-            LightNovel.findById(params.id).exec()
+        if (params.lightNovelId) {
+            LightNovel.findById(params.lightNovelId).exec()
                 .then(
                 function (lightNovel) {
                     return actionCB(null, lightNovel.toObjectNoChapterText());
