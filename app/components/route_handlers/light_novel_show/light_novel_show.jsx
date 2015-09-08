@@ -16,7 +16,7 @@ var authenticationStore = require("../../../stores/authentication_store");
 var VolumesList = require("./volumes_list.jsx");
 var VolumeListNewItem = require("./volume_list_new_item.jsx");
 var LightNovelHeader = require("./light_novel_header.jsx");
-var ChapterLightBox = require("./chapter_light_box.jsx");
+var ChapterLightBox = require("./chapter_lightbox.jsx");
 
 var LightNovelShow = React.createClass({
     contextTypes: {

@@ -1,8 +1,8 @@
 var createStore = require("fluxible/addons/createStore");
 
 var handlers = {
-    "OPEN_LIGHT_BOX" : "_openLightBox",
-    "CLOSE_LIGHT_BOX" : "_closeLightBox"
+    "OPEN_LIGHTBOX" : "_openLightBox",
+    "CLOSE_LIGHTBOX" : "_closeLightBox"
 };
 
 var lightboxStore = createStore({

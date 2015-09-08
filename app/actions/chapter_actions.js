@@ -4,7 +4,7 @@ var chapterActions = {
             if (err) {
                 context.dispatch("FIND_CHAPTER_ERR", err);
             } else if (chapter) {
-                console.log(chapter);
+                context.dispatch("OPEN_LIGHTBOX");
             }
         });
         done();
