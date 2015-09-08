@@ -7,6 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressState = require("express-state");
+var compression = require("compression");
 var React = require("react");
 
 //services
@@ -36,6 +37,8 @@ var app = express();
 //allow exposing of extra data to client
 expressState.extend(app);
 
+//enabling compression
+app.use(compression());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
