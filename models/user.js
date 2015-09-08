@@ -9,16 +9,24 @@ var created = require("./created");
 var bcrypt = require("bcrypt");
 var SALT_WORK_FACTOR = 10;
 
+//role related
+var admin = "admin";
+var editor = "editor";
+var user = "user";
+
 var userSchema = new Schema({
     email: {
         type: String,
         required: "Email is required",
         index: {unique: true},
-
     },
     password: {
         type: String,
         required: "Password is required"
+    },
+    role: {
+        type: String,
+        default: user
     }
 });
 
@@ -71,6 +79,15 @@ userSchema.methods.validatePassword = function (password, callback) {
             callback(null, isMatch);
         }
     });
+};
+
+userSchema.methods.canEdit = function () {
+    var allowedRoles = [editor, admin];
+    return _.indexOf(this.role, allowedRoles) != -1;
+};
+
+userSchema.methods.isSuperUser = function () {
+    return this.role == admin;
 };
 
 var User = mongoose.model("User", userSchema);
