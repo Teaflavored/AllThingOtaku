@@ -56,29 +56,31 @@ var LightNovelNew = React.createClass({
 
         return (
             <div className="row">
-                <form id="lightNovelNew" action="javascript:void(0);" className="col-sm-4">
-                    {
-                        (function () {
-                            if (error) {
-                                return <div className="alert-danger alert">{error.message}</div>;
-                            }
-                        })()
-                    }
-                    <div className="form-group">
-                        <label htmlFor="title">Title</label>
-                        <input type="text" className="form-control" id="title" onChange={this.handleTitleFieldChange}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="author">Author</label>
-                        <input type="text" className="form-control" id="author"
-                               onChange={this.handleAuthorFieldChange}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="summary">Summary</label>
+                <form id="lightNovelNew" action="javascript:void(0);" className="col-sm-6 col-md-5">
+                    <div className="card">
+                        {
+                            (function () {
+                                if (error) {
+                                    return <div className="alert-danger alert">{error.message}</div>;
+                                }
+                            })()
+                        }
+                        <div className="form-group">
+                            <label htmlFor="title">Title</label>
+                            <input type="text" className="form-control" id="title" onChange={this.handleTitleFieldChange}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="author">Author</label>
+                            <input type="text" className="form-control" id="author"
+                                   onChange={this.handleAuthorFieldChange}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="summary">Summary</label>
                         <textarea className="form-control" onChange={this.handleSummaryFieldChange} id="summary"
                                   rows="10"></textarea>
+                        </div>
+                        <input type="button" className="btn btn-block btn-primary" onClick={this.handleSubmit} value="Create"/>
                     </div>
-                    <input type="button" className="btn btn-primary" onClick={this.handleSubmit} value="Create"/>
                 </form>
             </div>
         );
