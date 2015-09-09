@@ -26,34 +26,68 @@ var LightNovelShow = React.createClass({
     statics: {
         loadAction: lightNovelActions.find
     },
+    getInitialState: function () {
+        return {
+            newChapterWindowOpen: null
+        };
+    },
     componentDidMount: function () {
         this.context.executeAction(lightNovelActions.find, {
             params: this.props.params
         });
     },
+    handleOpenChapterCreate: function (volume, event) {
+        this.setState({
+            newChapterWindowOpen: volume
+        });
+    },
+    handleCloseChapterCreate: function () {
+        this.setState({
+            newChapterWindowOpen: null
+        });
+    },
     render: function () {
+        var self = this;
         var lightNovel = this.props.lightNovel;
         var isLoggedIn = this.props.isLoggedIn;
 
         return (
-            <div id="lightNovel" className="row">
-                <div className="col-sm-8">
-                    <LightNovelHeader {...this.props} />
-                    { isLoggedIn ? <VolumeListNewItem {...this.props} /> : "" }
-                    <VolumesList {...this.props} isLoggedIn={isLoggedIn}/>
-                </div>
-                <div className="col-sm-4">
-                    <div className="card">
-                        <div className="lightNovel-title">
-                            {lightNovel.title}
-                        </div>
+            <div>
+                {
+                    (function () {
+                        if (self.state.newChapterWindowOpen) {
+                            return (
+                                <ChapterNew {...self.props} handleCloseChapterCreate={self.handleCloseChapterCreate}
+                                    volume={self.state.newChapterWindowOpen} />
+                            );
+                        }
+                    })()
+                }
+                <div id="lightNovel" className="row">
 
-                        <div className="lightNovel-author">
-                            {lightNovel.author}
-                        </div>
+                    <div className="col-sm-8">
+                        <LightNovelHeader {...this.props} />
 
-                        <div className="lightNovel-summary">
-                            {lightNovel.summary}
+                        { isLoggedIn ? <VolumeListNewItem {...this.props} /> : "" }
+
+                        <VolumesList {...this.props} isLoggedIn={isLoggedIn}
+                                                     handleOpenChapterCreate={this.handleOpenChapterCreate}/>
+
+                    </div>
+
+                    <div className="col-sm-4">
+                        <div className="card">
+                            <div className="lightNovel-title">
+                                {lightNovel.title}
+                            </div>
+
+                            <div className="lightNovel-author">
+                                {lightNovel.author}
+                            </div>
+
+                            <div className="lightNovel-summary">
+                                {lightNovel.summary}
+                            </div>
                         </div>
                     </div>
                 </div>

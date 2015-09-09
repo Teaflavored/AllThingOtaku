@@ -41,11 +41,17 @@ var ChapterNew = React.createClass({
             });
     },
     render: function () {
+        var newChapterNum = this.props.volume.chaptersCount + 1;
         return (
-            <div id="chapterShow">
-                <div className="row">
-                    <div className="col-xs-12">
-                        <div className="card">
+            <div id="chapterNew">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-xs-12">
+                            <h4>
+                                {this.props.volume.title}, Volume {this.props.volume.volumeNum}, <span className="small">Chapter {newChapterNum}</span>
+                                <a href="javascript:void(0);" className="pull-right fa fa-close"
+                                   onClick={this.props.handleCloseChapterCreate}></a>
+                            </h4>
                             <div className="form-group">
                                 <label htmlFor="chapterTitle">Chapter Title</label>
                                 <input onChange={this.handleChapterNameChange} type="text" className="form-control"
@@ -54,8 +60,8 @@ var ChapterNew = React.createClass({
                             <div className="form-group">
                                 <label htmlFor="chapterText">Chapter Text</label>
                                 <textarea className="form-control" type="text" onChange={this.handleChapterTextChange}
-                                      id="chapterText"
-                                      value={this.state.chapterText}></textarea>
+                                          id="chapterText"
+                                          value={this.state.chapterText}></textarea>
                             </div>
                         </div>
                     </div>

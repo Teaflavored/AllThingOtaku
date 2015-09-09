@@ -1,3 +1,17 @@
 .chapters-list {
   overflow: hidden;
 }
+
+#chapterNew {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: $white;
+  overflow-y: scroll;
+  z-index: 1031;
+}

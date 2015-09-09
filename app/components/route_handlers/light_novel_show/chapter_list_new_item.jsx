@@ -14,7 +14,7 @@ var ChapterListNewItem = React.createClass({
     render: function () {
         return (
             <div>
-                <span className="fa fa-plus"></span>
+                <span className="fa fa-plus" onClick={this.props.handleOpenChapterCreate.bind(null, this.props.volume)}></span>
             </div>
         );
     }
