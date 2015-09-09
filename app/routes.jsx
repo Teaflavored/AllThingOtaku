@@ -4,15 +4,15 @@ var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 
 var App = require("./components/app.jsx");
-var Home = require("./components/route_handlers/home.jsx");
 
 //light novel route handlers
+var Home = require("./components/route_handlers/home/home.jsx");
 var LightNovelIndex = require("./components/route_handlers/light_novel_index/light_novel_index.jsx");
 var LightNovelShow = require("./components/route_handlers/light_novel_show/light_novel_show.jsx");
 var LightNovelNew = require('./components/route_handlers/light_novel_new/light_novel_new.jsx');
 var ChapterShow = require("./components/route_handlers/chapter_show/chapter_show.jsx");
-var Signup = require("./components/route_handlers/signup.jsx");
-var Login = require("./components/route_handlers/login.jsx");
+var Signup = require("./components/route_handlers/signup/signup.jsx");
+var Login = require("./components/route_handlers/login/login.jsx");
 
 var routes = (
     <Route handler={App} path="/">

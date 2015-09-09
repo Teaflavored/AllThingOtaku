@@ -6,10 +6,10 @@ var Navigation = Router.Navigation;
 var fluxibleAddons = require("fluxible-addons-react");
 
 //stores
-var authenticationStore = require("../../stores/authentication_store");
+var authenticationStore = require("../../../stores/authentication_store");
 
 //actions
-var authenticate = require("../../actions/authenticate");
+var authenticate = require("../../../actions/authenticate");
 
 var Login = React.createClass({
     mixins: [Navigation],

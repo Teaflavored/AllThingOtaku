@@ -1,5 +1,4 @@
 var React = require("react");
-var Link = require("react-router").Link;
 var fluxibleAddons = require("fluxible-addons-react");
 
 //stores
@@ -9,8 +8,9 @@ var authenticationStore = require("../../../stores/authentication_store");
 //actions
 var lightNovelActions = require("../../../actions/light_novel_actions");
 
-//components & css
+//components
 var LightNovel = require("./light_novel_list_item.jsx");
+var LightNovelNew = require("./light_novel_list_new_item.jsx");
 
 //utils
 var permissions = require("../../../../utils/user_permissions");
@@ -38,17 +38,13 @@ var LightNovelsIndex = React.createClass({
 
         return (
             <div id="lightNovels">
-                {
-                    (function() {
+                {(function() {
                         if (permissions.canCreate(user)) {
                             return (
-                                <Link to="lightNovelCreate">
-                                    Create New
-                                </Link>
+                                <LightNovelNew />
                             );
                         }
-                    })()
-                }
+                    })()}
 
                 <div id="lightNovelList" className="row">
                     {lightNovelNodes}

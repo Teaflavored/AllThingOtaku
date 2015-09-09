@@ -101,7 +101,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-    User.findById(id, "_id email created modified", function (err, user) {
+    User.findById(id, "_id email role created modified", function (err, user) {
         if (err) {
             done(err);
         } else if (user) {
