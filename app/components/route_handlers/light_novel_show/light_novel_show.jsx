@@ -40,7 +40,7 @@ var LightNovelShow = React.createClass({
                 <div className="col-sm-8">
                     <LightNovelHeader {...this.props} />
                     { isLoggedIn ? <VolumeListNewItem {...this.props} /> : "" }
-                    <VolumesList {...this.props} volumes={lightNovel.volumes} lightNovelId={lightNovel._id} isLoggedIn={isLoggedIn}/>
+                    <VolumesList {...this.props} isLoggedIn={isLoggedIn}/>
                 </div>
                 <div className="col-sm-4">
                     <div className="card">
