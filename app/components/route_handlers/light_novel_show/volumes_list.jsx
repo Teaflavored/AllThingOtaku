@@ -12,11 +12,11 @@ var VolumesList = React.createClass({
         executeAction: React.PropTypes.func.isRequired
     },
     render: function () {
-        var volumeNodes = this.props.volumes.map(function (volume) {
+        var volumeNodes = this.props.lightNovel.volumes.map(function (volume, idx) {
             return (
-                <VolumeListItem lightNovelId={this.props.lightNovelId} volumeId={volume._id} volume={volume}
-                                isLoggedIn={this.props.isLoggedIn} key={volume._id}
-                                onClick={this.handleOpenVolumeItem}/>
+                <VolumeListItem {...this.props} volumeId={volume._id} volume={volume}
+                                                key={volume._id} idx={idx}
+                                                onVolumeClick={this.handleOpenVolumeItem}/>
             );
         }.bind(this));
 

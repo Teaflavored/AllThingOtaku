@@ -35,7 +35,7 @@ var VolumeListItem = React.createClass({
                             { this.props.volume.title }, Volume { this.props.volume.volumeNum}
                         </h5>
                     </div>
-                    <ChaptersList chapters={this.props.volume.chapters} lightNovelId={this.props.lightNovelId} volumeId={this.props.volume._id} isLoggedIn={this.props.isLoggedIn} />
+                    <ChaptersList {...this.props} />
                 </div>
             </div>
         );

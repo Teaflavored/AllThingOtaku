@@ -16,6 +16,7 @@ var authenticationStore = require("../../../stores/authentication_store");
 var VolumesList = require("./volumes_list.jsx");
 var VolumeListNewItem = require("./volume_list_new_item.jsx");
 var LightNovelHeader = require("./light_novel_header.jsx");
+var ChapterNew = require("./chapter_new.jsx");
 
 var LightNovelShow = React.createClass({
     contextTypes: {
@@ -37,9 +38,9 @@ var LightNovelShow = React.createClass({
         return (
             <div id="lightNovel" className="row">
                 <div className="col-sm-8">
-                    <LightNovelHeader title={lightNovel.title} numVolumes={lightNovel.volumes.length}/>
-                    { isLoggedIn ? <VolumeListNewItem lightNovelId={lightNovel._id}/> : "" }
-                    <VolumesList volumes={lightNovel.volumes} lightNovelId={lightNovel._id} isLoggedIn={isLoggedIn}/>
+                    <LightNovelHeader {...this.props} />
+                    { isLoggedIn ? <VolumeListNewItem {...this.props} /> : "" }
+                    <VolumesList {...this.props} volumes={lightNovel.volumes} lightNovelId={lightNovel._id} isLoggedIn={isLoggedIn}/>
                 </div>
                 <div className="col-sm-4">
                     <div className="card">

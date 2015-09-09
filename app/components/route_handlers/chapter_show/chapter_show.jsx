@@ -7,6 +7,7 @@ var chapterActions = require("../../../actions/chapter_actions");
 //stores
 var chapterStore = require("../../../stores/chapter_store");
 
+
 var ChapterShow = React.createClass({
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,

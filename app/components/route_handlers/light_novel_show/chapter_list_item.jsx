@@ -15,7 +15,7 @@ var ChapterListItem = React.createClass({
             <div>
                 <Link to="chapterShow" params={ {
                     lightNovelId: this.props.lightNovelId,
-                    volumeId: this.props.volumeId,
+                    volumeId: this.props.volume._id,
                     chapterId: this.props.chapter._id
                 } }>
                     Chapter {this.props.chapter.chapterNum}

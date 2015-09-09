@@ -10,11 +10,10 @@ var ChaptersList = React.createClass({
         executeAction: React.PropTypes.func.isRequired
     },
     render: function () {
-        var lightNovelId = this.props.lightNovelId;
-        var volumeId = this.props.volumeId;
+        var self = this;
 
-        var chaptersNodes = this.props.chapters.map(function (chapter) {
-            return (<ChapterListItem key={chapter._id} lightNovelId={lightNovelId} chapter={chapter} volumeId={volumeId} />);
+        var chaptersNodes = this.props.volume.chapters.map(function (chapter) {
+            return (<ChapterListItem {...self.props} key={chapter._id} chapter={chapter} />);
         });
 
         if (chaptersNodes.length == 0) {
@@ -31,7 +30,7 @@ var ChaptersList = React.createClass({
                     (function () {
                         if (isLoggedIn) {
                             return (
-                                <ChapterListNewItem lightNovelId={lightNovelId} volumeId={volumeId}/>
+                                <ChapterListNewItem {...self.props} />
                             );
                         }
                     })()
