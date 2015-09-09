@@ -17,6 +17,18 @@ var ChapterNew = React.createClass({
             chapterText: ""
         };
     },
+    handleKeyDown: function (event) {
+        console.log('hi');
+        if (event.keyCode == 27) {
+            this.props.handleCloseChapterCreate();
+        }
+    },
+    componentDidMount: function () {
+        window.addEventListener("keydown", this.handleKeyDown);
+    },
+    componentWillUnmount: function () {
+        window.removeEventListener("keydown", this.handleKeyDown);
+    },
     handleChapterNameChange: function (event) {
         this.setState({
             chapterName: event.target.value
