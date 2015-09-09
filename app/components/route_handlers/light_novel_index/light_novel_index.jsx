@@ -12,6 +12,9 @@ var lightNovelActions = require("../../../actions/light_novel_actions");
 //components & css
 var LightNovel = require("./light_novel_list_item.jsx");
 
+//utils
+var permissions = require("../../../../utils/user_permissions");
+
 var LightNovelsIndex = React.createClass({
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
@@ -20,22 +23,16 @@ var LightNovelsIndex = React.createClass({
     statics: {
         loadAction: lightNovelActions.index
     },
-    getDefaultProps: function () {
-        return {
-            lightNovels: [],
-            isLoggedIn: false
-        };
-    },
     componentDidMount: function () {
         this.context.executeAction(lightNovelActions.index);
     },
     render: function () {
-        var isLoggedIn = this.props.isLoggedIn;
-
+        var user = this.props.user;
         var lightNovels = this.props.lightNovels;
+
         var lightNovelNodes = lightNovels.map(function (lightNovel) {
             return (
-                <LightNovel lightNovel={ lightNovel  } key={lightNovel._id}/>
+                <LightNovel lightNovel={ lightNovel  } key={lightNovel._id} />
             );
         });
 
@@ -43,7 +40,7 @@ var LightNovelsIndex = React.createClass({
             <div id="lightNovels">
                 {
                     (function() {
-                        if (isLoggedIn) {
+                        if (permissions.canCreate(user)) {
                             return (
                                 <Link to="lightNovelCreate">
                                     Create New
@@ -64,7 +61,7 @@ var LightNovelsIndex = React.createClass({
 LightNovelsIndex = fluxibleAddons.connectToStores(LightNovelsIndex, [lightNovelStore, authenticationStore], function (context, props) {
     return {
         lightNovels: context.getStore(lightNovelStore).getLightNovels(),
-        isLoggedIn: context.getStore(authenticationStore).isLoggedIn()
+        user : context.getStore(authenticationStore).getUser()
     };
 });
 module.exports = LightNovelsIndex;

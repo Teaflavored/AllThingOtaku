@@ -4,6 +4,9 @@ var React = require("react");
 var ChapterListItem = require("./chapter_list_item.jsx");
 var ChapterListNewItem = require("./chapter_list_new_item.jsx");
 
+//utils
+var permission = require("../../../../utils/user_permissions");
+
 var ChaptersList = React.createClass({
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
@@ -11,6 +14,7 @@ var ChaptersList = React.createClass({
     },
     render: function () {
         var self = this;
+        var user = this.props.user;
 
         var chaptersNodes = this.props.volume.chapters.map(function (chapter) {
             return (<ChapterListItem {...self.props} key={chapter._id} chapter={chapter} />);
@@ -22,13 +26,11 @@ var ChaptersList = React.createClass({
             );
         }
 
-        var isLoggedIn = this.props.isLoggedIn;
-
         return (
             <div className="chapters-list">
                 {
                     (function () {
-                        if (isLoggedIn) {
+                        if (permission.canCreate(user)) {
                             return (
                                 <ChapterListNewItem {...self.props} />
                             );

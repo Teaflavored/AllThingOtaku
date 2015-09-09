@@ -48,7 +48,7 @@ var Signup = React.createClass({
             errorNode = "";
         }
         return (
-            <div className="col-md-4 col-md-offset-4">
+            <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                 <form action="javascript:void(0);" className="card">
                     <h3 className="text-center">Sign Up</h3>
                     {errorNode}
