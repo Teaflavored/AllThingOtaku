@@ -28,15 +28,7 @@ var ChaptersList = React.createClass({
 
         return (
             <div className="chapters-list">
-                {
-                    (function () {
-                        if (permission.canCreate(user)) {
-                            return (
-                                <ChapterListNewItem {...self.props} />
-                            );
-                        }
-                    })()
-                }
+                { permission.canCreate(user) ? (<ChapterListNewItem {...self.props} />) : "" }
                 {chaptersNodes}
             </div>
         );

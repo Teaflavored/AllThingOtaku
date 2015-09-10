@@ -18,7 +18,6 @@ var ChapterNew = React.createClass({
         };
     },
     handleKeyDown: function (event) {
-        console.log('hi');
         if (event.keyCode == 27) {
             this.props.handleCloseChapterCreate();
         }
@@ -51,6 +50,10 @@ var ChapterNew = React.createClass({
                     chapterText: marked(this.state.chapterText)
                 }
             });
+        this.setState({
+            chapterName: "",
+            chapterText: ""
+        });
     },
     render: function () {
         var newChapterNum = this.props.volume.chaptersCount + 1;
@@ -67,6 +70,7 @@ var ChapterNew = React.createClass({
                             <div className="form-group">
                                 <label htmlFor="chapterTitle">Chapter Title</label>
                                 <input onChange={this.handleChapterNameChange} type="text" className="form-control"
+                                       placeholder="Optional Title"
                                        id="chapterTitle" value={this.state.chapterName}/>
                             </div>
                             <div className="form-group">

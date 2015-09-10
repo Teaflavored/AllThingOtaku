@@ -14,7 +14,10 @@ var ChapterListNewItem = React.createClass({
     render: function () {
         return (
             <div>
-                <span className="fa fa-plus" onClick={this.props.handleOpenChapterCreate.bind(null, this.props.volume)}></span>
+                <a href="javascript:void(0);" className="block-link mts mbm"
+                   onClick={this.props.handleOpenChapterCreate.bind(null, this.props.volume)}>
+                    <span className="fa fa-plus"></span> Create Chapter
+                </a>
             </div>
         );
     }

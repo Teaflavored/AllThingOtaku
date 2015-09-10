@@ -78,15 +78,17 @@ var LightNovelShow = React.createClass({
 
                     <div className="col-sm-4">
                         <div className="card">
-                            <div className="lightNovel-title">
-                                {lightNovel.title}
+                            <div className="text-center lightNovel-title">
+                                <strong className=" bold-text">
+                                    {lightNovel.title}
+                                </strong>
                             </div>
 
-                            <div className="lightNovel-author">
-                                {lightNovel.author}
+                            <div className="lightNovel-author text-center">
+                                By: {lightNovel.author}
                             </div>
 
-                            <div className="lightNovel-summary">
+                            <div className="lightNovel-summary mtl">
                                 {lightNovel.summary}
                             </div>
                         </div>

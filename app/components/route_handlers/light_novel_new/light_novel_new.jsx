@@ -75,7 +75,7 @@ var LightNovelNew = React.createClass({
                                    onChange={this.handleAuthorFieldChange}/>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="summary">Summary</label>
+                            <label htmlFor="summary">Synopsis</label>
                         <textarea className="form-control" onChange={this.handleSummaryFieldChange} id="summary"
                                   rows="10"></textarea>
                         </div>
