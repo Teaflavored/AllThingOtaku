@@ -3,7 +3,11 @@ var React = require("react");
 var Home = React.createClass({
     render: function () {
         return (
-            <div className="home">Hi this is the home page</div>
+            <div className="row">
+                <div className="card">
+                    <h1 className="text-center">Stay Tuned, Life of Otaku will be lauching soon!</h1>
+                </div>
+            </div>
         );
     }
 });

@@ -17,6 +17,7 @@ var ChapterShowRight = React.createClass({
             <div className="card">
                 <h5><strong>All Chapters</strong></h5>
                 {chapterLinkNodes}
+                <h5><strong>Similar Light Novels</strong></h5>
             </div>
         );
     }
