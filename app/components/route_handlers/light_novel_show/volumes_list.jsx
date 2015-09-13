@@ -3,9 +3,6 @@ var fluxibleAddons = require("fluxible-addons-react");
 //components
 var VolumeListItem = require("./volume_list_item.jsx");
 
-//stores
-var volumeStore = require("../../../stores/volume_store");
-
 var VolumesList = React.createClass({
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
