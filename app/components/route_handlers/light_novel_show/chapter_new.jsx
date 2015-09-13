@@ -1,6 +1,7 @@
 var React = require("react");
 var Router = require("react-router");
 var Navigation = Router.Navigation;
+var ReactQuill = require("react-quill");
 
 //actions
 var chapterActions = require("../../../actions/chapter_actions");
@@ -33,9 +34,9 @@ var ChapterNew = React.createClass({
             chapterName: event.target.value
         });
     },
-    handleChapterTextChange: function (event) {
+    handleChapterTextChange: function (value) {
         this.setState({
-            chapterText: event.target.value
+            chapterText: value
         });
     },
     handleCreateChapter: function () {
@@ -47,7 +48,7 @@ var ChapterNew = React.createClass({
                 },
                 body: {
                     chapterName: this.state.chapterName,
-                    chapterText: marked(this.state.chapterText)
+                    chapterText: this.state.chapterText
                 }
             });
         this.setState({
@@ -76,9 +77,9 @@ var ChapterNew = React.createClass({
                             </div>
                             <div className="form-group">
                                 <label htmlFor="chapterText">Chapter Text</label>
-                                <textarea className="form-control" type="text" onChange={this.handleChapterTextChange}
-                                          id="chapterText"
-                                          value={this.state.chapterText}></textarea>
+                                <ReactQuill value={this.state.chapterText}
+                                            theme="snow"
+                                            onChange={this.handleChapterTextChange}/>
                             </div>
                             <input type="button" className="btn btn-primary btn-block" value="Create Chapter" onClick={this.handleCreateChapter} />
                         </div>
