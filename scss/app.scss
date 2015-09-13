@@ -1,6 +1,7 @@
 @import "_bootstrap.scss";
 @import "includes/core-mixins";
 
+@import "pages/light_novel";
 @import "pages/volume";
 @import "pages/chapter";
 
@@ -9,6 +10,10 @@
 
 body {
   @include main-body;
+
+  &.modal-open {
+    overflow-y: hidden;
+  }
 }
 
 .card {

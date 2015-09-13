@@ -27,7 +27,7 @@ var VolumeListItem = React.createClass({
         });
 
         return (
-            <div className="col-xs-12" >
+            <div className="col-xs-12">
                 <div className={volumeClasses}>
                     <div className="volume-toggle" data-id={this.props.volume._id} onClick={this.handleOpenVolumeItem}>
                         <span className={caretClasses}></span>

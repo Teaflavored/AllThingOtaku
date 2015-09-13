@@ -43,44 +43,52 @@ var LightNovelShow = React.createClass({
         this.setState({
             newChapterWindowOpen: volume
         });
+
+        //need to set overflow on the body
+        var bodyEl = document.getElementsByTagName("body")[0];
+        bodyEl.classList.add("modal-open");
     },
     handleCloseChapterCreate: function () {
         this.setState({
             newChapterWindowOpen: null
         });
+
+        var bodyEl = document.getElementsByTagName("body")[0];
+        bodyEl.classList.remove("modal-open");
     },
     render: function () {
         var self = this;
         var lightNovel = this.props.lightNovel;
         var user = this.props.user;
 
+        var numberOfVolumes = lightNovel.volumes.length;
+        var volumeNumsNode = "";
+        if (numberOfVolumes > 1) {
+            volumeNumsNode = <div className="small">({numberOfVolumes} Volumes)</div>;
+        } else if (numberOfVolumes == 1) {
+            volumeNumsNode = <div className="small">({numberOfVolumes} Volume)</div>;
+        }
+
         return (
             <div>
-                {
-                    (function () {
-                        if (self.state.newChapterWindowOpen) {
-                            return (
-                                <ChapterNew {...self.props} handleCloseChapterCreate={self.handleCloseChapterCreate}
-                                                            volume={self.state.newChapterWindowOpen}/>
-                            );
-                        }
-                    })()
-                }
+                { self.state.newChapterWindowOpen ?
+                    <ChapterNew {...self.props} handleCloseChapterCreate={self.handleCloseChapterCreate}
+                                                volume={self.state.newChapterWindowOpen}/> : "" }
                 <div id="lightNovel" className="row">
-
                     <div className="col-sm-9">
                         <LightNovelHeader {...this.props} />
-
                         { permissions.canCreate(user) ? <VolumeListNewItem {...this.props} /> : "" }
-
                         <VolumesList {...this.props} handleOpenChapterCreate={this.handleOpenChapterCreate}/>
-
                     </div>
 
                     <div className="col-sm-3">
                         <div className="card">
                             <div className="img-wrapper">
-                                <img src={imageUtils.getImageUrl(lightNovel.imageId, lightNovel.imageFormat, 190, 262)} />
+                                <img
+                                    src={imageUtils.getImageUrl(lightNovel.imageId, lightNovel.imageFormat, 190, 262)}/>
+                            </div>
+                            <div className="text-center">
+                                {volumeNumsNode ? volumeNumsNode : ""}
                             </div>
                             <div className="text-center lightNovel-title">
                                 <strong className=" bold-text">
@@ -90,10 +98,6 @@ var LightNovelShow = React.createClass({
 
                             <div className="lightNovel-author text-center">
                                 By: {lightNovel.author}
-                            </div>
-
-                            <div className="lightNovel-summary mtl">
-                                {lightNovel.summary}
                             </div>
                         </div>
                     </div>
