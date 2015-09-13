@@ -38,15 +38,8 @@ var LightNovelsIndex = React.createClass({
 
         return (
             <div id="lightNovels">
-                {(function() {
-                        if (permissions.canCreate(user)) {
-                            return (
-                                <LightNovelNew />
-                            );
-                        }
-                    })()}
-
                 <div id="lightNovelList" className="row">
+                    { permissions.canCreate(user) ? <LightNovelNew /> : "" }
                     {lightNovelNodes}
                 </div>
             </div>

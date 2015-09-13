@@ -20,7 +20,8 @@ var LightNovelNew = React.createClass({
         return {
             title: "",
             author: "",
-            summary: ""
+            summary: "",
+            image: ""
         };
     },
     handleTitleFieldChange: function (event) {
@@ -50,36 +51,59 @@ var LightNovelNew = React.createClass({
             body: this.state,
             component: this
         });
+
+        //todo need to fix
+    },
+    handleFileChange: function (event) {
+        var file = event.target.files[0];
+        var self = this;
+
+        if (file) {
+            var fileReader = new FileReader();
+            fileReader.onload = function (e) {
+                var contents = e.target.result;
+                self.setState({
+                    image: btoa(contents)
+                });
+            };
+            fileReader.readAsBinaryString(file);
+        }
     },
     render: function () {
         var error = this.props.error;
 
         return (
             <div className="row">
-                <form id="lightNovelNew" action="javascript:void(0);" className="col-sm-6 col-md-5">
+                <form id="lightNovelNew" action="javascript:void(0);" className="col-xs-12">
                     <div className="card">
-                        {
-                            (function () {
-                                if (error) {
-                                    return <div className="alert-danger alert">{error.message}</div>;
-                                }
-                            })()
-                        }
-                        <div className="form-group">
-                            <label htmlFor="title">Title</label>
-                            <input type="text" className="form-control" id="title" onChange={this.handleTitleFieldChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="author">Author</label>
-                            <input type="text" className="form-control" id="author"
-                                   onChange={this.handleAuthorFieldChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="summary">Synopsis</label>
+                        <div className="row">
+                            <div className="col-xs-12 text-center">
+                                <h3>New Light Novel</h3>
+                            </div>
+                            <div className="col-sm-6">
+                                { error ? <div className="alert-danger alert">{error.message}</div> : "" }
+                                <div className="form-group">
+                                    <label htmlFor="title">Title</label>
+                                    <input type="text" className="form-control" id="title"
+                                           onChange={this.handleTitleFieldChange}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="author">Author</label>
+                                    <input type="text" className="form-control" id="author"
+                                           onChange={this.handleAuthorFieldChange}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="summary">Synopsis</label>
                         <textarea className="form-control" onChange={this.handleSummaryFieldChange} id="summary"
                                   rows="10"></textarea>
+                                </div>
+                                <input type="button" className="btn btn-block btn-primary" onClick={this.handleSubmit}
+                                       value="Create"/>
+                            </div>
+                            <div className="col-sm-6">
+                                <input type="file" onChange={this.handleFileChange} />
+                            </div>
                         </div>
-                        <input type="button" className="btn btn-block btn-primary" onClick={this.handleSubmit} value="Create"/>
                     </div>
                 </form>
             </div>

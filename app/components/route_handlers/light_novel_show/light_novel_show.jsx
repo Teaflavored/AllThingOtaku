@@ -19,6 +19,7 @@ var ChapterNew = require("./chapter_new.jsx");
 
 //utils
 var permissions = require("../../../../utils/user_permissions");
+var imageUtils = require("../../../../utils/image_utils");
 
 var LightNovelShow = React.createClass({
     contextTypes: {
@@ -67,7 +68,7 @@ var LightNovelShow = React.createClass({
                 }
                 <div id="lightNovel" className="row">
 
-                    <div className="col-sm-8">
+                    <div className="col-sm-9">
                         <LightNovelHeader {...this.props} />
 
                         { permissions.canCreate(user) ? <VolumeListNewItem {...this.props} /> : "" }
@@ -76,8 +77,11 @@ var LightNovelShow = React.createClass({
 
                     </div>
 
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <div className="card">
+                            <div className="img-wrapper">
+                                <img src={imageUtils.getImageUrl(lightNovel.imageId, lightNovel.imageFormat, 190, 262)} />
+                            </div>
                             <div className="text-center lightNovel-title">
                                 <strong className=" bold-text">
                                     {lightNovel.title}

@@ -63,3 +63,9 @@
     margin-left: 20px;
   }
 }
+
+@mixin images() {
+  .img-wrapper img {
+    width: 100%;
+  }
+}

@@ -1,4 +1,5 @@
 var LightNovel = require("../models/light_novel");
+var cloudinary = require("cloudinary");
 var sanitizeHtml = require("sanitize-html");
 var sanitizeOptions = require("../utils/sanitize_options");
 var _ = require("lodash");
@@ -40,19 +41,27 @@ var lightNovelService = {
         if (req.isUnauthenticated()) {
             return actionCB(new Error(errorMessages["NO_AUTHENTICATION"]));
         }
+
         var lightNovel = new LightNovel({
             author: sanitizeHtml(body.author, sanitizeOptions),
             title: sanitizeHtml(body.title, sanitizeOptions),
             summary: sanitizeHtml(body.summary, sanitizeOptions)
         });
-        lightNovel.save().then(
-            function (lightNovel) {
-                return actionCB(null, lightNovel.toObjectNoChapterText());
-            },
-            function (err) {
-                return actionCB(err);
-            }
-        );
+
+        var image = body.image;
+        cloudinary.uploader.upload("data:image/png;base64," + image, function (result) {
+            lightNovel.imageId = result.public_id;
+            lightNovel.imageFormat = result.format;
+
+            lightNovel.save().then(
+                function (lightNovel) {
+                    return actionCB(null, lightNovel.toObjectNoChapterText());
+                },
+                function (err) {
+                    return actionCB(err);
+                }
+            );
+        });
     },
     update: function (req, resource, params, body, config, actionCB) {
         if (req.isUnauthenticated()) {

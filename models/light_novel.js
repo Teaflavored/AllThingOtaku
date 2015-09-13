@@ -18,7 +18,8 @@ var lightNovelSchema = new Schema({
         default: 0
     },
     summary: String,
-    image: String,
+    imageId: String,
+    imageFormat: String,
     pubDate: Date,
     completed: {
         type: Boolean,

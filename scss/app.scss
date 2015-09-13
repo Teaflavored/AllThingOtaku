@@ -5,6 +5,8 @@
 @import "pages/chapter";
 
 @include margins;
+@include images;
+
 body {
   @include main-body;
 }
