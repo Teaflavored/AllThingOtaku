@@ -7,6 +7,7 @@ var created = require("./created");
 var volumeSchema = new Schema({
     volumeNum: {
         type: Number,
+        unique: true,
         index: true
     },
     title: {

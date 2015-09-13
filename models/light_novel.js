@@ -4,8 +4,14 @@ var modified = require("./last_mod");
 var created = require("./created");
 var Volume = require("./volume");
 var _ = require("lodash");
+var shortid = require("shortid");
 
 var lightNovelSchema = new Schema({
+    _id: {
+        type: String,
+        unique: true,
+        default: shortid.generate
+    },
     author: {
         type: String
     },
