@@ -87,7 +87,7 @@ var LightNovelShow = React.createClass({
                                 <img
                                     src={imageUtils.getImageUrl(lightNovel.imageId, lightNovel.imageFormat, 190, 262)}/>
                             </div>
-                            <div className="text-center">
+                            <div className="text-center mbm">
                                 {volumeNumsNode ? volumeNumsNode : ""}
                             </div>
                             <div className="text-center lightNovel-title">
