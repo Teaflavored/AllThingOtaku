@@ -53,7 +53,7 @@ lightNovelSchema.pre("save", function (next) {
             title: this.title,
             author: this.author
         }).exec().then(function (lightNovel) {
-            if (lightNovel && !lightNovel._id.equals(self._id)) {
+            if (lightNovel && !lightNovel._id == self._id) {
                 self.invalidate("title", "Title and Author must be unique");
                 self.invalidate("author", "Title and Author must be unique");
                 next(new Error("Title and Author must be unique"));

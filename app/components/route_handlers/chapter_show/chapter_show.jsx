@@ -9,6 +9,8 @@ var chapterActions = require("../../../actions/chapter_actions");
 //stores
 var chapterStore = require("../../../stores/chapter_store");
 
+//components
+var ChapterShowRight = require("./chapter_show_right.jsx");
 
 var ChapterShow = React.createClass({
     contextTypes: {
@@ -18,14 +20,22 @@ var ChapterShow = React.createClass({
     statics: {
         loadAction: chapterActions.find
     },
-    componentDidMount: function () {
+    getChapterData: function (chapterNum){
         this.context.executeAction(chapterActions.find, {
             params: {
                 lightNovelId: this.props.params.lightNovelId,
-                volumeId: this.props.params.volumeId,
-                chapterId: this.props.params.chapterId
+                volumeNum: this.props.params.volumeNum,
+                chapterNum: chapterNum
             }
         });
+    },
+    componentWillMount: function () {
+        this.getChapterData(this.props.params.chapterNum);
+    },
+    componentWillReceiveProps: function (nextProps) {
+        if (nextProps.params.chapterNum != this.props.params.chapterNum) {
+            this.getChapterData(nextProps.params.chapterNum);
+        }
     },
     render: function () {
         return (
@@ -46,8 +56,7 @@ var ChapterShow = React.createClass({
                         </div>
                     </div>
                     <div className="col-md-3">
-                        <div className="card">
-                        </div>
+                        <ChapterShowRight {...this.props}/>
                     </div>
                 </div>
             </div>
@@ -57,8 +66,8 @@ var ChapterShow = React.createClass({
 
 ChapterShow = fluxibleAddons.connectToStores(ChapterShow, [chapterStore], function (context, props) {
     return {
-        volume: context.getStore(chapterStore).getVolume(props.params.volumeId),
-        chapter: context.getStore(chapterStore).getChapter(props.params.chapterId),
+        volume: context.getStore(chapterStore).getVolume(props.params.lightNovelId),
+        chapter: context.getStore(chapterStore).getChapter(props.params.lightNovelId),
         lightNovel: context.getStore(chapterStore).getLightNovel(props.params.lightNovelId)
     };
 });

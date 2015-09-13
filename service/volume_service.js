@@ -32,7 +32,6 @@ module.exports = {
                 var volumeNum = lightNovel.volumesCount + 1;
 
                 lightNovel.volumes.push(_.assign({}, body, {volumeNum: volumeNum}));
-
                 lightNovel.volumesCount = volumeNum;
 
                 lightNovel.save().then(

@@ -49,19 +49,32 @@ var lightNovelService = {
         });
 
         var image = body.image;
-        cloudinary.uploader.upload("data:image/png;base64," + image, function (result) {
-            lightNovel.imageId = result.public_id;
-            lightNovel.imageFormat = result.format;
+        if (image) {
+            cloudinary.uploader.upload("data:image/png;base64," + image, function (result) {
+                lightNovel.imageId = result.public_id;
+                lightNovel.imageFormat = result.format;
 
+                lightNovel.save().then(
+                    function (lightNovel) {
+                        return actionCB(null, lightNovel.toObjectNoChapterText());
+                    },
+                    function (err) {
+                        err.statusCode = 422;
+                        return actionCB(err);
+                    }
+                );
+            });
+        } else {
             lightNovel.save().then(
                 function (lightNovel) {
                     return actionCB(null, lightNovel.toObjectNoChapterText());
                 },
                 function (err) {
+                    err.statusCode = 422;
                     return actionCB(err);
                 }
-            );
-        });
+            )
+        }
     },
     update: function (req, resource, params, body, config, actionCB) {
         if (req.isUnauthenticated()) {

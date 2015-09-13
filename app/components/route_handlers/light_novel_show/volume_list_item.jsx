@@ -8,7 +8,7 @@ var ChaptersList = require("./chapters_list.jsx");
 var VolumeListItem = React.createClass({
     getInitialState: function () {
         return {
-            isOpen: false
+            isOpen: true
         };
     },
     handleOpenVolumeItem: function (event) {

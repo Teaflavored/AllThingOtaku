@@ -10,26 +10,20 @@ var ChapterStore = createStore({
     storeName: "chapterStore",
     handlers: handlers,
     initialize: function () {
-        this.chapterIdToChapters = {};
-        this.volumeIdToVolumes = {};
-        this.lightNovelIdToLightNovels ={};
+        this.lightNovelIdToData = {
+
+        };
     },
     dehydrate: function () {
         return {
-            chapterIdToChapters: this.chapterIdToChapters,
-            volumeIdToVolumes: this.volumeIdToVolumes,
-            lightNovelIdToLightNovels: this.lightNovelIdToLightNovels
+            lightNovelIdToData: this.lightNovelIdToData
         };
     },
     rehydrate: function (state) {
-        this.chapterIdToChapters = state.chapterIdToChapters;
-        this.volumeIdToVolumes = state.volumeIdToVolumes;
-        this.lightNovelIdToLightNovels = state.lightNovelIdToLightNovels;
+        this.lightNovelIdToData = state.lightNovelIdToData;
     },
     _findChapterSuccess: function (data) {
-        this.chapterIdToChapters[data.chapter._id] = data.chapter;
-        this.volumeIdToVolumes[data.volume._id] = data.volume;
-        this.lightNovelIdToLightNovels[data.lightNovel._id] = data.lightNovel;
+        this.lightNovelIdToData[data.lightNovel._id] = data;
         this.emitChange();
     },
     _findChapterErr: function (err) {
@@ -38,40 +32,29 @@ var ChapterStore = createStore({
     _createChapterErr: function (err) {
 
     },
-    hasChapter: function (chapterId) {
-        if (!chapterId) {
-            return false;
-        }
-
-        if (typeof chapterId == "string") {
-            return this.chapterIdToChapters[chapterId];
-        }
-
-        return false;
-    },
-    getChapter: function (chapterId) {
-        if (!chapterId) {
+    getChapter: function (lightNovelId) {
+        if (!lightNovelId) {
             return {};
         }
 
-        var chapter = this.chapterIdToChapters[chapterId];
-        return ( chapter ? (chapter) : ( {} ) );
+        var chapterData = this.lightNovelIdToData[lightNovelId];
+        return chapterData ? chapterData.chapter : {};
     },
-    getVolume: function (volumeId) {
-        if (!volumeId) {
+    getVolume: function (lightNovelId) {
+        if (!lightNovelId) {
             return {};
         }
 
-        var volume = this.volumeIdToVolumes[volumeId];
-        return ( volume ? (volume) : ( {} ));
+        var chapterData = this.lightNovelIdToData[lightNovelId];
+        return chapterData ? chapterData.volume : {};
     },
     getLightNovel: function (lightNovelId) {
         if (!lightNovelId) {
             return {};
         }
 
-        var lightNovel = this.lightNovelIdToLightNovels[lightNovelId];
-        return ( lightNovel ? (lightNovel) : ( {} ));
+        var chapterData = this.lightNovelIdToData[lightNovelId];
+        return chapterData ? chapterData.lightNovel : {};
     }
 });
 

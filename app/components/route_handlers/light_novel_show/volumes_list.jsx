@@ -14,7 +14,7 @@ var VolumesList = React.createClass({
         var volumeNodes = this.props.lightNovel.volumes.map(function (volume, idx) {
             return (
                 <VolumeListItem {...self.props} volume={volume}
-                                                key={volume._id} idx={idx}/>
+                                                key={idx} idx={idx}/>
             );
         }.bind(this));
 

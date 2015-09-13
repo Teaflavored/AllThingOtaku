@@ -1,8 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var Chapter = require("./chapter");
-var lastMod = require("./last_mod");
-var created = require("./created");
+var _ = require("lodash");
 
 var volumeSchema = new Schema({
     volumeNum: {
@@ -22,8 +21,10 @@ var volumeSchema = new Schema({
     pubDate: Date
 });
 
-volumeSchema.plugin(lastMod);
-volumeSchema.plugin(created);
 
+volumeSchema.methods.toObjectNoChapters = function () {
+    tempVolume = this.toObject();
+    return _.omit(tempVolume, "chapters");
+};
 var Volume = mongoose.model("Volume", volumeSchema);
 module.exports = Volume;

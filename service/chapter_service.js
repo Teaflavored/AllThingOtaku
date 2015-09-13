@@ -7,19 +7,23 @@ var chapterService = {
     name: "chapters",
     read: function (req, resource, params, config, actionCB) {
         var lightNovelId = params.lightNovelId;
-        var volumeId = params.volumeId;
-        var chapterId = params.chapterId;
 
         LightNovel.findById(lightNovelId).exec().then(
             function (lightNovel) {
-                var volume = lightNovel.volumes.id(volumeId);
-                var chapter = volume.chapters.id(chapterId);
+                var volume = _.find(lightNovel.volumes, function (volume) {
+                    return volume.volumeNum = params.volumeNum;
+                });
+
+                var chapter = _.find(volume.chapters, function (chapter) {
+                    return chapter.chapterNum == params.chapterNum;
+                });
 
                 var result = {
                     lightNovel: lightNovel.toObjectNoVolumes(),
-                    volume: volume.toObject(),
+                    volume: volume.toObjectNoChapters(),
                     chapter: chapter.toObject()
                 };
+
                 return actionCB(null, result);
             },
             function (err) {

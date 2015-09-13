@@ -13,12 +13,11 @@ var ChaptersList = React.createClass({
         executeAction: React.PropTypes.func.isRequired
     },
     render: function () {
-        var self = this;
         var user = this.props.user;
 
-        var chaptersNodes = this.props.volume.chapters.map(function (chapter) {
-            return (<ChapterListItem {...self.props} key={chapter._id} chapter={chapter} />);
-        });
+        var chaptersNodes = this.props.volume.chapters.map(function (chapter, idx) {
+            return (<ChapterListItem {...this.props} key={idx} chapter={chapter} />);
+        }.bind(this));
 
         if (chaptersNodes.length == 0) {
             chaptersNodes = (
@@ -28,7 +27,7 @@ var ChaptersList = React.createClass({
 
         return (
             <div className="chapters-list">
-                { permission.canCreate(user) ? (<ChapterListNewItem {...self.props} />) : "" }
+                { permission.canCreate(user) ? (<ChapterListNewItem {...this.props} />) : "" }
                 {chaptersNodes}
             </div>
         );

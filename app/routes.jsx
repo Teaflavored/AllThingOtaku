@@ -19,7 +19,7 @@ var routes = (
         <Route name="lightNovelCreate" path="/lightNovel/new" handler={LightNovelNew}/>
         <Route name="lightNovelShow" path="/lightNovel/:lightNovelId" handler={LightNovelShow} />
         <Route name="lightNovelsIndex" path="/lightNovels" handler={LightNovelIndex}/>
-        <Route name="chapterShow" path="/lightNovel/:lightNovelId/volume/:volumeId/chapter/:chapterId" handler={ChapterShow} />
+        <Route name="chapterShow" path="/lightNovel/:lightNovelId/volume/:volumeNum/chapter/:chapterNum" handler={ChapterShow} />
         <Route name="signup" path="/signup" handler={Signup} />
         <Route name="login" path="/login" handler={Login} />
         <DefaultRoute name="home" handler={Home}/>
