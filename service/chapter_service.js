@@ -32,7 +32,7 @@ var chapterService = {
 
                 volume.chapters.push(_.assign({}, {
                     chapterNum: volume.chaptersCount,
-                    chapterText: sanitizeHtml(body.chapterText, sanitizeOptions)
+                    chapterText: body.chapterText
                 }));
 
                 lightNovel.save().then(

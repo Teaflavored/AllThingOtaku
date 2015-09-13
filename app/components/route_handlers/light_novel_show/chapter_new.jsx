@@ -42,8 +42,8 @@ var ChapterNew = React.createClass({
         this.context.executeAction(chapterActions.create,
             {
                 params: {
-                    lightNovelId: this.props.lightNovelId,
-                    volumeId: this.props.volumeId
+                    lightNovelId: this.props.lightNovel._id,
+                    volumeId: this.props.volume._id
                 },
                 body: {
                     chapterName: this.state.chapterName,
@@ -54,6 +54,7 @@ var ChapterNew = React.createClass({
             chapterName: "",
             chapterText: ""
         });
+        this.props.handleCloseChapterCreate();
     },
     render: function () {
         var newChapterNum = this.props.volume.chaptersCount + 1;
@@ -79,6 +80,7 @@ var ChapterNew = React.createClass({
                                           id="chapterText"
                                           value={this.state.chapterText}></textarea>
                             </div>
+                            <input type="button" className="btn btn-primary btn-block" value="Create Chapter" onClick={this.handleCreateChapter} />
                         </div>
                     </div>
                 </div>
