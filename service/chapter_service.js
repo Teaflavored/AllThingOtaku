@@ -12,8 +12,15 @@ var chapterService = {
 
         LightNovel.findById(lightNovelId).exec().then(
             function (lightNovel) {
-                var chapter = lightNovel.volumes.id(volumeId).chapters.id(chapterId);
-                return actionCB(null, chapter.toObject());
+                var volume = lightNovel.volumes.id(volumeId);
+                var chapter = volume.chapters.id(chapterId);
+
+                var result = {
+                    lightNovel: lightNovel.toObjectNoVolumes(),
+                    volume: volume.toObject(),
+                    chapter: chapter.toObject()
+                };
+                return actionCB(null, result);
             },
             function (err) {
                 err.statusCode = 422;

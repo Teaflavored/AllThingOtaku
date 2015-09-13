@@ -5,8 +5,7 @@ var handlers = {
     LOAD_LIGHT_NOVELS_ERR: "_receiveLightNovelsErr",
     FIND_LIGHT_NOVEL: "_receiveLightNovel",
     FIND_LIGHT_NOVEL_ERR: "_receiveLightNovelErr",
-    CREATE_LIGHT_NOVEL_ERR: "_receiveCreateLightNovelErr",
-    FIND_VOLUME: "_receiveVolume"
+    CREATE_LIGHT_NOVEL_ERR: "_receiveCreateLightNovelErr"
 };
 
 module.exports = createStore({
@@ -18,10 +17,6 @@ module.exports = createStore({
             volumes: []
         };
         this.newLightNovelErr = null;
-    },
-    _receiveVolume: function (data) {
-        this.volumeIdToVolumes[data._id] = data;
-        this.emitChange();
     },
     _receiveCreateLightNovelErr: function (err) {
         this.newLightNovelErr = err;

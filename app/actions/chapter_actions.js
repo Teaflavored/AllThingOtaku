@@ -1,10 +1,10 @@
 var chapterActions = {
     find: function (context, payload, done) {
-        context.service.read("chapters", payload.params, {}, function (err, chapter) {
+        context.service.read("chapters", payload.params, {}, function (err, data) {
             if (err) {
                 context.dispatch("FIND_CHAPTER_ERR", err);
-            } else if (chapter) {
-                context.dispatch("FIND_CHAPTER_SUCCESS", chapter);
+            } else if (data) {
+                context.dispatch("FIND_CHAPTER_SUCCESS", data);
             }
             done();
         });

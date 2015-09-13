@@ -1,30 +1,30 @@
 var createStore = require("fluxible/addons/createStore");
 
 var handlers = {
-    "SET_LAST_USED_VOLUME_ID": "_setLastUsedVolumeId"
+    "FIND_VOLUME_SUCCESS": "_findVolumeSuccess"
 };
 
 module.exports = createStore({
     storeName: "volumeStore",
     handlers: handlers,
     initialize: function () {
-        this.lastUsedVolumeId = null;
+        this.volumeIdToVolume = {};
     },
     dehydrate: function () {
         return {
-            lastUsedVolumeId: this.lastUsedVolumeId
+            volumeIdToVolume: this.volumeIdToVolume
         };
     },
     rehydrate: function (state) {
-        this.lastUsedVolumeId = state.lastUsedVolumeId
+        this.volumeIdToVolume = state.volumeIdToVolume;
     },
-    _setLastUsedVolumeId: function (volumeId) {
-        this.lastUsedVolumeId = volumeId;
+    _findVolumeSuccess: function (volume) {
+        if (volume) {
+            this.volumeIdToVolume[volume._id] = volume;
+        }
+        this.emitChange();
     },
-    getLastUsedVolumeId: function () {
-        return this.lastUsedVolumeId;
-    },
-    isLastUsedVolume: function (volumeId) {
-        return this.lastUsedVolumeId == volumeId;
+    getVolume: function (volumeId) {
+        return this.volumeIdToVolume[volumeId];
     }
 });

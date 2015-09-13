@@ -3,30 +3,33 @@ var createStore = require("fluxible/addons/createStore");
 var handlers = {
     FIND_CHAPTER_SUCCESS: "_findChapterSuccess",
     FIND_CHAPTER_ERR: "_findChapterErr",
-    CREATE_CHAPTER_SUCCESS: "_createChapterSuccess",
     CREATE_CHAPTER_ERR: "_createChapterErr"
 };
 
 var ChapterStore = createStore({
     storeName: "chapterStore",
+    handlers: handlers,
     initialize: function () {
-        this.chapterIdToChapters = {}
+        this.chapterIdToChapters = {};
+        this.volumeIdToVolumes = {};
+        this.lightNovelIdToLightNovels ={};
     },
     dehydrate: function () {
         return {
-            chapterIdToChapters: {}
+            chapterIdToChapters: this.chapterIdToChapters,
+            volumeIdToVolumes: this.volumeIdToVolumes,
+            lightNovelIdToLightNovels: this.lightNovelIdToLightNovels
         };
     },
     rehydrate: function (state) {
         this.chapterIdToChapters = state.chapterIdToChapters;
+        this.volumeIdToVolumes = state.volumeIdToVolumes;
+        this.lightNovelIdToLightNovels = state.lightNovelIdToLightNovels;
     },
-    handlers: handlers,
-    _findChapterSuccess: function (chapter) {
-        this.chapterIdToChapters[chapter._id] = chapter;
-        this.emitChange();
-    },
-    _createChapterSuccess: function (chapter) {
-        this.chapterIdToChapters[chapter._id] = chapter;
+    _findChapterSuccess: function (data) {
+        this.chapterIdToChapters[data.chapter._id] = data.chapter;
+        this.volumeIdToVolumes[data.volume._id] = data.volume;
+        this.lightNovelIdToLightNovels[data.lightNovel._id] = data.lightNovel;
         this.emitChange();
     },
     _findChapterErr: function (err) {
@@ -53,6 +56,22 @@ var ChapterStore = createStore({
 
         var chapter = this.chapterIdToChapters[chapterId];
         return ( chapter ? (chapter) : ( {} ) );
+    },
+    getVolume: function (volumeId) {
+        if (!volumeId) {
+            return {};
+        }
+
+        var volume = this.volumeIdToVolumes[volumeId];
+        return ( volume ? (volume) : ( {} ));
+    },
+    getLightNovel: function (lightNovelId) {
+        if (!lightNovelId) {
+            return {};
+        }
+
+        var lightNovel = this.lightNovelIdToLightNovels[lightNovelId];
+        return ( lightNovel ? (lightNovel) : ( {} ));
     }
 });
 
