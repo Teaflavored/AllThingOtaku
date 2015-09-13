@@ -11,7 +11,7 @@ var chapterService = {
         LightNovel.findById(lightNovelId).exec().then(
             function (lightNovel) {
                 var volume = _.find(lightNovel.volumes, function (volume) {
-                    return volume.volumeNum = params.volumeNum;
+                    return volume.volumeNum == params.volumeNum;
                 });
 
                 var chapter = _.find(volume.chapters, function (chapter) {
@@ -33,12 +33,18 @@ var chapterService = {
         )
     },
     create: function (req, resource, params, body, config, actionCB) {
+        if (!req.isAuthenticated()) {
+           return actionCB(new Error("No Authentication"));
+        }
         var lightNovelId = params.lightNovelId;
-        var volumeId = params.volumeId;
+        var volumeNum = params.volumeNum;
 
         LightNovel.findById(lightNovelId).exec().then(
             function (lightNovel) {
-                var volume = lightNovel.volumes.id(volumeId);
+                var volume = _.find(lightNovel.volumes, function (volume) {
+                    return volume.volumeNum == volumeNum;
+                });
+
                 volume.chaptersCount = volume.chaptersCount + 1;
 
                 volume.chapters.push(_.assign({}, {
@@ -48,10 +54,7 @@ var chapterService = {
 
                 lightNovel.save().then(
                     function (lightNovel) {
-                        return actionCB(null, {
-                            lightNovel: lightNovel.toObjectNoChapterText(),
-                            lastUsedVolumeId: volumeId
-                        });
+                        return actionCB(null, lightNovel.toObjectNoChapterText());
                     },
                     function (err) {
                         err.statusCode = 422;
@@ -65,6 +68,41 @@ var chapterService = {
             }
         )
 
+    },
+    delete: function (req, resource, params, config, actionCB) {
+        if (!req.isAuthenticated()) {
+            return actionCB(new Error("No Authentication"));
+        }
+
+        var lightNovelId = params.lightNovelId;
+        var volumeNum = params.volumeNum;
+        var chapterNum = params.chapterNum;
+
+        LightNovel.findById(lightNovelId).exec().then(
+            function (lightNovel) {
+                var volume = _.find(lightNovel.volumes, function (volume) {
+                    return volume.volumeNum == volumeNum
+                });
+
+                volume.chapters = _.filter(volume.chapters, function (chapter) {
+                    return chapter.chapterNum != chapterNum;
+                });
+
+                lightNovel.save().then(
+                    function(lightNovel) {
+                        return actionCB(null, lightNovel);
+                    },
+                    function (err) {
+                        err.statusCode = 422;
+                        return actionCB(err);
+                    }
+                )
+            },
+            function (err) {
+                err.statusCode = 422;
+                return actionCB(err);
+            }
+        )
     }
 };
 

@@ -12,7 +12,7 @@ var ChapterListItem = React.createClass({
     },
     render: function () {
         return (
-            <div>
+            <div className="mbm">
                 <Link to="chapterShow" params={ {
                     lightNovelId: this.props.lightNovel._id,
                     volumeNum: this.props.volume.volumeNum,
@@ -20,8 +20,6 @@ var ChapterListItem = React.createClass({
                 } }>
                     Chapter {this.props.chapter.chapterNum}
                 </Link>
-
-                <p dangerouslySetInnerHTML={{__html: this.props.chapter.chapterText }}></p>
             </div>
         );
     }

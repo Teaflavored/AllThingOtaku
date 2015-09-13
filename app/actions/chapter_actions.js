@@ -10,11 +10,21 @@ var chapterActions = {
         });
     },
     create: function (context, payload, done) {
-        context.service.create("chapters", payload.params, payload.body, {}, function (err, data) {
+        context.service.create("chapters", payload.params, payload.body, {}, function (err, lightNovel) {
             if (err) {
                 context.dispatch("CREATE_CHAPTER_ERR", err);
-            } else if (data.lightNovel) {
-                context.dispatch("FIND_LIGHT_NOVEL", data.lightNovel);
+            } else if (lightNovel) {
+                context.dispatch("FIND_LIGHT_NOVEL", lightNovel);
+            }
+            done();
+        });
+    },
+    delete: function (context, payload, done) {
+        context.service.delete("chapters", payload.params, {}, function (err, lightNovel) {
+            if (err) {
+                context.dispatch("DELETE_CHAPTER_ERR", err);
+            } else if (lightNovel) {
+                context.dispatch("FIND_LIGHT_NOVEL", lightNovel);
             }
             done();
         });

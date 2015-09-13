@@ -44,7 +44,7 @@ var ChapterNew = React.createClass({
             {
                 params: {
                     lightNovelId: this.props.lightNovel._id,
-                    volumeId: this.props.volume._id
+                    volumeNum: this.props.volume.volumeNum
                 },
                 body: {
                     chapterName: this.state.chapterName,
