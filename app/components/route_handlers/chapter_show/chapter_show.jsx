@@ -37,7 +37,7 @@ var ChapterShow = React.createClass({
                                   params={ { lightNovelId: this.props.params.lightNovelId} }>Back
                                 to {this.props.lightNovel.title}</Link>
 
-                            <div className="text-center">
+                            <div className="text-center chapter-show-header">
                                 <h3>{this.props.lightNovel.title}</h3>
                                 <h5>Volume {this.props.volume.volumeNum},
                                     Chapter {this.props.chapter.chapterNum}</h5>
