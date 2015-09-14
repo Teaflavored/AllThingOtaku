@@ -1,13 +1,10 @@
 var React = require("react");
-var Router = require("react-router");
-var Navigation = Router.Navigation;
 var ReactQuill = require("react-quill");
 
 //actions
 var chapterActions = require("../../../actions/chapter_actions");
 
 var ChapterNew = React.createClass({
-    mixins: [Navigation],
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
         executeAction: React.PropTypes.func.isRequired
