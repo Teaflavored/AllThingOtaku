@@ -38,7 +38,12 @@ var ChapterEdit = React.createClass({
         });
     },
     handleKeyDown: function (event) {
-        if (event.keyCode == 27) {
+        if (event.keyCode == 8) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        if (event.keyCode == 27 || event.keyCode == 8) {
             this.props.handleCloseChapterEdit();
         }
     },
@@ -54,6 +59,9 @@ var ChapterEdit = React.createClass({
     },
     componentWillUnmount: function () {
         window.removeEventListener("keydown", this.handleKeyDown);
+
+        var bodyEl = document.getElementsByTagName("body")[0];
+        bodyEl.classList.remove("modal-open");
     },
     handleSaveChapter: function () {
         this.context.executeAction(chapterActions.update, {

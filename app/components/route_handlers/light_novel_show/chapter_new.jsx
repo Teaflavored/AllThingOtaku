@@ -16,7 +16,11 @@ var ChapterNew = React.createClass({
         };
     },
     handleKeyDown: function (event) {
-        if (event.keyCode == 27) {
+        if (event.keyCode == 8) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        if (event.keyCode == 27 || event.keyCode == 8) {
             this.props.handleCloseChapterCreate();
         }
     },
@@ -25,6 +29,9 @@ var ChapterNew = React.createClass({
     },
     componentWillUnmount: function () {
         window.removeEventListener("keydown", this.handleKeyDown);
+
+        var bodyEl = document.getElementsByTagName("body")[0];
+        bodyEl.classList.remove("modal-open");
     },
     handleChapterNameChange: function (event) {
         this.setState({

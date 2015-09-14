@@ -48,9 +48,8 @@ var chapterService = {
                 volume.chaptersCount = volume.chaptersCount + 1;
 
                 volume.chapters.push(_.assign({}, {
-                    chapterNum: volume.chaptersCount,
-                    chapterText: body.chapterText
-                }));
+                    chapterNum: volume.chaptersCount
+                }, body));
 
                 lightNovel.save().then(
                     function (lightNovel) {
@@ -88,6 +87,8 @@ var chapterService = {
                     if (chapter.chapterNum == chapterNum) {
                         //update the chapter
                         return _.assign({}, chapter.toObject(), body);
+                    } else {
+                        return chapter;
                     }
                 });
 
