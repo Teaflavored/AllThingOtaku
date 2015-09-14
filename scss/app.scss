@@ -26,6 +26,10 @@ a {
 }
 
 /* Navbar */
+#navbar {
+  border-bottom: none;
+}
+
 #navbar .nav-btn:hover,
 #navbar .nav-btn.active:hover {
   background: $primary-color-light;
@@ -35,7 +39,10 @@ a {
 #navbar .nav-btn.active {
   background: $primary-color;
   color: $white;
+}
 
+#navbar .navbar-header {
+  border-bottom: 1px solid $border-gray;
 }
 
 #navbar .navbar-brand,
@@ -44,5 +51,13 @@ a {
   height: 60px;
 }
 
-
+@media (min-width: $grid-float-breakpoint) {
+  #navbar {
+    border-bottom: 1px solid $border-gray; 
+  }
+  
+  #navbar .navbar-header {
+    border-bottom: none;
+  }
+}
 
