@@ -101,7 +101,14 @@ var LightNovelNew = React.createClass({
                                        value="Create"/>
                             </div>
                             <div className="col-sm-6">
-                                <input type="file" onChange={this.handleFileChange} />
+                                <div className="form-group">
+                                    <label>Tags</label>
+                                    <input type="text" className="form-control" placeholder="Optional Tags"/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Cover Image</label>
+                                    <input type="file" onChange={this.handleFileChange}/>
+                                </div>
                             </div>
                         </div>
                     </div>
