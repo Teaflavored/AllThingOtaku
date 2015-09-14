@@ -4,21 +4,17 @@ var Chapter = require("./chapter");
 var _ = require("lodash");
 
 var volumeSchema = new Schema({
-    volumeNum: {
-        type: Number,
-        unique: true,
-        index: true
-    },
+    volumeNum: Number,
     title: {
         type: String,
         required: true
     },
-    chapters: [Chapter.schema],
     chaptersCount: {
         type: Number,
         default: 0
     },
-    pubDate: Date
+    pubDate: Date,
+    chapters: [Chapter.schema]
 });
 
 

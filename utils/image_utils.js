@@ -1,6 +1,6 @@
 var imageUtils = {
     baseUrl: "http://res.cloudinary.com/teaflavored/image/upload",
-    placeholderImageUrl: "http://res.cloudinary.com/teaflavored/image/upload/v1442197844/Cover-Image_pzjrmk.png",
+    placeholderImagePublic: "Cover-Image_pzjrmk.png",
     getImageUrlSrcset: function (public_id, format, imageSizes) {
         var imageSrcs = [];
         var idxToSize = {
@@ -26,11 +26,25 @@ var imageUtils = {
     },
     getImageUrl: function (public_id, format, width, height) {
         if (!public_id) {
-            return this.placeholderImageUrl;
+            var tempPlaceholderImageUrl = this.baseUrl;
+            var placeholderOptions = [];
+            if (width) {
+                placeholderOptions.push("w_" + width);
+            }
+
+            if (height) {
+                placeholderOptions.push("h_" + height);
+            }
+
+            if (placeholderOptions.length) {
+                tempPlaceholderImageUrl = this.baseUrl + "/" + placeholderOptions.join(",");
+            }
+
+            return tempPlaceholderImageUrl + "/" + this.placeholderImagePublic;
         }
 
         var options = [];
-        var tempUrl;
+        var tempUrl = this.baseUrl;
 
         if (width) {
             options.push("w_" + width);
@@ -42,10 +56,6 @@ var imageUtils = {
 
         if (options.length) {
             tempUrl = this.baseUrl + "/" + options.join(",");
-        }
-
-        if (!tempUrl) {
-            tempUrl = this.baseUrl;
         }
 
         return tempUrl + "/" + public_id + "." + format;
