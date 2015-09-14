@@ -41,7 +41,7 @@ var Navbar = React.createClass({
                     <div className="navbar-header">
                         <h1 style={navbarCSS.brandHeader}>
                             <Link to="home" className="navbar-brand">
-                                AllThingsOtaku
+                                Life of Otaku
                             </Link>
                         </h1>
                     </div>

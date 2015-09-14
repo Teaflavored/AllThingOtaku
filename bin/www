@@ -9,7 +9,7 @@ if (process.env.NPM_CONFIG_PRODUCTION) {
  */
 
 var app = require('../server');
-var debug = require('debug')('allThingsOtaku:server');
+var debug = require('debug')('lifeOfOtaku:server');
 var http = require('http');
 var dbConnection = require("../db");
 /**

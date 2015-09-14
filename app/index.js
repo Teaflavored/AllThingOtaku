@@ -16,7 +16,7 @@ var app = new FluxibleApp({
     component: routes
 });
 
-app.uid = "allThingsOtaku";
+app.uid = "lifeOfOtaku";
 app.registerStore(lightNovelStore);
 app.registerStore(authenticationStore);
 app.registerStore(userStore);

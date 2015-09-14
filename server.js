@@ -166,7 +166,7 @@ app.get("*", function (req, res, next) {
             console.log("Rendering Server React Components");
             res.render("index", {
                 main: markup,
-                title: "All Things Otaku, your number one stop for manga, anime, and light novels",
+                title: "Life of Otaku, your number one stop for manga, anime, light novels, and all your japanese otaku needs.",
                 uid: mainApp.uid
             }, function (err, markup) {
                 if (err) {
