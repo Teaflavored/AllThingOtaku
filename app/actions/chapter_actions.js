@@ -19,8 +19,18 @@ var chapterActions = {
             done();
         });
     },
+    update: function (context, payload, done) {
+        context.service.update("chapters", payload.params, payload.body, {}, function (err, lightNovel) {
+            if (err) {
+                context.dispatch("UPDATE_CHAPTER_ERR", err);
+            } else if (lightNovel) {
+                context.dispatch("FIND_LIGHT_NOVEL", lightNovel);
+            }
+            done();
+        });
+    },
     delete: function (context, payload, done) {
-        context.service.delete("chapters", payload.params, {}, function (err, lightNovel) {
+        context.service.delete("chapters", payload.params, {}, function (err, lightNoel) {
             if (err) {
                 context.dispatch("DELETE_CHAPTER_ERR", err);
             } else if (lightNovel) {

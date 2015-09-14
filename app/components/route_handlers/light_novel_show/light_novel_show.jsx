@@ -16,6 +16,7 @@ var VolumesList = require("./volumes_list.jsx");
 var VolumeListNewItem = require("./volume_list_new_item.jsx");
 var LightNovelHeader = require("./light_novel_header.jsx");
 var ChapterNew = require("./chapter_new.jsx");
+var ChapterEdit = require("./chapter_edit.jsx");
 
 //utils
 var permissions = require("../../../../utils/user_permissions");
@@ -31,7 +32,8 @@ var LightNovelShow = React.createClass({
     },
     getInitialState: function () {
         return {
-            newChapterWindowOpen: null
+            newChapterWindowOpen: null,
+            editChapterWindowOpen: null
         };
     },
     componentDidMount: function () {
@@ -39,22 +41,43 @@ var LightNovelShow = React.createClass({
             params: this.props.params
         });
     },
+    bodyModalOpen: function () {
+        //need to set overflow on the body
+        var bodyEl = document.getElementsByTagName("body")[0];
+        bodyEl.classList.add("modal-open");
+    },
+    bodyModalClose: function () {
+        var bodyEl = document.getElementsByTagName("body")[0];
+        bodyEl.classList.remove("modal-open");
+    },
     handleOpenChapterCreate: function (volume, event) {
         this.setState({
             newChapterWindowOpen: volume
         });
 
-        //need to set overflow on the body
-        var bodyEl = document.getElementsByTagName("body")[0];
-        bodyEl.classList.add("modal-open");
+        this.bodyModalOpen();
     },
     handleCloseChapterCreate: function () {
         this.setState({
             newChapterWindowOpen: null
         });
 
-        var bodyEl = document.getElementsByTagName("body")[0];
-        bodyEl.classList.remove("modal-open");
+        this.bodyModalClose();
+    },
+    handleOpenChapterEdit: function (volume, chapterNum, event) {
+        this.setState({
+            editChapterWindowOpen: volume,
+            editChapterNum: chapterNum
+        });
+
+        this.bodyModalOpen();
+    },
+    handleCloseChapterEdit: function () {
+        this.setState({
+            editChapterWindowOpen: null
+        });
+
+        this.bodyModalClose();
     },
     render: function () {
         var self = this;
@@ -73,12 +96,17 @@ var LightNovelShow = React.createClass({
             <div>
                 { self.state.newChapterWindowOpen ?
                     <ChapterNew {...self.props} handleCloseChapterCreate={self.handleCloseChapterCreate}
-                                                volume={self.state.newChapterWindowOpen}/> : "" }
+                                                volume={self.state.newChapterWindowOpen }/> : "" }
+                { self.state.editChapterWindowOpen ?
+                    <ChapterEdit {...self.props} handleCloseChapterEdit={self.handleCloseChapterEdit}
+                                                 chapterNum={self.state.editChapterNum}
+                                                 volume={self.state.editChapterWindowOpen }/> : ""}
                 <div id="lightNovel" className="row">
                     <div className="col-sm-9">
                         <LightNovelHeader {...this.props} />
                         { permissions.canCreate(user) ? <VolumeListNewItem {...this.props} /> : "" }
-                        <VolumesList {...this.props} handleOpenChapterCreate={this.handleOpenChapterCreate}/>
+                        <VolumesList {...this.props} handleOpenChapterCreate={this.handleOpenChapterCreate}
+                                                     handleOpenChapterEdit={this.handleOpenChapterEdit}/>
                     </div>
 
                     <div className="col-sm-3">
