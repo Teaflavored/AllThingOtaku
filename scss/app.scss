@@ -30,6 +30,11 @@ a {
   border-bottom: none;
 }
 
+#navbar .navbar-nav {
+  margin: 0 -15px;
+  border-bottom: 1px solid $border-gray;
+}
+
 #navbar .nav-btn:hover,
 #navbar .nav-btn.active:hover {
   background: $primary-color-light;
@@ -54,6 +59,11 @@ a {
 @media (min-width: $grid-float-breakpoint) {
   #navbar {
     border-bottom: 1px solid $border-gray; 
+  }
+
+  #navbar .navbar-nav {
+    margin: 0;
+    border-bottom: none;
   }
   
   #navbar .navbar-header {
