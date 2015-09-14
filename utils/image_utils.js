@@ -1,5 +1,6 @@
 var imageUtils = {
     baseUrl: "http://res.cloudinary.com/teaflavored/image/upload",
+    placeholderImageUrl: "http://res.cloudinary.com/teaflavored/image/upload/v1442197844/Cover-Image_pzjrmk.png",
     getImageUrlSrcset: function (public_id, format, imageSizes) {
         var imageSrcs = [];
         var idxToSize = {
@@ -24,6 +25,10 @@ var imageUtils = {
         return imageSrcs.join(",");
     },
     getImageUrl: function (public_id, format, width, height) {
+        if (!public_id) {
+            return this.placeholderImageUrl;
+        }
+
         var options = [];
         var tempUrl;
 
