@@ -40,11 +40,11 @@ var Navbar = React.createClass({
                 <div className="container">
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#navigationItems" aria-expanded="false">
+                                data-target="#navigationItems" aria-expanded="false" style={navbarCSS.navbarToggle}>
                             <span className="sr-only">Toggle navigation</span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
+                            <span className="icon-bar" style={navbarCSS.navbarIconBar}></span>
+                            <span className="icon-bar" style={navbarCSS.navbarIconBar}></span>
+                            <span className="icon-bar" style={navbarCSS.navbarIconBar}></span>
                         </button>
                         <h1 style={navbarCSS.brandHeader}>
                             <Link to="home" className="navbar-brand">
