@@ -105,7 +105,7 @@ var ChapterEdit = React.createClass({
                                             theme="snow"
                                             onChange={this.handleChapterTextChange}/>
                             </div>
-                            <input type="button" className="btn btn-primary btn-block" value="Create Chapter"
+                            <input type="button" className="btn btn-primary btn-block" value="Edit Chapter"
                                    onClick={this.handleSaveChapter}/>
                         </div>
                     </div>
