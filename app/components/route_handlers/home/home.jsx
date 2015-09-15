@@ -5,7 +5,7 @@ var Home = React.createClass({
         return (
             <div className="row">
                 <div className="card">
-                    <h1 className="text-center">Stay Tuned, Life of Otaku will be lauching soon!</h1>
+                    <h1 className="text-center">Stay Tuned<br/><br /> Life of Otaku will be lauching soon!</h1>
                 </div>
             </div>
         );

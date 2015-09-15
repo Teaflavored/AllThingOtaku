@@ -23,6 +23,28 @@ body {
 a {
   color: $primary-color;
 }
+#app {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 50px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: $white;
+  height: 50px;
+  border-top: 1px solid #e6e6e6;
+  text-align: center;
+
+  .contact-email {
+    margin-top: 15px;
+    display: inline-block;
+  }
+}
+
+
 
 /* Navbar */
 #navbar {
