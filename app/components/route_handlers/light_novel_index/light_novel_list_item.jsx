@@ -19,11 +19,13 @@ var LightNovel = React.createClass({
             <div className="col-sm-4 col-md-3">
                 <div className="light-novel card text-center">
                     <Link to="lightNovelShow" params={ { lightNovelId : lightNovelId } }>
-                        <div className="img-wrapper" >
-                            <img src={imageUrl} alt=" " />
+                        <div className="img-wrapper">
+                            <img src={imageUrl} alt=" "/>
                         </div>
-                        <div className="title">
-                            { title }
+                        <div className="title-wrapper">
+                            <div className="title">
+                                { title }
+                            </div>
                         </div>
                     </Link>
 

@@ -5,3 +5,22 @@
     padding-top: 10px;
   }
 }
+
+#lightNovelList {
+  .title-wrapper{
+    height: 40px;
+    margin: 5px 0;
+    position: relative;
+
+    .title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      -moz-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+      -o-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+}
