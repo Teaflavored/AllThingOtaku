@@ -1,7 +1,6 @@
 @import "_bootstrap.scss";
 @import "includes/core-mixins";
 @import "includes/quill";
-
 @import "pages/light_novel";
 @import "pages/volume";
 @import "pages/chapter";
@@ -58,14 +57,17 @@ a {
 
 @media (min-width: $grid-float-breakpoint) {
   #navbar {
-    border-bottom: 1px solid $border-gray; 
+    border-bottom: 1px solid $border-gray;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.09);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.09);
   }
 
   #navbar .navbar-nav {
     margin: 0;
     border-bottom: none;
   }
-  
+
   #navbar .navbar-header {
     border-bottom: none;
   }
