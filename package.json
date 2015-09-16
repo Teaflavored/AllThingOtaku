@@ -47,7 +47,7 @@
     "passport-local": "^1.0.0",
     "react": "*",
     "react-quill": "^0.2.2",
-    "react-router": "*",
+    "react-router": "1.0.0-rc1",
     "reactify": "*",
     "sanitize-html": "^1.10.0",
     "serve-favicon": "~2.3.0",
