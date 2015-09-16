@@ -8,7 +8,7 @@ var Home = React.createClass({
             <div className="row">
                 <div className="card">
                     <h1 className="text-center">Stay Tuned<br/><br /> Life of Otaku will be lauching soon!</h1>
-                    <div className="text-center">Read some Light Novels <Link to="/lightNovels"> Here </Link></div>
+                    <div className="text-center mtxl">Read some Light Novels <Link to="/lightNovels"> Here </Link></div>
                 </div>
             </div>
         );
