@@ -121,13 +121,13 @@ passport.deserializeUser(function (id, done) {
         }
     });
 });
-//authentication
+
+//services
 pluginInstance.registerService(lightNovelService);
 pluginInstance.registerService(authenticateService);
 pluginInstance.registerService(userService);
 pluginInstance.registerService(volumeService);
 pluginInstance.registerService(chapterService);
-
 app.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
 
 app.get("*", function (req, res, next) {
