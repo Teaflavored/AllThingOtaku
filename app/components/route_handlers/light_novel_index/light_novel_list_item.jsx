@@ -18,7 +18,7 @@ var LightNovel = React.createClass({
         return (
             <div className="col-sm-4 col-md-3">
                 <div className="light-novel card text-center">
-                    <Link to="lightNovelShow" params={ { lightNovelId : lightNovelId } }>
+                    <Link to={'/lightNovels/' + lightNovelId}>
                         <div className="img-wrapper">
                             <img src={imageUrl} alt=" "/>
                         </div>

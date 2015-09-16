@@ -25,7 +25,7 @@ var lightNovelActions = {
                 context.dispatch("CREATE_LIGHT_NOVEL_ERR", err);
             } else {
                 var lightNovelId = lightNovel._id;
-                payload.component.transitionTo("lightNovelShow", {lightNovelId: lightNovelId});
+                payload.component.handleSuccessfulLightNovelCreate && payload.component.handleSuccessfulLightNovelCreate(lightNovelId);
             }
             done();
         });

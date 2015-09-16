@@ -1,7 +1,7 @@
 var React = require("react");
 var Router = require('react-router');
+var History = Router.History;
 var Link = Router.Link;
-var Navigation = Router.Navigation;
 // need to move the input into its own component, needs to handle auto complete and searching, can do later
 
 //styling
@@ -17,7 +17,7 @@ var fluxibleAddons = require("fluxible-addons-react");
 var authenticationStore = require("../../stores/authentication_store");
 
 var Navbar = React.createClass({
-    mixins: [Navigation],
+    mixins: [History],
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
         executeAction: React.PropTypes.func.isRequired
@@ -26,6 +26,9 @@ var Navbar = React.createClass({
         return {
             isLoggedIn: false
         };
+    },
+    handleSuccessfulLogout: function () {
+        this.history.replaceState(null, "/");
     },
     handleLogOut: function () {
         this.context.executeAction(logout, {
@@ -47,18 +50,18 @@ var Navbar = React.createClass({
                             <span className="icon-bar" style={navbarCSS.navbarIconBar}></span>
                         </button>
                         <h1 style={navbarCSS.brandHeader}>
-                            <Link to="home" className="navbar-brand">
+                            <Link to={'/'} className="navbar-brand">
                                 Life of Otaku
                             </Link>
                         </h1>
                     </div>
                     <div className="collapse navbar-collapse" id="navigationItems">
                         <ul className="nav navbar-nav navbar-right">
-                            <li><Link className="nav-btn" to="lightNovelsIndex">Light Novels</Link></li>
+                            <li><Link className="nav-btn" activeClassName="active" to={'/lightNovels'}>Light Novels</Link></li>
                             { isLoggedIn ?
                                 <li><a href="javascript:void(0);" className="nav-btn" onClick={logoutFn}>Log Out</a>
                                 </li>
-                                : <li><Link className="nav-btn" to="login">Log In</Link></li> }
+                                : <li><Link className="nav-btn" to="/login">Log In</Link></li> }
                         </ul>
                     </div>
                 </div>

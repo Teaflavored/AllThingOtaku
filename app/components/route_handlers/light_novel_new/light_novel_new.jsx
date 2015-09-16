@@ -1,6 +1,6 @@
 var React = require("react");
 var Router = require("react-router");
-var Navigation = Router.Navigation;
+var History = Router.History;
 var fluxibleAddons = require("fluxible-addons-react");
 
 //stores
@@ -11,7 +11,7 @@ var authenticationStore = require("../../../stores/authentication_store");
 var lightNovelActions = require("../../../actions/light_novel_actions");
 
 var LightNovelNew = React.createClass({
-    mixins: [Navigation],
+    mixins: [History],
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
         executeAction: React.PropTypes.func.isRequired
@@ -44,6 +44,9 @@ var LightNovelNew = React.createClass({
                 summary: event.target.value
             }
         );
+    },
+    handleSuccessfulLightNovelCreate: function (lightNovelId) {
+        this.history.replaceState(null, "/lightNovels/" + lightNovelId);
     },
     handleSubmit: function () {
         this.context.executeAction(lightNovelActions.create, {

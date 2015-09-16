@@ -7,7 +7,7 @@ var LightNovelListNewItem = React.createClass({
         return (
             <div className="col-sm-4 col-md-3">
                 <div className="light-novel card text-center">
-                    <Link to="lightNovelCreate">
+                    <Link to="/lightNovels/new">
                         Create New
                     </Link>
                 </div>

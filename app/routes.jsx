@@ -1,11 +1,10 @@
 var React = require("react");
-var Router = require("react-router");
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
+var ReactRouter = require("react-router");
+var IndexRouter = ReactRouter.IndexRoute;
+var Route = ReactRouter.Router;
 
+//components
 var App = require("./components/app.jsx");
-
-//light novel route handlers
 var Home = require("./components/route_handlers/home/home.jsx");
 var LightNovelIndex = require("./components/route_handlers/light_novel_index/light_novel_index.jsx");
 var LightNovelShow = require("./components/route_handlers/light_novel_show/light_novel_show.jsx");
@@ -13,16 +12,18 @@ var LightNovelNew = require('./components/route_handlers/light_novel_new/light_n
 var ChapterShow = require("./components/route_handlers/chapter_show/chapter_show.jsx");
 var Signup = require("./components/route_handlers/signup/signup.jsx");
 var Login = require("./components/route_handlers/login/login.jsx");
+var NotFound = require("./components/route_handlers/notfound/notfound.jsx");
 
 var routes = (
-    <Route handler={App} path="/">
-        <Route name="lightNovelCreate" path="/lightNovel/new" handler={LightNovelNew}/>
-        <Route name="lightNovelShow" path="/lightNovel/:lightNovelId" handler={LightNovelShow} />
-        <Route name="lightNovelsIndex" path="/lightNovels" handler={LightNovelIndex}/>
-        <Route name="chapterShow" path="/lightNovel/:lightNovelId/volume/:volumeNum/chapter/:chapterNum" handler={ChapterShow} />
-        <Route name="signup" path="/signup" handler={Signup} />
-        <Route name="login" path="/login" handler={Login} />
-        <DefaultRoute name="home" handler={Home}/>
+    <Route component={App} path="/">
+        <IndexRouter component={Home}/>
+        <Route component={ChapterShow} path="/lightNovels/:lightNovelId/volume/:volumeNum/chapter/:chapterNum" />
+        <Route component={LightNovelNew} path="/lightNovels/new" />
+        <Route component={LightNovelShow} path="/lightNovels/:lightNovelId" />
+        <Route component={LightNovelIndex} path="/lightNovels" />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
+        <Route path="*" component={NotFound} />
     </Route>
 );
 

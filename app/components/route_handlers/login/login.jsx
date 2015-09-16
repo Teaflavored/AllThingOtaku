@@ -1,8 +1,8 @@
 var React = require("react");
 var Router = require("react-router");
+var History = Router.History;
 var Link = Router.Link;
 
-var Navigation = Router.Navigation;
 var fluxibleAddons = require("fluxible-addons-react");
 
 //stores
@@ -12,7 +12,7 @@ var authenticationStore = require("../../../stores/authentication_store");
 var authenticate = require("../../../actions/authenticate");
 
 var Login = React.createClass({
-    mixins: [Navigation],
+    mixins: [History],
     contextTypes: {
         getStore: React.PropTypes.func.isRequired,
         executeAction: React.PropTypes.func.isRequired
@@ -32,6 +32,9 @@ var Login = React.createClass({
         this.setState({
             password: event.target.value
         });
+    },
+    handleSuccessfulLogin: function () {
+        this.history.replaceState(null, "/");
     },
     handleLogin: function () {
         this.context.executeAction(authenticate, {
@@ -63,7 +66,7 @@ var Login = React.createClass({
                     <div className="form-group">
                         <input type="submit" value="Log In" className="btn btn-primary btn-block" onClick={this.handleLogin}/>
                     </div>
-                    <Link className="small" to="signup">Don't have an account?</Link>
+                    <Link className="small" to="/signup">Don't have an account?</Link>
                 </form>
             </div>
         );

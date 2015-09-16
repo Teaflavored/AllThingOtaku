@@ -4,7 +4,7 @@ var logout = function (context, payload, done) {
          context.dispatch("SIGN_OUT_ERR");
       } else {
          context.dispatch("SIGN_OUT_SUCCESS");
-         payload.component.transitionTo("home");
+         payload.component.handleSuccessfulLogout && payload.component.handleSuccessfulLogout();
       }
       done();
    });

@@ -8,9 +8,9 @@ var ChapterShowRight = React.createClass({
         var chapterLinkNodes = [];
 
         for (var i = 1; i <= chaptersCount; i++) {
-            chapterLinkNodes.push(<Link to="chapterShow" key={i} className="chapter-show-sidelink block-link" params={
-                { lightNovelId: this.props.params.lightNovelId, volumeNum: this.props.params.volumeNum, chapterNum: i}
-            }>Chapter {i}</Link>);
+            var url = "/lightNovels/" + this.props.params.lightNovelId + "/volume/" + this.props.params.volumeNum + "/chapter/" + i;
+            chapterLinkNodes.push(<Link to={url} key={i}
+                                        className="chapter-show-sidelink block-link">Chapter {i}</Link>);
         }
 
         return (
