@@ -11,24 +11,25 @@ var VolumeMetaInfo = React.createClass({
         return {
             hasReadMore: false,
             readMoreOpened: false,
+            firstStateSet: false,
             height: null
         };
     },
-    componentDidMount: function () {
+    componentDidUpdate: function (nextProps, prevState) {
         var summaryRef = this.refs.summary,
             summaryNode;
 
-        if (summaryRef) {
+        if (summaryRef && !prevState.firstStateSet) {
             summaryNode = summaryRef.getDOMNode();
             var fullHeight = summaryNode.scrollHeight;
             var innerHeight = summaryNode.clientHeight;
 
-            var newState = {
-                defaultHeight: innerHeight
+            newState = {
+                firstStateSet: true
             };
 
             if (fullHeight > innerHeight) {
-                newState = React.__spread({}, newState, { hasReadMore: true} );
+                var newState = React.__spread({}, newState, { hasReadMore: true });
             }
 
             this.setState(newState);
@@ -86,12 +87,12 @@ var VolumeMetaInfo = React.createClass({
                     <div>
                         <strong>Synopsis</strong>
 
-                        <div className="summary-container">
+                        <div className="summary-container" style={headerCSS.summaryContainerCSS}>
                             <div ref="summary" className="summary" style={summaryStyle}>
                                 {summary}
                             </div>
                             {
-                                this.state.hasReadMore ? <a href="javascript:void(0);" onClick={this.handleShowMore} >Read More <i className={iconClass}></i></a> : ""
+                                this.state.hasReadMore ? <a href="javascript:void(0);" style={headerCSS.showMoreCSS} onClick={this.handleShowMore} >Read More <i className={iconClass}></i></a> : ""
                             }
                         </div>
                     </div> : ""}
@@ -105,6 +106,15 @@ var headerCSS = {
         "maxHeight": 135,
         "overflow": "hidden",
         "transition" : "max-height 0.3s ease"
+    },
+    summaryContainerCSS: {
+        "paddingBottom" : 20,
+        "position" : "relative"
+    },
+    showMoreCSS: {
+        "position" : "absolute",
+        "left" : 0,
+        "bottom" : 0
     },
     summaryOpenCSS: function (height) {
         return {
