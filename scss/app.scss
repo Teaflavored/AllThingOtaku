@@ -20,6 +20,10 @@ body {
   @include card;
 }
 
+.colorLink {
+  color: $primary-color;
+}
+
 a {
   color: $primary-color;
 }
