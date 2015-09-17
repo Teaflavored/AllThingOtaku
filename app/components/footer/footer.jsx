@@ -1,4 +1,6 @@
 var React = require("react");
+var ReactRouter = require("react-router");
+var Link = ReactRouter.Link;
 
 var Footer = React.createClass({
     render: function () {
@@ -14,6 +16,11 @@ var Footer = React.createClass({
                         <i className="fa fa-facebook-square fa-2x mrm" style={footerCSS.fbBtn}></i>
                     </a>
                     <i className="fa fa-twitter-square fa-2x" style={footerCSS.twitterBtn}></i>
+                </div>
+                <div className="disclaimer text-center">
+                    <Link to="/disclaimer" className="small">
+                        Disclaimer
+                    </Link>
                 </div>
             </footer>
         );

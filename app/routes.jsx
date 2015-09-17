@@ -14,6 +14,7 @@ var ChapterShow = require("./components/route_handlers/chapter_show/chapter_show
 var Signup = require("./components/route_handlers/signup/signup.jsx");
 var Login = require("./components/route_handlers/login/login.jsx");
 var NotFound = require("./components/route_handlers/notfound/notfound.jsx");
+var Disclaimer = require("./components/route_handlers/disclaimer/disclaimer.jsx");
 
 var routes = (
     <Route component={App} path="/">
@@ -25,6 +26,7 @@ var routes = (
         <Route component={LightNovelShow} path="/lightNovels/:lightNovelId" />
         <Route component={LightNovelIndex} path="/lightNovels" />
 
+        <Route path="/disclaimer" component={Disclaimer} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="*" component={NotFound} />
