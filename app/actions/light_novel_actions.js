@@ -29,6 +29,26 @@ var lightNovelActions = {
             }
             done();
         });
+    },
+    findEdit: function (context, payload, done) {
+        context.service.read("lightNovels", payload.params, { editMode: true }, function (err, lightNovel) {
+            if (err) {
+                context.dispatch("HANDLE_FIND_LIGHT_NOVEL_EDIT", err);
+            } else if (lightNovel) {
+                context.dispatch("HANDLE_FIND_LIGHT_NOVEL_EDIT", lightNovel);
+            }
+            done();
+        });
+    },
+    update: function (context, payload, done) {
+        context.service.update("lightNovels", payload.params, payload.body, {}, function (err, lightNovelId) {
+            if (err) {
+                context.dispatch("HANDLE_EDIT_LIGHT_NOVEL_ERR", err);
+            } else if (lightNovelId) {
+                payload.component && payload.component.handleSuccessfulUpdate(lightNovelId);
+            }
+            done();
+        });
     }
 };
 

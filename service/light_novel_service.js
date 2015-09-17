@@ -1,7 +1,7 @@
 var LightNovel = require("../models/light_novel");
 var cloudinary = require("cloudinary");
-var sanitizeHtml = require("sanitize-html");
-var sanitizeOptions = require("../utils/sanitize_options");
+
+var permissions = require("../utils/user_permissions");
 var _ = require("lodash");
 
 var errorMessages = {
@@ -11,11 +11,19 @@ var errorMessages = {
 var lightNovelService = {
     name: "lightNovels",
     read: function (req, resource, params, config, actionCB) {
+
+        //default is show, load all without actual chapter text
+        var editMode = config.editMode;
+
         if (params.lightNovelId) {
             LightNovel.findById(params.lightNovelId).exec()
                 .then(
                 function (lightNovel) {
-                    return actionCB(null, lightNovel.toObjectNoChapterText());
+                    if (editMode) {
+                        return actionCB(null, lightNovel.toObjectNoVolumes());
+                    } else {
+                        return actionCB(null, lightNovel.toObjectNoChapterText());
+                    }
                 },
                 function (err) {
                     err.statusCode = 404;
@@ -39,13 +47,17 @@ var lightNovelService = {
     },
     create: function (req, resource, params, body, config, actionCB) {
         if (req.isUnauthenticated()) {
-            return actionCB(new Error(errorMessages["NO_AUTHENTICATION"]));
+            return actionCB(new Error("No logged in user"));
+        }
+
+        if (!permissions.canCreate(req.user)) {
+            return actionCB(new Error("No permission for this action"));
         }
 
         var lightNovel = new LightNovel({
-            author: sanitizeHtml(body.author, sanitizeOptions),
-            title: sanitizeHtml(body.title, sanitizeOptions),
-            summary: sanitizeHtml(body.summary, sanitizeOptions)
+            author: body.author,
+            title: body.title,
+            summary: body.summary
         });
 
         var image = body.image;
@@ -78,17 +90,46 @@ var lightNovelService = {
     },
     update: function (req, resource, params, body, config, actionCB) {
         if (req.isUnauthenticated()) {
-            return actionCB(new Error(errorMessages["NO_AUTHENICATION"]));
+            return actionCB(new Error("No logged in user"));
         }
-        var lightNovelId = params.id;
+
+        if (!permissions.canEdit(req.user)) {
+            return actionCB(new Error("No permission for this action"));
+        }
+
+        var lightNovelId = params.lightNovelId;
         var title = body.title;
         var author = body.author;
+        var summary = body.summary;
+        var image = body.image;
 
         LightNovel.findById(lightNovelId).exec().then(
             function(lightNovel) {
-                lightNovel.save(body).then(
+
+                lightNovel.title = title;
+                lightNovel.author = author;
+                lightNovel.summary = summary;
+
+                if (image) {
+                    cloudinary.uploader.upload("data:image/png;base64," + image, function (result) {
+                        lightNovel.imageId = result.public_id;
+                        lightNovel.imageFormat = result.format;
+
+                        lightNovel.save().then(
+                            function (lightNovel) {
+                                return actionCB(null, lightNovel._id);
+                            },
+                            function (err) {
+                                err.statusCode = 422;
+                                return actionCB(err);
+                            }
+                        );
+                    });
+                }
+
+                lightNovel.save().then(
                     function(lightNovel) {
-                        actionCB(null, lightNovel.toObjectNoChapterText());
+                        actionCB(null, lightNovel._id);
                     },
                     function (err){
                         err.statusCode = 422;
@@ -101,19 +142,6 @@ var lightNovelService = {
                 return actionCB(err);
             }
         );
-        LightNovel.findOneAndUpdate(lightNovelId, {
-            $set: {
-                title: title,
-                author: author
-            }
-        }, function (err, lightNovel) {
-            if (err) {
-                err.statusCode = 422;
-                return actionCB(err);
-            } else {
-                return actionCB(lightNovel.toObjectNoChapters());
-            }
-        });
     },
     delete: function (req, resource, params, config, actionCB) {
         if (req.isUnauthenticated()) {
