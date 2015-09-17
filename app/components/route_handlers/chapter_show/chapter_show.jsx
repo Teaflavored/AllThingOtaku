@@ -38,13 +38,14 @@ var ChapterShow = React.createClass({
         }
     },
     render: function () {
+        var url = "/lightNovels/" + this.props.params.lightNovelId;
+
         return (
             <div id="chapterShow">
                 <div className="row">
                     <div className="col-md-9">
                         <div className="card">
-                            <Link className="small" to="lightNovelShow"
-                                  params={ { lightNovelId: this.props.params.lightNovelId} }>Back
+                            <Link className="small" to={url}>Back
                                 to {this.props.lightNovel.title}</Link>
 
                             <div className="text-center chapter-show-header mbm">
