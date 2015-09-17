@@ -2,6 +2,8 @@ var React = require("react");
 var ReactRouter = require("react-router");
 var History = ReactRouter.History;
 
+var permission = require("../../../../utils/user_permissions");
+
 var VolumeMetaInfo = React.createClass({
     mixins: [History],
     handleGoToEdit: function () {
@@ -12,10 +14,12 @@ var VolumeMetaInfo = React.createClass({
         var title = this.props.lightNovel.title;
         return (
             <div className="card">
-                <a href="javascript:void(0);" onClick={this.handleGoToEdit}>
-                    <i className="fa fa-pencil fa-lg pull-right"></i>
-                </a>
-
+                {
+                    permission.canEdit(this.props.user) ?
+                        <a href="javascript:void(0);" onClick={this.handleGoToEdit}>
+                            <i className="fa fa-pencil fa-lg pull-right"></i>
+                        </a> : ""
+                }
                 <h1>{title}</h1>
                 { summary ?
                     <div>
