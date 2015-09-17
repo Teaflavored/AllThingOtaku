@@ -29,6 +29,12 @@ var ChapterShow = React.createClass({
             }
         });
     },
+    componentWillUnmount: function () {
+
+    },
+    componentDidUpdate: function () {
+        //loading
+    },
     componentWillMount: function () {
         this.getChapterData(this.props.params.chapterNum);
     },
@@ -45,8 +51,9 @@ var ChapterShow = React.createClass({
                 <div className="row">
                     <div className="col-md-9">
                         <div className="card">
-                            <Link className="small" to={url}>Back
-                                to {this.props.lightNovel.title}</Link>
+                            <Link className="small" to={url}>
+                                Back to {this.props.lightNovel.title} <i className="fa fa-undo"></i>
+                            </Link>
 
                             <div className="text-center chapter-show-header mbm">
                                 <h3>{this.props.lightNovel.title}</h3>
