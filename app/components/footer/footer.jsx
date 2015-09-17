@@ -18,9 +18,7 @@ var Footer = React.createClass({
                     <i className="fa fa-twitter-square fa-2x" style={footerCSS.twitterBtn}></i>
                 </div>
                 <div className="disclaimer text-center">
-                    <Link to="/disclaimer" className="small">
-                        Disclaimer
-                    </Link>
+                    <Link to="/disclaimer" className="small">Disclaimer</Link> | <Link to"/recruiting" className="small">Recruiting</Link>
                 </div>
             </footer>
         );
