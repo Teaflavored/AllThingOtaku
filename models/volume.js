@@ -22,5 +22,7 @@ volumeSchema.methods.toObjectNoChapters = function () {
     tempVolume = this.toObject();
     return _.omit(tempVolume, "chapters");
 };
+
 var Volume = mongoose.model("Volume", volumeSchema);
+
 module.exports = Volume;
