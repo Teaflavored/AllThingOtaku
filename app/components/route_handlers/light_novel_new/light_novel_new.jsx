@@ -98,8 +98,6 @@ var LightNovelNew = React.createClass({
                         <textarea className="form-control" onChange={this.handleSummaryFieldChange} id="summary"
                                   rows="10"></textarea>
                                 </div>
-                                <input type="button" className="btn btn-block btn-primary" onClick={this.handleSubmit}
-                                       value="Create"/>
                             </div>
                             <div className="col-sm-6">
                                 <div className="form-group">
@@ -110,6 +108,10 @@ var LightNovelNew = React.createClass({
                                     <label>Cover Image</label>
                                     <input type="file" onChange={this.handleFileChange}/>
                                 </div>
+                            </div>
+                            <div className="col-xs-12">
+                                <input type="button" className="btn btn-block btn-primary" onClick={this.handleSubmit}
+                                       value="Create"/>
                             </div>
                         </div>
                     </div>

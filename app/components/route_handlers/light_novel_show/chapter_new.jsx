@@ -70,7 +70,7 @@ var ChapterNew = React.createClass({
             <div id="chapterNew">
                 <div className="container">
                     <div className="row">
-                        <div className="col-xs-12">
+                        <div className="col-xs-12 card">
                             <h4>
                                 {this.props.volume.title}, Volume {this.props.volume.volumeNum}, <span className="small">Chapter {newChapterNum}</span>
                                 <a href="javascript:void(0);" className="pull-right fa fa-close"

@@ -123,8 +123,6 @@ var LightNovelEdit = React.createClass({
                         <textarea className="form-control" onChange={this.handleSummaryFieldChange} id="summary"
                                   rows="10" value={this.state.summary}></textarea>
                                 </div>
-                                <input type="button" className="btn btn-block btn-primary" onClick={this.handleUpdate}
-                                       value="Update"/>
                             </div>
                             <div className="col-sm-6">
                                 <div className="form-group">
@@ -135,6 +133,10 @@ var LightNovelEdit = React.createClass({
                                     <label>Cover Image</label>
                                     <input type="file" onChange={this.handleImageChange}/>
                                 </div>
+                            </div>
+                            <div className="col-xs-12">
+                                <input type="button" className="btn btn-block btn-primary" onClick={this.handleUpdate}
+                                       value="Update"/>
                             </div>
                         </div>
                     </div>
