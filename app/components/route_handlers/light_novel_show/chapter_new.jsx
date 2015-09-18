@@ -16,11 +16,13 @@ var ChapterNew = React.createClass({
         };
     },
     handleKeyDown: function (event) {
-        if (event.keyCode == 8) {
+        if (this.refs.chapterTitle.getDOMNode() != document.activeElement && event.keyCode == 8) {
             event.preventDefault();
-            event.stopPropagation();
+            this.props.handleCloseChapterCreate();
+            return;
         }
-        if (event.keyCode == 27 || event.keyCode == 8) {
+
+        if (event.keyCode == 27) {
             this.props.handleCloseChapterCreate();
         }
     },
@@ -34,6 +36,7 @@ var ChapterNew = React.createClass({
         bodyEl.classList.remove("modal-open");
     },
     handleChapterNameChange: function (event) {
+
         this.setState({
             chapterName: event.target.value
         });
@@ -75,7 +78,7 @@ var ChapterNew = React.createClass({
                             </h4>
                             <div className="form-group">
                                 <label htmlFor="chapterTitle">Chapter Title</label>
-                                <input onChange={this.handleChapterNameChange} type="text" className="form-control"
+                                <input ref="chapterTitle" onChange={this.handleChapterNameChange} type="text" className="form-control"
                                        placeholder="Optional Title"
                                        id="chapterTitle" value={this.state.chapterName}/>
                             </div>
