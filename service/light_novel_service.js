@@ -138,11 +138,11 @@ var lightNovelService = {
                                 }
                             ).then(
                                 function (lightNovel) {
-                                    return (null, lightNovel.toObjectNoChapterText());
+                                    return actionCB(null, lightNovel.toObjectNoChapterText());
                                 },
                                 function (err) {
                                     err.statusCode = 422;
-                                    return (err);
+                                    return actionCB(err);
                                 }
                             );
                         }
