@@ -24,8 +24,7 @@ var lightNovelSchema = new Schema({
         default: 0
     },
     summary: String,
-    imageId: String,
-    imageFormat: String,
+    image: { type: String, ref: "Image"},
     pubDate: Date,
     completed: {
         type: Boolean,
@@ -52,7 +51,8 @@ lightNovelSchema.pre("save", function (next) {
         .findOne({
             title: this.title,
             author: this.author
-        }).exec().then(function (lightNovel) {
+        }).exec().then(
+        function (lightNovel) {
             if (lightNovel && !lightNovel._id == self._id) {
                 self.invalidate("title", "Title and Author must be unique");
                 self.invalidate("author", "Title and Author must be unique");

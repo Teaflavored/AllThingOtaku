@@ -16,6 +16,9 @@ var Login = require("./components/route_handlers/login/login.jsx");
 var NotFound = require("./components/route_handlers/notfound/notfound.jsx");
 var Disclaimer = require("./components/route_handlers/disclaimer/disclaimer.jsx");
 
+//reviews components
+var ReviewsIndex = require("./components/route_handlers/reviews_index/reviews_index.jsx");
+
 var routes = (
     <Route component={App} path="/">
         <IndexRouter component={Home}/>
@@ -26,6 +29,7 @@ var routes = (
         <Route component={LightNovelShow} path="/lightNovels/:lightNovelId" />
         <Route component={LightNovelIndex} path="/lightNovels" />
 
+        <Route component={ReviewsIndex} path="/reviews" />
         <Route path="/disclaimer" component={Disclaimer} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />

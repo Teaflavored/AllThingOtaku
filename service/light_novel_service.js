@@ -1,22 +1,18 @@
 var LightNovel = require("../models/light_novel");
+var Image = require("../models/image");
 var cloudinary = require("cloudinary");
 
 var permissions = require("../utils/user_permissions");
 var _ = require("lodash");
 
-var errorMessages = {
-    "NO_AUTHENTICATION": "You have no authentication for this action"
-};
-
 var lightNovelService = {
     name: "lightNovels",
     read: function (req, resource, params, config, actionCB) {
-
         //default is show, load all without actual chapter text
         var editMode = config.editMode;
 
         if (params.lightNovelId) {
-            LightNovel.findById(params.lightNovelId).exec()
+            LightNovel.findById(params.lightNovelId).populate("image").exec()
                 .then(
                 function (lightNovel) {
                     if (editMode) {
@@ -30,7 +26,7 @@ var lightNovelService = {
                     return actionCB(err);
                 });
         } else {
-            LightNovel.find({}).exec()
+            LightNovel.find({}).populate("image").exec()
                 .then(
                 function (lightNovels) {
                     var lightNovelsArr = lightNovels.map(function (_lightNovel) {
@@ -63,10 +59,21 @@ var lightNovelService = {
         var image = body.image;
         if (image) {
             cloudinary.uploader.upload("data:image/png;base64," + image, function (result) {
-                lightNovel.imageId = result.public_id;
-                lightNovel.imageFormat = result.format;
+                var newImage = new Image({
+                    imageId: result.public_id,
+                    imageFormat: result.format
+                });
 
-                lightNovel.save().then(
+                newImage.save().then(
+                    function (image) {
+                        lightNovel.image = image._id;
+                        return lightNovel.save();
+                    }
+                ).then(
+                    function (lightNovel) {
+                        return LightNovel.findById(lightNovel._id).populate("image").exec()
+                    }
+                ).then(
                     function (lightNovel) {
                         return actionCB(null, lightNovel.toObjectNoChapterText());
                     },
@@ -98,6 +105,7 @@ var lightNovelService = {
         }
 
         var lightNovelId = params.lightNovelId;
+
         var title = body.title;
         var author = body.author;
         var summary = body.summary;
@@ -111,31 +119,45 @@ var lightNovelService = {
                 lightNovel.summary = summary;
 
                 if (image) {
-                    cloudinary.uploader.upload("data:image/png;base64," + image, function (result) {
-                        lightNovel.imageId = result.public_id;
-                        lightNovel.imageFormat = result.format;
+                    cloudinary.uploader.upload("data:image/png;base64," + image,
+                        function (result) {
+                            var newImage = new Image({
+                                imageId: result.public_id,
+                                imageFormat: result.format
+                            });
 
-                        lightNovel.save().then(
-                            function (lightNovel) {
-                                return actionCB(null, lightNovel._id);
-                            },
-                            function (err) {
-                                err.statusCode = 422;
-                                return actionCB(err);
-                            }
-                        );
-                    });
+                            newImage.save().then(
+                                function (image) {
+                                    lightNovel.image = image._id;
+
+                                    return lightNovel.save();
+                                }
+                            ).then(
+                                function (lightNovel) {
+                                    return LightNovel.findById(lightNovel._id).populate("image").exec();
+                                }
+                            ).then(
+                                function (lightNovel) {
+                                    return (null, lightNovel.toObjectNoChapterText());
+                                },
+                                function (err) {
+                                    err.statusCode = 422;
+                                    return (err);
+                                }
+                            );
+                        }
+                    );
+                } else {
+                    lightNovel.save().then(
+                        function(lightNovel) {
+                            actionCB(null, lightNovel._id);
+                        },
+                        function (err){
+                            err.statusCode = 422;
+                            actionCB(err);
+                        }
+                    )
                 }
-
-                lightNovel.save().then(
-                    function(lightNovel) {
-                        actionCB(null, lightNovel._id);
-                    },
-                    function (err){
-                        err.statusCode = 422;
-                        actionCB(err);
-                    }
-                )
             },
             function (err) {
                 err.statusCode = 422;
@@ -145,8 +167,13 @@ var lightNovelService = {
     },
     delete: function (req, resource, params, config, actionCB) {
         if (req.isUnauthenticated()) {
-            return actionCB(new Error(errorMessages["NO_AUTHENTICATION"]));
+            return actionCB(new Error("No logged in user"));
         }
+
+        if (!permissions.canRemove(req.user)) {
+            return actionCB(new Error("No authentication"));
+        }
+
         var lightNovelId = params.id;
 
         LightNovel.findOneAndDelete(lightNovelId, function (err, lightNovel) {

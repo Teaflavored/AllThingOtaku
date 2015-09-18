@@ -113,7 +113,7 @@ var LightNovelShow = React.createClass({
                         <div className="card">
                             <div className="img-wrapper">
                                 <img
-                                    src={imageUtils.getImageUrl(lightNovel.imageId, lightNovel.imageFormat, 190, 262)}/>
+                                    src={imageUtils.getImageUrl(lightNovel.image, 190, 262)}/>
                             </div>
                             <div className="text-center mbm mts">
                                 {volumeNumsNode ? volumeNumsNode : ""}

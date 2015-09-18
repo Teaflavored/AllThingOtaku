@@ -49,6 +49,16 @@ var lightNovelActions = {
             }
             done();
         });
+    },
+    delete: function (context, payload, done) {
+        context.service.delete("lightNovels", payload.params, {}, function (err, lightNovel) {
+            if (err) {
+                context.dispatch("HANDLE_DELETE_LIGHT_NOVEL_ERR", err);
+            } else if (lightNovel) {
+                payload.component && payload.component.handleSuccessfulDelete();
+            }
+            done();
+        });
     }
 };
 

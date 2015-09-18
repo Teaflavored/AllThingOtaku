@@ -57,7 +57,8 @@ var Navbar = React.createClass({
                     </div>
                     <div className="collapse navbar-collapse" id="navigationItems">
                         <ul className="nav navbar-nav navbar-right">
-                            <li><Link className="nav-btn" activeClassName="active" to={'/lightNovels'}>Light Novels</Link></li>
+                            <li><Link className="nav-btn" activeClassName="active" to="/reviews">Reviews</Link></li>
+                            <li><Link className="nav-btn" activeClassName="active" to="/lightNovels">Light Novels</Link></li>
                             { isLoggedIn ?
                                 <li><a href="javascript:void(0);" className="nav-btn" onClick={logoutFn}>Log Out</a>
                                 </li>

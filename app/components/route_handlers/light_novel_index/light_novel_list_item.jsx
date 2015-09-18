@@ -10,10 +10,9 @@ var LightNovel = React.createClass({
         var author = this.props.lightNovel.author;
         var title = this.props.lightNovel.title;
         var lightNovelId = this.props.lightNovel._id;
-        var imageId = this.props.lightNovel.imageId;
-        var imageFormat = this.props.lightNovel.imageFormat;
+        var image = this.props.lightNovel.image;
 
-        var imageUrl = imageUtils.getImageUrl(imageId, imageFormat, 183, 248);
+        var imageUrl = imageUtils.getImageUrl(image, 183, 248);
 
         return (
             <div className="col-sm-4 col-md-3">
