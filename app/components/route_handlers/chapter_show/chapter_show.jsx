@@ -56,7 +56,7 @@ var ChapterShow = React.createClass({
                             </Link>
 
                             <div className="text-center chapter-show-header mbm">
-                                <h3>{this.props.lightNovel.title}</h3>
+                                <h3 className="one-line">{this.props.lightNovel.title}</h3>
                                 <h5>Volume {this.props.volume.volumeNum},
                                     Chapter {this.props.chapter.chapterNum}</h5>
                             </div>

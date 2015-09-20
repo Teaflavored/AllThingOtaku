@@ -85,7 +85,7 @@ var ChapterEdit = React.createClass({
             <div id="chapterNew">
                 <div className="container">
                     <div className="row">
-                        <div className="col-xs-12">
+                        <div className="col-xs-12 card">
                             <h4>
                                 {this.props.volume.title}, Volume {this.props.volume.volumeNum}, <span
                                 className="small">Chapter {this.props.chapterNum}</span>
