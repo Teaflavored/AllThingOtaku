@@ -1,4 +1,5 @@
 var createStore = require("fluxible/addons/createStore");
+var _ = require("lodash");
 
 var reviewStore = createStore({
     storeName: "reviewStore",
@@ -11,7 +12,7 @@ var reviewStore = createStore({
     },
     initialize: function () {
         this.currentReview = {};
-        this.reviews = [];
+        this.reviews = {};
     },
     dehydrate: function () {
         return {
@@ -27,7 +28,9 @@ var reviewStore = createStore({
 
     },
     findReviews: function (reviews) {
-        this.reviews = this.reviews.concat(reviews);
+        _.forEach(reviews, function (review) {
+            this.reviews[review._id] = review;
+        }.bind(this));
         this.emitChange();
     },
     findReviewErr: function () {
@@ -41,7 +44,7 @@ var reviewStore = createStore({
 
     },
     getReviews: function () {
-        return this.reviews;
+        return _.values(this.reviews)
     },
     getCurrentReview: function () {
         return this.currentReview
