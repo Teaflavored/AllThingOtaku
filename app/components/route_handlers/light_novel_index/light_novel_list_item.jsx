@@ -22,7 +22,7 @@ var LightNovel = React.createClass({
                             <img src={imageUrl} alt=" "/>
                         </div>
                         <div className="title-wrapper">
-                            <div className="title">
+                            <div className="title one-line">
                                 { title }
                             </div>
                         </div>

@@ -69,8 +69,8 @@ var ChapterNew = React.createClass({
         return (
             <div id="chapterNew">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-xs-12 card">
+                    <div className="row test">
+                        <div className="col-xs-12 card test">
                             <h4>
                                 {this.props.volume.title}, Volume {this.props.volume.volumeNum}, <span className="small">Chapter {newChapterNum}</span>
                                 <a href="javascript:void(0);" className="pull-right fa fa-close"
