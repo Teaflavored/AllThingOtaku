@@ -15,6 +15,7 @@ var authenticateService = require("./service/authenticate_service");
 var userService = require("./service/user_service");
 var volumeService = require("./service/volume_service");
 var chapterService = require("./service/chapter_service");
+var reviewService = require("./service/review_service");
 
 //router
 
@@ -126,6 +127,7 @@ pluginInstance.registerService(authenticateService);
 pluginInstance.registerService(userService);
 pluginInstance.registerService(volumeService);
 pluginInstance.registerService(chapterService);
+pluginInstance.registerService(reviewService);
 app.use(pluginInstance.getXhrPath(), pluginInstance.getMiddleware());
 
 //routing

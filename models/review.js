@@ -16,15 +16,20 @@ var reviewSchema = new Schema({
         type: String,
         required: true
     },
-    body: {
+    reviewBody: {
         type: String,
+        required: true
+    },
+    coverImage: {
+        type: String,
+        ref: "Image",
         required: true
     },
     images: [ { type: String, ref: "Image" }]
 });
 
-reviewSchema.plug(created);
-reviewSchema.plug(lastMod);
+reviewSchema.plugin(created);
+reviewSchema.plugin(lastMod);
 
 var Review = mongoose.model("Review", reviewSchema);
 
