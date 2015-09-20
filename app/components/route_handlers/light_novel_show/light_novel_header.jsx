@@ -82,7 +82,7 @@ var VolumeMetaInfo = React.createClass({
                             <i className="fa fa-pencil fa-lg pull-right"></i>
                         </a> : ""
                 }
-                <h1>{title}</h1>
+                <h1 className="one-line">{title}</h1>
                 { summary ?
                     <div>
                         <strong>Synopsis</strong>

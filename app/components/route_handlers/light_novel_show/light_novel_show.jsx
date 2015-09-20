@@ -119,7 +119,7 @@ var LightNovelShow = React.createClass({
                                 {volumeNumsNode ? volumeNumsNode : ""}
                             </div>
                             <div className="text-center lightNovel-title">
-                                <strong className=" bold-text">
+                                <strong className=" bold-text" style={LightNovelCSS.rightTitle}>
                                     {lightNovel.title}
                                 </strong>
                             </div>
@@ -141,5 +141,11 @@ LightNovelShow = fluxibleAddons.connectToStores(LightNovelShow, [lightNovelStore
         user: context.getStore(authenticationStore).getUser()
     };
 });
+
+var LightNovelCSS = {
+    rightTitle: {
+        "wordWrap" : "break-word"
+    }
+};
 
 module.exports = LightNovelShow;

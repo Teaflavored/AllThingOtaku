@@ -31,7 +31,7 @@ var VolumeListItem = React.createClass({
                 <div className={volumeClasses}>
                     <div className="volume-toggle" data-id={this.props.volume._id} onClick={this.handleOpenVolumeItem}>
                         <span className={caretClasses}></span>
-                        <h5>
+                        <h5 className="one-line">
                             { this.props.volume.title }, Volume { this.props.volume.volumeNum}
                         </h5>
                     </div>

@@ -5,27 +5,19 @@
 @import "pages/volume";
 @import "pages/chapter";
 
-@include margins;
+@include main-body;
+@include card;
+
+//utilities
+@includes links;
+@include one-line;
 @include images;
+@include margins;
 
 body {
-  @include main-body;
-
   &.modal-open {
     overflow-y: hidden;
   }
-}
-
-.card {
-  @include card;
-}
-
-.colorLink {
-  color: $primary-color;
-}
-
-a {
-  color: $primary-color;
 }
 #app {
   min-height: 100vh;
@@ -54,8 +46,6 @@ a {
     display: inline-block;
   }
 }
-
-
 
 /* Navbar */
 #navbar {

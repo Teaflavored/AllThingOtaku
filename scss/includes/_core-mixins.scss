@@ -1,16 +1,20 @@
 @mixin main-body() {
-  font: 14px "Noto Sans", sans-serif !important;
-  background: #f8f8f8 !important;
-  overflow-y: scroll;
+  body {
+    font: 14px "Noto Sans", sans-serif !important;
+    background: #f8f8f8 !important;
+    overflow-y: scroll;
+  }
 }
 
 @mixin card() {
-  background: $white;
-  padding: 15px;
-  margin-bottom: 15px;
-  -webkit-box-shadow: 1px 2px 4px 0 #e6e6e6;
-  -moz-box-shadow: 1px 2px 4px 0 #e6e6e6;
-  box-shadow: 1px 2px 4px 0 #e6e6e6;
+  .card {
+    background: $white;
+    padding: 15px;
+    margin-bottom: 15px;
+    -webkit-box-shadow: 1px 2px 4px 0 #e6e6e6;
+    -moz-box-shadow: 1px 2px 4px 0 #e6e6e6;
+    box-shadow: 1px 2px 4px 0 #e6e6e6;
+  }
 }
 
 @mixin margins() {
@@ -64,8 +68,26 @@
   }
 }
 
+@mixin one-line() {
+  .one-line {
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+  }
+}
+
 @mixin images() {
   .img-wrapper img {
     width: 100%;
+  }
+}
+
+@mixin links() {
+  .colorLink {
+    color: $primary-color;
+  }
+
+  a {
+    color: $primary-color;
   }
 }
