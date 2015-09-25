@@ -7,8 +7,12 @@ var reviewStore = require("../../../stores/review_store");
 //actions
 var reviewActions = require("../../../actions/review_actions");
 
-//compoennts
+//components
 var ReviewIndexItem = require("./review_index_item.jsx");
+var ReviewIndexRight = require("./review_index_right.jsx");
+
+//utils
+var permission = require("../../../../utils/user_permissions");
 
 var ReviewsIndex = React.createClass({
     contextTypes: {
@@ -32,7 +36,16 @@ var ReviewsIndex = React.createClass({
 
         return (
             <div className="row">
-                { reviewNodes }
+                <div className="col-xs-12">
+
+                </div>
+                <div className="col-sm-9">
+                    { reviewNodes }
+                </div>
+
+                <div className="col-sm-3">
+                    <ReviewIndexRight />
+                </div>
             </div>
         );
     }

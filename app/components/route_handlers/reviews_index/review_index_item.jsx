@@ -14,7 +14,7 @@ var ReviewIndexItem = React.createClass({
                 <div className="small">
                     <strong>Posted:</strong> { dateUtils.getFormattedDate(this.props.review.created) }
                 </div>
-                { this.props.review.reviewBody}
+                { this.props.review.reviewBody }
             </div>
         );
     }
